@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Liaison Co</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+</style>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #F5F2E9; color: #0B1D3A; font-family: 'Cormorant Garamond', serif; }
@@ -224,7 +226,7 @@
       <div class="logo-sub">Connect · Position · Grow</div>
     </div>
   </div>
-  <button class="btn-gold" onclick="scroll('lead-form')">Get Connected</button>
+  <button class="btn-gold" onclick="goTo('lead-form')">Get Connected</button>
 </nav>
 
 <!-- HERO -->
@@ -234,8 +236,8 @@
   <p class="hero-tagline">Do it with TLC.</p>
   <p class="hero-sub">Strategic Connections &nbsp;·&nbsp; Real Visibility &nbsp;·&nbsp; Business Growth</p>
   <div class="hero-btns">
-    <button class="btn-gold" onclick="scroll('lead-form')">Let's Connect</button>
-    <button class="btn-outline" onclick="scroll('what-we-do')">See How It Works</button>
+    <button class="btn-gold" onclick="goTo('lead-form')">Let's Connect</button>
+    <button class="btn-outline" onclick="goTo('what-we-do')">See How It Works</button>
   </div>
 </div>
 
@@ -374,7 +376,13 @@
 </footer>
 
 <script>
-function scroll(id) { var el = document.getElementById(id); if(el) el.scrollIntoView({ behavior: 'smooth' }); }
+function goTo(id) {
+  var el = document.getElementById(id);
+  if(el) {
+    var top = el.getBoundingClientRect().top + window.pageYOffset - 80;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
+}
 function handleSubmit() {
   var fname = document.getElementById('f-fname').value.trim();
   var email = document.getElementById('f-email').value.trim();
