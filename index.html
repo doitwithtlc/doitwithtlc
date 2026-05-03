@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Liaison Co</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #F5F2E9; color: #0B1D3A; font-family: 'Cormorant Garamond', serif; }
+
+  /* ── TOKENS ── */
+  :root {
+    --navy: #0B1D3A;
+    --gold: #D4AF37;
+    --cream: #F5F2E9;
+    --gray: #E5E5E5;
+    --navy-mid: #122444;
+  }
+
+  /* ── NAV ── */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 52px; border-bottom: 1px solid #D4AF3730;
+    position: sticky; top: 0; z-index: 10;
+    background: #0B1D3Aee; backdrop-filter: blur(6px);
+  }
+  .logo {
+    font-family: 'Cinzel', serif; font-size: 15px; font-weight: 700;
+    letter-spacing: 0.18em; color: var(--gold);
+  }
+  .logo-sub {
+    font-family: 'Montserrat', sans-serif; font-size: 8px;
+    letter-spacing: 0.22em; color: #D4AF3788; text-transform: uppercase; margin-top: 2px;
+  }
+  .btn-gold {
+    font-family: 'Montserrat', sans-serif; background: var(--gold); color: var(--navy);
+    border: none; padding: 12px 28px; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; border-radius: 2px; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-gold:hover { background: #e8c84a; }
+  .btn-outline {
+    font-family: 'Montserrat', sans-serif; background: transparent; color: var(--gold);
+    border: 1px solid var(--gold); padding: 11px 28px; font-size: 11px;
+    font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    border-radius: 2px; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-outline:hover { background: #D4AF3715; }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    padding: 108px 52px 92px; text-align: center;
+    border-bottom: 1px solid #D4AF3722;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      90deg, transparent, transparent 79px,
+      #D4AF3710 79px, #D4AF3710 80px
+    );
+    pointer-events: none;
+  }
+  .eyebrow {
+    font-family: 'Montserrat', sans-serif; font-size: 10px;
+    letter-spacing: 0.28em; color: var(--gold); text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Cinzel', serif; font-size: clamp(36px, 5.5vw, 64px);
+    font-weight: 600; line-height: 1.12; color: var(--cream);
+    max-width: 760px; margin: 0 auto 16px; letter-spacing: 0.02em;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif; font-size: 20px;
+    font-style: italic; color: #D4AF37aa; margin-bottom: 10px;
+  }
+  .hero-sub {
+    font-family: 'Montserrat', sans-serif; font-size: 11px;
+    letter-spacing: 0.2em; color: #ffffff44; margin-bottom: 44px;
+    text-transform: uppercase;
+  }
+  .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  /* ── TAGLINE STRIP ── */
+  .strip {
+    background: var(--gold); padding: 22px 52px;
+  }
+  .strip-inner {
+    max-width: 960px; margin: 0 auto;
+    display: flex; flex-wrap: wrap; gap: 8px 36px; justify-content: center;
+  }
+  .strip span {
+    font-family: 'Montserrat', sans-serif; font-size: 12px;
+    color: var(--navy); letter-spacing: 0.06em;
+  }
+  .strip span strong { font-weight: 700; }
+
+  /* ── SECTIONS ── */
+  section { padding: 84px 52px; max-width: 980px; margin: 0 auto; }
+  hr.div { border: none; border-top: 1px solid var(--gray); }
+
+  /* ── WHAT WE DO ── */
+  .section-eyebrow {
+    font-family: 'Montserrat', sans-serif; font-size: 10px;
+    letter-spacing: 0.24em; color: var(--gold); text-transform: uppercase; margin-bottom: 14px;
+  }
+  .section-h2 {
+    font-family: 'Cinzel', serif; font-size: 30px; font-weight: 600;
+    color: var(--navy); margin-bottom: 20px; letter-spacing: 0.02em;
+  }
+  .section-body {
+    font-family: 'Cormorant Garamond', serif; font-size: 19px;
+    color: #0B1D3Aaa; line-height: 1.85; max-width: 660px;
+  }
+
+  /* ── VALUE CARDS ── */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 40px; }
+  .card {
+    background: #fff; border: 1px solid var(--gray);
+    border-top: 3px solid var(--gold);
+    border-radius: 2px; padding: 30px 26px;
+  }
+  .card-icon {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: #F5F2E9; border: 1px solid #D4AF3755;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+  }
+  .card h3 {
+    font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600;
+    color: var(--navy); margin-bottom: 10px; letter-spacing: 0.06em;
+  }
+  .card p {
+    font-family: 'Cormorant Garamond', serif; font-size: 17px;
+    color: #0B1D3A99; line-height: 1.75;
+  }
+
+  /* ── WHO WE SERVE TAGS ── */
+  .tags { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .tag {
+    font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.1em;
+    background: #fff; border: 1px solid #D4AF3755; color: #0B1D3A99;
+    padding: 10px 20px; border-radius: 100px; text-transform: uppercase;
+  }
+
+  /* ── FORM ── */
+  .form-wrap {
+    background: var(--navy); border-radius: 2px;
+    padding: 40px 36px; max-width: 620px;
+    border: 1px solid #D4AF3730;
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .fg { margin-bottom: 16px; }
+  label {
+    font-family: 'Montserrat', sans-serif; font-size: 10px;
+    letter-spacing: 0.16em; color: #D4AF3799; display: block;
+    margin-bottom: 7px; text-transform: uppercase;
+  }
+  input, textarea, select {
+    font-family: 'Cormorant Garamond', serif; font-size: 17px;
+    background: #0d2040; border: 1px solid #D4AF3730; color: var(--cream);
+    border-radius: 2px; padding: 12px 14px; width: 100%;
+    transition: border-color 0.2s;
+  }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--gold); }
+  input::placeholder, textarea::placeholder { color: #ffffff22; }
+  select option { background: #0B1D3A; }
+  .form-note {
+    font-family: 'Montserrat', sans-serif; font-size: 10px;
+    color: #ffffff22; text-align: center; margin-top: 14px; letter-spacing: 0.08em;
+  }
+
+  /* ── SUCCESS ── */
+  .success-wrap {
+    display: none; background: var(--navy);
+    border: 1px solid #D4AF3733; border-radius: 2px;
+    padding: 60px 36px; max-width: 620px; text-align: center;
+  }
+  .success-icon {
+    width: 54px; height: 54px; border-radius: 50%; border: 2px solid var(--gold);
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
+  }
+  .success-wrap h3 {
+    font-family: 'Cinzel', serif; font-size: 26px; font-weight: 600;
+    color: var(--cream); margin-bottom: 12px;
+  }
+  .success-wrap p {
+    font-family: 'Cormorant Garamond', serif; font-size: 18px;
+    color: #ffffff66; line-height: 1.75;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy); border-top: 1px solid #D4AF3722;
+    padding: 36px 52px;
+  }
+  .footer-inner {
+    max-width: 980px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+  }
+  .footer-logo { font-family: 'Cinzel', serif; font-size: 15px; font-weight: 700; letter-spacing: 0.18em; color: var(--gold); }
+  .footer-sub { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic; color: #D4AF3766; margin-top: 4px; }
+  .footer-links { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+  .footer-link {
+    font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.08em;
+    color: #ffffff55; text-decoration: none; display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s;
+  }
+  .footer-link:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div style="display:flex;align-items:center;gap:14px;">
+    <img src="https://drive.google.com/uc?export=view&id=1tnrf8Nqa5P7H718bMtUGcNJnj3aGjjc3" onerror="this.style.display='none'" alt="The Liaison Co." style="height:44px;width:auto;" id="nav-logo-img">
+    <div>
+      <div class="logo">THE LIAISON CO.</div>
+      <div class="logo-sub">Connect · Position · Grow</div>
+    </div>
+  </div>
+  <button class="btn-gold" onclick="scroll('lead-form')">Get Connected</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="eyebrow">Brand Representation &amp; Strategic Placement · Ocala, FL</p>
+  <h1>We Put Your Brand<br><span>In the Room.</span></h1>
+  <p class="hero-tagline">Do it with TLC.</p>
+  <p class="hero-sub">Strategic Connections &nbsp;·&nbsp; Real Visibility &nbsp;·&nbsp; Business Growth</p>
+  <div class="hero-btns">
+    <button class="btn-gold" onclick="scroll('lead-form')">Let's Connect</button>
+    <button class="btn-outline" onclick="scroll('what-we-do')">See How It Works</button>
+  </div>
+</div>
+
+<!-- TAGLINE STRIP -->
+<div class="strip">
+  <div class="strip-inner">
+    <span>Want community exposure? <strong>Do it with TLC.</strong></span>
+    <span>Need the right contacts? <strong>Do it with TLC.</strong></span>
+    <span>Ready to get in the room? <strong>Do it with TLC.</strong></span>
+    <span>Growing your brand? <strong>Do it with TLC.</strong></span>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- WHAT WE DO -->
+<section id="what-we-do">
+  <p class="section-eyebrow">What We Do</p>
+  <h2 class="section-h2">Your brand, placed with purpose.</h2>
+  <p class="section-body">
+    The Liaison Co. acts as the bridge between your business and the events, networking spaces, and community activations where your ideal clients already are. We handle the strategy, placement, and representation — so you can focus on what you do best.
+  </p>
+</section>
+
+<hr class="div">
+
+<!-- VALUE PROPS -->
+<section>
+  <p class="section-eyebrow">Why Work With Us</p>
+  <h2 class="section-h2">More than a vendor. A liaison.</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3>Strategic Placement</h3>
+      <p>We match your brand to the right rooms — events, expos, and networking spaces aligned with your goals.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <h3>Professional Representation</h3>
+      <p>Your brand shows up polished and consistent — even when you can't be there in person.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <h3>Real Results</h3>
+      <p>From warm leads to lasting partnerships — visibility that converts into real business growth.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- WHO WE SERVE -->
+<section>
+  <p class="section-eyebrow">Who We Serve</p>
+  <h2 class="section-h2">Built for brands ready to grow.</h2>
+  <p class="section-body">Whether you're a vendor, a service provider, or a community organization — if you're ready to show up with intention, we're ready to represent you.</p>
+  <div class="tags">
+    <span class="tag">Small Businesses</span>
+    <span class="tag">Vendors &amp; Makers</span>
+    <span class="tag">Event Sponsors</span>
+    <span class="tag">Service Providers</span>
+    <span class="tag">Community Organizations</span>
+    <span class="tag">Entrepreneurs &amp; Founders</span>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- LEAD FORM -->
+<section id="lead-form">
+  <p class="section-eyebrow">Get Connected</p>
+  <h2 class="section-h2">Ready to get in the room?</h2>
+  <p class="section-body" style="margin-bottom:36px;">Tell us about your brand and we'll reach out to explore how we can work together.</p>
+
+  <div class="form-wrap" id="form-wrap">
+    <div class="form-grid">
+      <div class="fg"><label>First Name</label><input type="text" placeholder="Carmen" id="f-fname"></div>
+      <div class="fg"><label>Last Name</label><input type="text" placeholder="Garcia" id="f-lname"></div>
+    </div>
+    <div class="fg"><label>Business Name</label><input type="text" placeholder="Your brand or company" id="f-biz"></div>
+    <div class="fg"><label>Email Address</label><input type="email" placeholder="you@yourbrand.com" id="f-email"></div>
+    <div class="fg"><label>Phone (Optional)</label><input type="tel" placeholder="(352) 000-0000" id="f-phone"></div>
+    <div class="fg">
+      <label>I'm Interested In...</label>
+      <select id="f-interest">
+        <option value="">Select one...</option>
+        <option>Event representation</option>
+        <option>Networking placement</option>
+        <option>Brand visibility strategy</option>
+        <option>Book a discovery call</option>
+        <option>Join the waitlist</option>
+      </select>
+    </div>
+    <div class="fg"><label>Tell Us About Your Brand (Optional)</label>
+      <textarea rows="3" placeholder="What do you do, who do you serve, and what's your goal?" id="f-msg"></textarea>
+    </div>
+    <button class="btn-gold" style="width:100%;padding:16px;font-size:12px;letter-spacing:0.16em;" onclick="handleSubmit()">Submit My Inquiry</button>
+    <p class="form-note">No spam. We'll only reach out when it's worth your time.</p>
+  </div>
+
+  <div class="success-wrap" id="form-success">
+    <div class="success-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h3>You're in the room.</h3>
+    <p>Thanks for reaching out. We'll be in touch within 1–2 business days to explore how The Liaison Co. can help your brand grow.<br><br><em>Connect. Position. Grow.</em></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">THE LIAISON CO.</div>
+      <div class="footer-sub">Connect. Position. Grow.</div>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:carmen@doitwithtlc.com" class="footer-link">carmen@doitwithtlc.com</a>
+      <a href="https://instagram.com/doitwithtlc" target="_blank" class="footer-link">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @doitwithtlc
+      </a>
+      <a href="https://facebook.com/doitwithtlc" target="_blank" class="footer-link">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        @doitwithtlc
+      </a>
+      <span class="footer-link" style="cursor:default;">Ocala, Florida</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function scroll(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+function handleSubmit() {
+  var fname = document.getElementById('f-fname').value.trim();
+  var email = document.getElementById('f-email').value.trim();
+  var interest = document.getElementById('f-interest').value;
+  if (!fname || !email || !interest) { alert('Please fill in your name, email, and area of interest.'); return; }
+  document.getElementById('form-wrap').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+</script>
+</body>
+</html>
