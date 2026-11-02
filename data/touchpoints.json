@@ -1,0 +1,65 @@
+{
+  "event": {
+    "destination": "email",
+    "to": "carmen@doitwithtlc.com",
+    "subject": "Let's plan my event | TLC",
+    "prompt": "Hi Carmen,\n\nI'd like TLC's help with an event. Here is what I know so far (undecided is fine):\n\nName and company:\nPhone and preferred way to reach me:\nEvent type/name:\nPurpose and what I want guests to take away:\nPreferred date/time and flexibility:\nLocation/venue (booked, considering, or need help):\nEstimated guest count and audience:\nEstimated event budget:\nSupport needed (planning, vendors, registration, communications, on-site management, other):\nSponsors, speakers, or vendors already involved:\nDecisions already made / deadlines:\nAnything else you should know:\n\nThank you!",
+    "futureFunnelUrl": null
+  },
+  "representation": {
+    "destination": "email",
+    "to": "carmen@doitwithtlc.com",
+    "subject": "My business visibility | TLC",
+    "prompt": "Hi Carmen,\n\nI'd like to discuss brand representation for my business.\n\nName and company:\nPhone and preferred contact method:\nWebsite:\nWhat we do and who we serve:\nService area:\nBusiness/referral partners we want to reach:\nCurrent memberships or activities we struggle to attend:\nOur visibility goals:\nSupport we need / timing:\n\nThank you!",
+    "futureFunnelUrl": null
+  },
+  "bilingual": {
+    "destination": "email",
+    "to": "carmen@doitwithtlc.com",
+    "subject": "Bilingual outreach inquiry | TLC",
+    "prompt": "Hi Carmen,\n\nI'd like to discuss bilingual outreach.\n\nName and company:\nPhone:\nOur services and audience:\nLanguages / communities we need to connect with:\nOutreach or follow-up support needed:\nTiming and current process:\n\nThank you!",
+    "futureFunnelUrl": null
+  },
+  "content": {
+    "destination": "email",
+    "to": "carmen@doitwithtlc.com",
+    "subject": "Branding and content support | TLC",
+    "prompt": "Hi Carmen,\n\nI'd like to discuss content support.\n\nName and company:\nPhone:\nProject or event:\nAudience and goal:\nMaterials / content / channels needed:\nExisting photos, branding and resources:\nDeadline:\nBudget if known:\n\nThank you!",
+    "futureFunnelUrl": null
+  },
+  "general": {
+    "destination": "email",
+    "to": "carmen@doitwithtlc.com",
+    "subject": "Let's connect | TLC",
+    "prompt": "Hi Carmen,\n\nName and company:\nPhone and preferred contact method:\nI'm interested in (representation / event management / bilingual outreach / content / other):\nWhat I need help with:\nGoals and timing:\n\nThank you!",
+    "futureFunnelUrl": null
+  },
+  "testimonial": {
+    "destination": "email",
+    "to": "carmen@doitwithtlc.com",
+    "subject": "My experience working with TLC",
+    "prompt": "Hi Carmen,\n\nI'd like to share feedback about working with TLC.\n\nFull name:\nCompany and title:\nEmail / phone for verification (not for publication):\nService or event / approximate date:\nWhat TLC helped with:\nMy experience in my own words:\nA specific difference it made (only what I can personally confirm):\n\nMay TLC publish my quote with my name/company on the website and related promotional materials? YES / NO:\nDo I want to approve the final excerpt before publication? YES / NO:\nAny relationship or compensation that should be disclosed:\n\nThank you!",
+    "futureFunnelUrl": null
+  },
+  "visit": {
+    "destination": "email",
+    "to": "bblocala@gmail.com",
+    "subject": "Plan my BBLO visit",
+    "prompt": "Hi Carmen,\n\nI'd like to visit BBLO. Please confirm the next meeting's date, time, and location.\n\nName:\nBusiness:\nEmail / phone:\nWhat we do:\nPreferred Friday:\nNumber of prior BBLO visits:\n\nThank you!",
+    "futureFunnelUrl": null
+  },
+  "membership": {
+    "destination": "email",
+    "to": "bblocala@gmail.com",
+    "subject": "BBLO membership inquiry",
+    "prompt": "Hi Carmen,\n\nI'd like information about BBLO membership and the application process.\n\nName and business:\nEmail / phone:\nWhat we do:\nMembership option I'm considering:\nQuestions:\n\nThank you!",
+    "futureFunnelUrl": null
+  },
+  "submission": {
+    "destination": "email",
+    "to": "carmen@doitwithtlc.com",
+    "subject": "Marion County business event submission",
+    "prompt": "Hi Carmen,\n\nPlease consider this business event for the weekly guide.\n\nEvent name:\nOrganizer and contact:\nDate and start/end time (Eastern):\nVenue and full address:\nIntended business audience:\nCost / admission:\nOfficial information or registration URL:\nFlyer link or attachment:\nWhat business owners will get from attending:\n\nThank you!",
+    "futureFunnelUrl": null
+  }
+}
