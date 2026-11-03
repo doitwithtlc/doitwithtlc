@@ -1,0 +1,195 @@
+{
+  "unstoppable": {
+    "photos": [
+      {
+        "src": "galleries/unstoppable/photo-01.webp",
+        "caption": "Photo-booth memories from Unstoppable 2026.",
+        "width": 1400,
+        "height": 1050
+      },
+      {
+        "src": "galleries/unstoppable/photo-02.webp",
+        "caption": "Guests together beside the Unstoppable stage.",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "galleries/unstoppable/photo-03.webp",
+        "caption": "A moment together at the event backdrop.",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "galleries/unstoppable/photo-04.webp",
+        "caption": "The audience gathered for the evening program.",
+        "width": 1280,
+        "height": 961
+      },
+      {
+        "src": "galleries/unstoppable/photo-05.webp",
+        "caption": "Participants together on stage.",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "galleries/unstoppable/photo-06.webp",
+        "caption": "A speaker addressing the Unstoppable audience.",
+        "width": 1280,
+        "height": 961
+      },
+      {
+        "src": "galleries/unstoppable/photo-07.webp",
+        "caption": "An Unstoppable detail from the guest experience.",
+        "width": 1400,
+        "height": 1062
+      },
+      {
+        "src": "galleries/unstoppable/photo-08.webp",
+        "caption": "Guests gathered near the event stage.",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "galleries/unstoppable/photo-09.webp",
+        "caption": "A conversation and photo between event guests.",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "galleries/unstoppable/photo-10.webp",
+        "caption": "Connections made during the evening.",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "galleries/unstoppable/photo-11.webp",
+        "caption": "A look at the VIP table details.",
+        "width": 900,
+        "height": 1600
+      },
+      {
+        "src": "galleries/unstoppable/photo-12.webp",
+        "caption": "The stage and event lighting.",
+        "width": 1200,
+        "height": 1600
+      }
+    ],
+    "videos": [
+      {
+        "src": "galleries/unstoppable/video-142549.mp4",
+        "poster": "galleries/unstoppable/video-142549-poster.webp",
+        "title": "Before the doors opened.",
+        "description": "A short look at the event space during setup.",
+        "duration": 8.0
+      },
+      {
+        "src": "galleries/unstoppable/video-180830.mp4",
+        "poster": "galleries/unstoppable/video-180830-poster.webp",
+        "title": "Photo-booth moment.",
+        "description": "A quick photo-booth moment during the evening.",
+        "duration": 2.4
+      }
+    ]
+  },
+  "bblo-08-28": {
+    "photos": [
+      {
+        "src": "galleries/bblo-08-28/photo-01.webp",
+        "caption": "The August 28 meeting at Media Minds.",
+        "width": 1400,
+        "height": 1050
+      },
+      {
+        "src": "galleries/bblo-08-28/photo-02.webp",
+        "caption": "Members listening and talking around the meeting tables.",
+        "width": 1400,
+        "height": 1050
+      },
+      {
+        "src": "galleries/bblo-08-28/photo-03.webp",
+        "caption": "Business conversation at the August 28 meeting.",
+        "width": 1400,
+        "height": 1050
+      },
+      {
+        "src": "galleries/bblo-08-28/photo-04.webp",
+        "caption": "A candid photo with BBLO participants.",
+        "width": 1400,
+        "height": 1050
+      }
+    ],
+    "videos": []
+  },
+  "bblo-09-25": {
+    "photos": [
+      {
+        "src": "galleries/bblo-09-25/photo-01.webp",
+        "caption": "The September 25 meeting at Media Minds.",
+        "width": 1400,
+        "height": 1050
+      },
+      {
+        "src": "galleries/bblo-09-25/photo-02.webp",
+        "caption": "A business presentation and discussion.",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "galleries/bblo-09-25/photo-03.webp",
+        "caption": "Sharing a topic with the BBLO group.",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "galleries/bblo-09-25/photo-04.webp",
+        "caption": "Participants together after the September 25 meeting.",
+        "width": 1400,
+        "height": 1050
+      }
+    ],
+    "videos": []
+  },
+  "bblo-10-09": {
+    "photos": [
+      {
+        "src": "galleries/bblo-10-09/photo-01.webp",
+        "caption": "A member presentation at the October 9 meeting.",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "galleries/bblo-10-09/photo-02.webp",
+        "caption": "A second presentation during the morning program.",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "galleries/bblo-10-09/photo-03.webp",
+        "caption": "Business conversation with the BBLO group.",
+        "width": 1400,
+        "height": 1050
+      },
+      {
+        "src": "galleries/bblo-10-09/photo-04.webp",
+        "caption": "The October 9 group together at Media Minds.",
+        "width": 1400,
+        "height": 1050
+      },
+      {
+        "src": "galleries/bblo-10-09/photo-05.webp",
+        "caption": "A candid moment around the BBLO meeting table.",
+        "width": 1080,
+        "height": 810
+      }
+    ],
+    "videos": [
+      {
+        "src": "galleries/bblo-10-09/video-083623.mp4",
+        "poster": "galleries/bblo-10-09/video-083623-poster.webp",
+        "title": "Inside the October 9 meeting.",
+        "description": "A short candid view across the meeting tables.",
+        "duration": 7.4
+      }
+    ]
+  }
+}
