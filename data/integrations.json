@@ -1,0 +1,21 @@
+{
+  "inquiry": {
+    "enabled": false,
+    "provider": "C-Suiteware",
+    "embedUrl": null,
+    "webhookUrl": null,
+    "notificationEmail": "carmen@doitwithtlc.com",
+    "tested": false
+  },
+  "weekly": {
+    "socialPublishedUrl": null,
+    "carouselImages": [],
+    "status": "draft"
+  },
+  "brand": {
+    "silhouetteFile": "Carmen_Personalized_Silhouette_300dpi.png",
+    "silhouetteLibraryFileId": "libfile_b7f2aaff4e3c819187acff49865db8fe",
+    "installed": false,
+    "iconsInstalled": false
+  }
+}
