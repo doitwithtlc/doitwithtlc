@@ -20,3 +20,7 @@ function initializeBblo(){
 }
 
 initializeBblo();
+
+// Keep native navigation menus usable on mouse, touch and keyboard.
+document.addEventListener('click',event=>{document.querySelectorAll('header details[open]').forEach(menu=>{if(!menu.contains(event.target))menu.open=false;});});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'){document.querySelectorAll('header details[open]').forEach(menu=>{menu.open=false;menu.querySelector('summary').focus();});}});
