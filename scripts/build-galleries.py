@@ -16,7 +16,7 @@ def link(path,label,cls='button'):return '<a class="'+cls+'" href="'+BASE+path+'
 def section(body,cls=''):return '<section class="'+cls+'"><div class="wrap">'+body+'</div></section>'
 def hero(label,title,copy):return section('<p class="eyebrow">'+label+'</p><h1>'+title+'</h1><p class="lead">'+copy+'</p>','hero')
 def photo(p):
- return '<figure class="photo"><a href="'+BASE+'/assets/'+p['src']+'" target="_blank" rel="noopener" aria-label="Open photograph: '+esc(p['caption'])+'"><img src="'+BASE+'/assets/'+p['src']+'" alt="'+esc(p['caption'])+'" width="'+str(p['width'])+'" height="'+str(p['height'])+'" loading="lazy" decoding="async"></a><figcaption>'+esc(p['caption'])+'</figcaption></figure>'
+ return '<figure class="photo"><a href="'+BASE+'/assets/'+p['src']+'" target="_blank" rel="noopener" aria-label="Open photograph: '+esc(p['caption'])+'"><img src="'+BASE+'/assets/'+p['src']+'" alt="'+esc(p['caption'])+'" width="'+str(p['width'])+'" height="'+str(p['height'])+'" loading="lazy" decoding="async"></a></figure>'
 def videos(items):
  if not items:return ''
  return section('<p class="eyebrow">Short video moments</p><h2>Press play.<br>Step into the moment.</h2><div class="grid gallery-video-grid">'+''.join('<article><h3>'+esc(v['title'])+'</h3><p>'+esc(v['description'])+' · '+str(v['duration'])+' seconds.</p><video class="gallery-video" controls playsinline preload="none" poster="'+BASE+'/assets/'+v['poster']+'"><source src="'+BASE+'/assets/'+v['src']+'" type="video/mp4">Your browser does not support this video.</video></article>' for v in items)+'</div>','map-section')
@@ -26,7 +26,7 @@ def write(route,title,description,body,is_bblo=False,cover='photos/unstoppable-d
 
 unstoppable=media['unstoppable']
 body=hero('Unstoppable 2026 · October 7, 2026','The moments.<br><em>The people. The experience.</em>','A closer look at Unstoppable 2026 at the College of Central Florida’s Klein Center, from the setup to the stage and the connections in between.')
-body+=section('<p class="eyebrow">From the event archive</p><h2>A night worth remembering.</h2><div class="gallery portfolio-gallery curated-gallery">'+''.join(photo(p) for p in unstoppable['photos'])+'</div><p class="note">Selected photographs and short clips from the event archive supplied by Carmen.</p>')+videos(unstoppable['videos'])
+body+=section('<p class="eyebrow">From the event archive</p><h2>A night worth remembering.</h2><div class="gallery portfolio-gallery curated-gallery">'+''.join(photo(p) for p in unstoppable['photos'])+'</div>')+videos(unstoppable['videos'])
 body+=section('<h2>See how the experience came together.</h2><div class="actions">'+link('/events/unstoppable-2026/','← Event portfolio','button secondary')+link('/inquire/?service=events','Let’s plan your event')+'</div>')
 write('/events/unstoppable-2026/gallery/','Unstoppable 2026 Photo & Video Gallery','Selected real photographs and short videos from Unstoppable 2026.',body)
 
@@ -39,7 +39,7 @@ cards=[]
 for a in albums:
  data=media[a['key']];cover=data['photos'][a['cover']]
  cards.append('<article class="album-card">'+photo(cover)+'<div class="card-copy"><p class="eyebrow">BBLO meeting</p><h2>'+a['date']+'</h2><p>'+a['intro']+'</p>'+link('/bblo/gallery/'+a['slug']+'/', 'Open album →','text-link')+'</div></article>')
- body=hero('BBLO meeting · '+a['date'],'The BBLO experience.<br><em>One meeting at a time.</em>',a['intro'])+section('<div class="gallery portfolio-gallery curated-gallery">'+''.join(photo(p) for p in data['photos'])+'</div><p class="note">Photographs from the dated BBLO meeting archive supplied by Carmen.</p>')+videos(data['videos'])
+ body=hero('BBLO meeting · '+a['date'],'The BBLO experience.<br><em>One meeting at a time.</em>',a['intro'])+section('<div class="gallery portfolio-gallery curated-gallery">'+''.join(photo(p) for p in data['photos'])+'</div>')+videos(data['videos'])
  body+=section('<div class="actions">'+link('/bblo/gallery/','← Photo &amp; video albums','button secondary')+link('/bblo/join/','Come meet us')+'</div>')
  write('/bblo/gallery/'+a['slug']+'/',a['date']+' · BBLO Photo & Video Album',a['intro'],body,True,cover['src'])
 body=hero('BBLO photos & videos','See the people.<br><em>Feel the connection.</em>','Browse moments from BBLO meetings, member presentations and business conversations. Open a dated album to see the photographs and available short videos.')+section('<div class="grid three gallery-album-grid">'+''.join(cards)+'</div>')
