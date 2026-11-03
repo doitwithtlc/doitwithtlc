@@ -1,0 +1,17 @@
+{
+  "source_design_id": "DAHBO7KOuHQ",
+  "source_slide": 6,
+  "source_heading": "Meet Our Team",
+  "verified_on": "2026-11-03",
+  "name_note": "The board slide says Andrew Abad; his individual slide and member referral directory say Andres Abad. Use Andres consistently pending Carmen's review.",
+  "photo_source": "Six portraits extracted from the existing frames on page 14 of BBLO_20260828_071635_0000.pdf, matching the current Canva board portraits. Andres uses the original Andrew Abad.webp also referenced by the current Canva board slide.",
+  "members": [
+    {"member_slug":"tlc","name":"Carmen Garcia Tirado","role":"Founder & President","company":"The Liaison Companies","photo":"bblo/board/carmen-garcia-tirado.webp"},
+    {"member_slug":"jc-lawn","name":"Christian Concepcion","role":"Vice President","company":"JC Lawn Painting and Cleaning Services","photo":"bblo/board/christian-concepcion.webp"},
+    {"member_slug":"vitas","name":"Patty Torres","role":"Events & Community Engagement","company":"VITAS","photo":"bblo/board/patty-torres.webp"},
+    {"member_slug":"legacy-insurance","name":"Jorge Caravasi","role":"Membership Committee","company":"Ocala Insurance Group","photo":"bblo/board/jorge-caravasi.webp"},
+    {"member_slug":"vertex360","name":"Josmary Rivera","role":"Finance Committee","company":"Vertex360 Consulting","photo":"bblo/board/josmary-rivera.webp"},
+    {"member_slug":"martinez-roofing","name":"Juan Martinez","role":"Membership Committee","company":"Martinez Roofing Solutions","photo":"bblo/board/juan-martinez.webp"},
+    {"member_slug":"media-minds","name":"Andres Abad","role":"Website, Social Media & AI Management","company":"Media Minds DMA","photo":"bblo/board/andres-abad.webp"}
+  ]
+}

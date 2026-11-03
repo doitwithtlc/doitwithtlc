@@ -27,6 +27,8 @@ def page(route,title,description,body,image='photos/bblo-october-group.webp'):
  file=ROOT/route.strip('/')/'index.html';file.parent.mkdir(parents=True,exist_ok=True);file.write_text(document)
 
 members=json.loads((REPO/'data/bblo-members.json').read_text())
+board_data=json.loads((REPO/'data/bblo-board.json').read_text())
+board_by_slug={b['member_slug']:b for b in board_data['members']}
 
 def member_card(m):
  image=photo(m['photo'],m['name'],cls='directory-portrait') if m['photo'] else ''
@@ -45,6 +47,8 @@ for m in members:
  social=''.join(f'<a class="button secondary" href="{esc(m[key])}" target="_blank" rel="noopener">{label} ↗</a>' for key,label in [('facebook','Facebook'),('instagram','Instagram'),('website','Website')] if m[key])
  image=photo(m['photo'],m['name'],esc(m['photo_credit']),'member-profile-photo') if m['photo'] else ''
  body=hero('Meet our members',esc(m['name']),esc(m['company']))
+ if m['slug'] in board_by_slug:
+  body+=section('<p class="eyebrow">BBLO leadership</p><h2>'+esc(board_by_slug[m['slug']]['role'])+'</h2>'+link('/bblo/board/','Meet the BBLO board →','text-link'))
  body+=section('<div class="member-profile-layout"><div><p class="eyebrow">Their business</p><h2>'+esc(m['company'])+'</h2><p class="lead">'+esc(m['category'])+'</p><h3>Connect directly.</h3>'+contacts(m)+'<div class="actions">'+social+'</div><p class="note">Business contact information supplied in BBLO’s member referral list. Available social and website links are shown.</p></div>'+image+'</div>')
  if m.get('quote') and m.get('quote_approved'):
   body+=section('<p class="eyebrow">Their BBLO experience</p><blockquote class="member-quote"><p>'+esc(m['quote'])+'</p><cite>'+esc(m['name'])+' · '+esc(m['company'])+'</cite></blockquote>','map-section')
@@ -91,8 +95,10 @@ investment_source=(ROOT/'bblo/join/index.html').read_text() if (ROOT/'bblo/join/
 investment=re.search(r'<section class=""><div class="wrap"><p class="eyebrow">Membership investment.*?</section>',investment_source,re.S).group()
 join+=investment
 page('/bblo/join/','How to Join','Visit a BBLO meeting, learn about membership and review the current fee options.',join)
-board=hero('Meet our board','The people behind<br><em>the community.</em>','Leadership profiles are published with confirmed names, roles, photographs and biographies.')+section('<div class="split"><div><p class="eyebrow">Founder &amp; President</p><h2>Carmen Garcia Tirado</h2><p>Founder and owner of The Liaison Companies LLC. Carmen leads BBLO’s work connecting local business owners through relationships, education and community involvement.</p>'+link('/bblo/members/tlc/','Meet Carmen &amp; connect','button')+'</div>'+photo('photos/carmen-portrait.jpg','Carmen Garcia Tirado.','Carmen Garcia Tirado / BBLO Founder &amp; President.','member-profile-photo')+'</div><p class="review-note">Board review: additional names, titles, photos and biographies are awaiting confirmation.</p>')
-page('/bblo/board/','Meet Our Board','Meet BBLO’s confirmed leadership.',board,'photos/carmen-portrait.jpg')
+def board_card(b):
+ return '<article class="card board-card">'+photo(b['photo'],b['name']+' · '+b['role'],cls='board-portrait')+'<p class="eyebrow">'+esc(b['role'])+'</p><h2>'+esc(b['name'])+'</h2><p class="board-company">'+esc(b['company'])+'</p>'+link('/bblo/members/'+b['member_slug']+'/', 'Profile &amp; contact details →','text-link')+'</article>'
+board=hero('Meet our board','The people behind<br><em>the community.</em>','Meet the BBLO leadership team. Open a profile for business contact information and available website, Facebook and Instagram links.')+section('<div class="grid three board-grid">'+''.join(board_card(b) for b in board_data['members'])+'</div>')+section('<p class="eyebrow">Build the community with us</p><h2>Connect with BBLO.</h2><p>Interested in membership, a community activity or supporting local businesses? Let’s start a conversation.</p><div class="actions">'+link('/bblo/join/','How to join')+link('/bblo/support/','Support BBLO','button secondary')+'</div>','map-section')
+page('/bblo/board/','Meet Our Board','Meet the seven BBLO leadership team members, their roles, photographs and business contact profiles.',board,'bblo/board/carmen-garcia-tirado.webp')
 
 def field(label,name,kind='text',required=True,options=None):
  req=' required' if required else '';id='f-'+name
