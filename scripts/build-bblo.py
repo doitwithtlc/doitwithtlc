@@ -25,6 +25,8 @@ def subnav(active):
 def page(route,title,description,body,image='photos/bblo-october-group.webp'):
  document=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{esc(title)} | BBLO · TLC</title><meta name="description" content="{esc(description)}"><link rel="canonical" href="https://doitwithtlc.com{route}"><meta property="og:title" content="{esc(title)} | BBLO"><meta property="og:description" content="{esc(description)}"><meta property="og:type" content="website"><meta property="og:url" content="https://doitwithtlc.com{route}"><meta property="og:image" content="https://doitwithtlc.com{BASE}/assets/{image}"><meta name="twitter:card" content="summary_large_image"><link rel="stylesheet" href="{BASE}/assets/design.css?v={VERSION}"><link rel="stylesheet" href="{BASE}/assets/bblo/bblo.css?v={VERSION}"><script src="{BASE}/assets/site.js?v={VERSION}" defer></script><script src="{BASE}/assets/bblo/bblo.js?v={VERSION}" defer></script></head><body><a class="skip" href="#main">Skip to content</a>{header}{subnav(route)}<main id="main" class="bblo-page">{body}</main>{footer}</body></html>'''
  file=ROOT/route.strip('/')/'index.html';file.parent.mkdir(parents=True,exist_ok=True);file.write_text(document)
+ if route=='/bblo/board/':
+  file.write_text(document.replace(f'bblo/bblo.css?v={VERSION}', 'bblo/bblo.css?v=20261103-bblo-board'))
 
 members=json.loads((REPO/'data/bblo-members.json').read_text())
 board_data=json.loads((REPO/'data/bblo-board.json').read_text())
