@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /website-preview/
 Sitemap: https://doitwithtlc.com/sitemap.xml
