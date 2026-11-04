@@ -28,6 +28,8 @@ for p,page in pages.items():
  if s.count('class="carmen-trail"')!=1:errors.append(f'{p}: expected one silhouette section')
  if 'id="site-nav"' not in s:errors.append(f'{p}: navigation control missing')
  if not re.search('<title>.+?</title>',s):errors.append(f'{p}: missing title')
+ expected='https://doitwithtlc.com/website-preview/'+str(p.parent.relative_to(ROOT/'website-preview'))+'/'
+ if f'rel="canonical" href="{expected}"' not in s:errors.append(f'{p}: missing or incorrect self canonical')
  for image in page.images:
   if 'alt' not in image:errors.append(f'{p}: image missing alt')
  for link in page.links:

@@ -43,6 +43,8 @@ for file in ROOT.rglob('index.html'):
  # Each preview canonical identifies its actual equivalent content. Production
  # launch must switch these to production URLs together with indexing rules.
  s=re.sub(r'<link rel="canonical" href="[^\"]+">',f'<link rel="canonical" href="https://doitwithtlc.com{BASE}{route}">',s)
+ if 'rel="canonical"' not in s:
+  s=s.replace('</head>',f'<link rel="canonical" href="https://doitwithtlc.com{BASE}{route}"></head>')
  # Decorative clue in the hero, while all headings remain real text.
  s=re.sub(r'<img class="hero-clue"[^>]*>','',s)
  name='calendar' if ('events/' in route or 'where-is-carmen' in route) else 'business-card' if ('members/' in route or 'about/' in route or 'board/' in route) else 'open-door'

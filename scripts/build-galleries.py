@@ -68,3 +68,5 @@ s=portfolio.read_text();s=re.sub(r'<!-- expanded-gallery-start -->.*?<!-- expand
 cta='<!-- expanded-gallery-start -->'+section('<p class="eyebrow">More from Unstoppable 2026</p><h2>Explore the photo &amp; video gallery.</h2><p>See more guest moments, stage photographs, event details and short video clips.</p>'+link('/events/unstoppable-2026/gallery/','Open the event gallery'))+'<!-- expanded-gallery-end -->'
 s=s.replace('<section class="dark">',cta+'<section class="dark">',1);portfolio.write_text(s)
 print('Built Unstoppable gallery, four selected community albums and three selected meeting albums.')
+import runpy
+runpy.run_path(str(REPO/'scripts/polish-preview.py'))
