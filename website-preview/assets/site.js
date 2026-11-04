@@ -1,18 +1,48 @@
-
-function initializeInquiry(){
-const form=document.getElementById('tlc-inquiry');if(!form)return;
-const service=form.elements.service;
-const update=()=>{document.querySelectorAll('.service-fields').forEach(group=>{const show=group.dataset.service===service.value;group.hidden=!show;group.querySelectorAll('input,select,textarea').forEach(control=>control.disabled=!show)});document.getElementById('inquiry-review').hidden=true;};
-const preset=new URLSearchParams(location.hash.includes('?')?location.hash.split('?')[1]:location.search).get('service');if([...service.options].some(o=>o.value===preset))service.value=preset;
-service.addEventListener('change',update);update();
-form.addEventListener('submit',e=>e.preventDefault());
-document.getElementById('review-inquiry').addEventListener('click',()=>{if(!form.reportValidity())return;const box=document.getElementById('inquiry-review');box.replaceChildren();const title=document.createElement('h3');title.textContent='Your inquiry summary';box.append(title);[...new FormData(form)].forEach(([name,value])=>{if(!value||name==='contact_permission')return;const p=document.createElement('p');const label=form.querySelector('label[for="'+name+'"]');p.textContent=(label?label.textContent:name)+': '+(name==='service'?service.selectedOptions[0].textContent:value);box.append(p)});const note=document.createElement('p');note.textContent='This preview has not sent your inquiry.';box.append(note);box.hidden=false;box.scrollIntoView({behavior:'smooth',block:'start'});});
+function initializeInquiry() {
+ const form=document.getElementById('tlc-inquiry'); if(!form)return;
+ const service=form.elements.service,box=document.getElementById('inquiry-review');
+ const update=()=>{document.querySelectorAll('.service-fields').forEach(group=>{const show=group.dataset.service===service.value;group.hidden=!show;group.querySelectorAll('input,select,textarea').forEach(control=>control.disabled=!show);});box.hidden=true;};
+ const preset=new URLSearchParams(location.hash.includes('?')?location.hash.split('?')[1]:location.search).get('service');
+ if([...service.options].some(o=>o.value===preset))service.value=preset;
+ service.addEventListener('change',update);update();
+ const review=()=>{
+  if(!form.reportValidity())return;
+  box.replaceChildren();const title=document.createElement('h3');title.textContent='Review your inquiry';box.append(title);
+  const answers=[];
+  for(const [name,value] of new FormData(form)){
+   if(!value||name==='contact_permission')continue;
+   const control=form.elements.namedItem(name);
+   const label=control?.id?form.querySelector('label[for="'+control.id+'"]'):null;
+   const answer=control?.tagName==='SELECT'?control.selectedOptions[0].textContent:String(value);
+   const line=(label?label.textContent:name)+': '+answer;
+   answers.push(line);const p=document.createElement('p');p.textContent=line;box.append(p);
+  }
+  answers.push('Permission: TLC may contact me about this inquiry.');
+  const address=service.value.startsWith('bblo-')?'bblocala@gmail.com':'carmen@doitwithtlc.com',body=answers.join('\n\n');
+  const actions=document.createElement('div');actions.className='email-actions';
+  const email=document.createElement('a');email.className='button';email.textContent='Open email draft';
+  email.href='mailto:'+address+'?subject='+encodeURIComponent('Website inquiry — '+service.selectedOptions[0].textContent)+'&body='+encodeURIComponent(body);
+  const copy=document.createElement('button');copy.type='button';copy.className='button secondary';copy.textContent='Copy inquiry';
+  const status=document.createElement('p');status.className='copy-status';status.setAttribute('role','status');
+  copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(body);status.textContent='Copied. Paste your inquiry into an email to '+address+'.';}catch{status.textContent='Select and copy the answers above, then email '+address+'.';}});
+  actions.append(email,copy);box.append(actions,status);
+  const note=document.createElement('p');note.textContent='Your email app will open with your answers. Review the message, attach any photos and press Send there. Nothing has been sent by this page.';box.append(note);
+  const direct=document.createElement('p');direct.append('Using webmail? Copy your inquiry and send it to ');
+  const contact=document.createElement('a');contact.href='mailto:'+address;contact.textContent=address;direct.append(contact,'.');box.append(direct);
+  box.hidden=false;box.focus();box.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+ };
+ form.addEventListener('submit',event=>{event.preventDefault();review();});
+ document.getElementById('review-inquiry').addEventListener('click',review);
+ form.addEventListener('input',()=>{box.hidden=true;});
 }
-
-function initializeSite(){initializeInquiry();const path=location.hash?location.hash.slice(1).split('?')[0]:location.pathname;document.querySelectorAll('nav a').forEach(a=>{const target=a.getAttribute('href').replace(/^#/,'');if(target===path)a.setAttribute('aria-current','page')});}
-
-document.addEventListener('DOMContentLoaded',initializeSite);
-
-// Keep native navigation menus usable on mouse, touch and keyboard.
+function initializeNavigation(){
+ const nav=document.getElementById('site-nav'),toggle=document.querySelector('.nav-toggle');if(!nav||!toggle)return;
+ const media=matchMedia('(max-width:760px)');
+ const sync=()=>{nav.hidden=media.matches;toggle.setAttribute('aria-expanded',String(!nav.hidden));};
+ sync();media.addEventListener('change',sync);
+ toggle.addEventListener('click',()=>{nav.hidden=!nav.hidden;toggle.setAttribute('aria-expanded',String(!nav.hidden));});
+ document.addEventListener('keydown',event=>{if(event.key==='Escape'&&media.matches&&!nav.hidden){nav.hidden=true;toggle.setAttribute('aria-expanded','false');toggle.focus();}});
+}
+document.addEventListener('DOMContentLoaded',()=>{initializeInquiry();initializeNavigation();document.querySelectorAll('nav a').forEach(a=>{if(a.pathname===location.pathname&&!a.hash)a.setAttribute('aria-current','page');});});
 document.addEventListener('click',event=>{document.querySelectorAll('header details[open]').forEach(menu=>{if(!menu.contains(event.target))menu.open=false;});});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){document.querySelectorAll('header details[open]').forEach(menu=>{menu.open=false;menu.querySelector('summary').focus();});}});

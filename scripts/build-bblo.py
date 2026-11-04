@@ -168,3 +168,6 @@ routes=['/'+str(p.parent.relative_to(ROOT)).strip('/')+'/' for p in ROOT.rglob('
 bridge='''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>TLC Website Review</title></head><body><p><a href="/website-preview/home/">Open the TLC website review</a></p><p><a href="/website-preview/bblo/">Open BBLO</a></p><script>const routes=ROUTES;let requested=location.hash.startsWith('#/')?location.hash.slice(1):'/home/';const path=requested.split(/[?#]/)[0];if(!routes.includes(path))requested='/home/';location.replace('/website-preview'+requested);</script></body></html>'''.replace('ROUTES',json.dumps(routes))
 (ROOT/'index.html').write_text(bridge)
 print('Built BBLO sections, 17 member profiles, 3 activity albums and native-page navigation.')
+
+# Apply shared navigation, brand artwork and accessibility after generation.
+runpy.run_path(str(REPO/'scripts/polish-preview.py'))

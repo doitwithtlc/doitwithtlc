@@ -67,7 +67,7 @@
       if (!form.reportValidity()) return;
       summary.replaceChildren();
       const heading = document.createElement('h3');
-      heading.textContent = 'Review only — nothing sent or saved';
+      heading.textContent = 'Review your proposal';
       summary.append(heading);
       const addLine = (label, value) => {
         const line = document.createElement('p');
@@ -88,6 +88,14 @@
         addLine('Types', [...entry.querySelectorAll('[data-win-type]:checked')].map(c => c.value).join(' · '));
         entry.querySelectorAll('input:not([data-win-type]),select,textarea').forEach(control => { if (control.value) addLine(control.labels[0].textContent.trim(), control.value); });
       });
+      const answers = [...summary.querySelectorAll('p')].map(p => p.textContent).join('\n\n');
+      const action = document.createElement('a');
+      action.className = 'button';
+      action.textContent = 'Open email draft to BBLO';
+      action.href = 'mailto:bblocala@gmail.com?subject=' + encodeURIComponent('BBLO presentation proposal') + '&body=' + encodeURIComponent(answers + '\n\nPermission: BBLO may contact me about this proposal.');
+      const note = document.createElement('p');
+      note.textContent = 'Review the draft, attach any supporting photos and press Send in your email app. Nothing has been sent by this page. If your email app does not open, copy the answers above and email bblocala@gmail.com.';
+      summary.append(action, note);
       summary.hidden = false;
       summary.focus();
     });
