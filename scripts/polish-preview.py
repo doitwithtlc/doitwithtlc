@@ -7,11 +7,11 @@ import html, json, re
 
 ROOT = Path(__file__).resolve().parents[1] / 'website-preview'
 BASE = '/website-preview'
-VERSION = '20261103-services'
+VERSION = '20261103-bblo-refined'
 ASSETS = BASE + '/assets/brand/'
 MEDIA = json.loads((ROOT.parent/'data/gallery-media.json').read_text())
 DIMENSIONS = {BASE+'/assets/'+photo['src']:(photo['width'],photo['height']) for album in MEDIA.values() for photo in album['photos'] if photo.get('width') and photo.get('height')}
-SECTIONS = [('','About BBLO'),('join/','How to Join'),('members/','Meet Our Members'),('board/','Meet Our Board'),('community-impact/','Our Community Impact'),('gallery/','Photos & Videos'),('testimonials/','Visitor Experience'),('present/','Interested in Presenting?'),('partners/','BBLO Partners'),('support/','Brand Opportunities'),('member-center/','Member Login')]
+SECTIONS = [('','About BBLO'),('join/','How to Join'),('members/','Meet Our Members'),('board/','Meet Our Board'),('community-impact/','Our Community Impact'),('gallery/','BBLO in Action'),('testimonials/','Member &amp; Visitor Experiences'),('present/','Interested in Presenting?'),('partners/','Partners & Brand Opportunities'),('member-center/','Member Login')]
 DROPDOWN = '<details class="nav-dropdown bblo-dropdown"><summary>BBLO <span aria-hidden="true">⌄</span></summary><div class="dropdown-links">' + ''.join(f'<a href="{BASE}/bblo/{route}">{label}</a>' for route,label in SECTIONS) + '</div></details>'
 
 TLC_MENU = '<details class="nav-dropdown tlc-dropdown"><summary>The Liaison Companies <span aria-hidden="true">⌄</span></summary><div class="dropdown-links"><a href="'+BASE+'/home/">Home / Our Services</a><a href="'+BASE+'/services/brand-representation/">Brand Representation</a><a href="'+BASE+'/services/event-management/">Event Management</a><a href="'+BASE+'/bblo/">BBLO</a><a href="'+BASE+'/services/bilingual-outreach/">Bilingual Outreach</a><a href="'+BASE+'/services/branding-content/">Branding &amp; Content</a><a href="'+BASE+'/about/">Meet Carmen</a></div></details>'
@@ -132,3 +132,7 @@ for file in ROOT.rglob('index.html'):
  file.write_text(s);count+=1
 
 print(f'Polished {count} review pages. Preview indexing restrictions preserved.')
+
+# Keep Carmen’s final content structure after all generators run.
+import runpy
+runpy.run_path(str(ROOT.parent/"scripts/refine-bblo.py"))

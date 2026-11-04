@@ -47,3 +47,6 @@ function initializeNavigation(){
 document.addEventListener('DOMContentLoaded',()=>{initializeInquiry();initializeNavigation();document.querySelectorAll('nav a').forEach(a=>{if(a.pathname===location.pathname&&!a.hash)a.setAttribute('aria-current','page');});});
 document.addEventListener('click',event=>{document.querySelectorAll('header details[open]').forEach(menu=>{if(!menu.contains(event.target))menu.open=false;});});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){document.querySelectorAll('header details[open]').forEach(menu=>{menu.open=false;menu.querySelector('summary').focus();});}});
+
+// Explicit pause control for the networking photo strip.
+document.addEventListener("click",event=>{const button=event.target.closest("[data-pause-strip]");if(!button)return;const strip=button.closest(".networking-strip");const paused=strip.classList.toggle("is-paused");button.setAttribute("aria-pressed",String(paused));button.textContent=paused?"Resume photo motion":"Pause photo motion";});
