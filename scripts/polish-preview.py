@@ -7,7 +7,7 @@ import html, json, re
 
 ROOT = Path(__file__).resolve().parents[1] / 'website-preview'
 BASE = '/website-preview'
-VERSION = '20261103-bblo-refined'
+VERSION = '20261103-bblo-refined2'
 ASSETS = BASE + '/assets/brand/'
 MEDIA = json.loads((ROOT.parent/'data/gallery-media.json').read_text())
 DIMENSIONS = {BASE+'/assets/'+photo['src']:(photo['width'],photo['height']) for album in MEDIA.values() for photo in album['photos'] if photo.get('width') and photo.get('height')}
