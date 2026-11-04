@@ -50,3 +50,11 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape'){document.qu
 
 // Explicit pause control for the networking photo strip.
 document.addEventListener("click",event=>{const button=event.target.closest("[data-pause-strip]");if(!button)return;const strip=button.closest(".networking-strip");const paused=strip.classList.toggle("is-paused");button.setAttribute("aria-pressed",String(paused));button.textContent=paused?"Resume photo motion":"Pause photo motion";});
+
+// Keep discovery links available on existing pages without changing member records.
+document.addEventListener('DOMContentLoaded',()=>{
+ const prefix=location.pathname.startsWith('/website-preview/')?'/website-preview':'';
+ for(const [menu,path,label] of [['.tlc-dropdown .dropdown-links','/local-business-spotlights/','Local Business Spotlights & Nominations'],['.bblo-dropdown .dropdown-links','/bblo/chapters/','Bring BBLO to Your Community']]){
+  const box=document.querySelector(menu);if(box&&!box.querySelector('a[href="'+prefix+path+'"]')){const link=document.createElement('a');link.href=prefix+path;link.textContent=label;box.append(link);}
+ }
+});
