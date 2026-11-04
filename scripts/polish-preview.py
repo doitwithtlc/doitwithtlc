@@ -23,6 +23,7 @@ for file in ROOT.rglob('index.html'):
  s=file.read_text()
  s=re.sub(r'<details class="nav-dropdown">.*?</details>',lambda _:DROPDOWN,s,flags=re.S)
  s=s.replace('>Testimonials<','>Visitor Experience<')
+ s=s.replace('/assets/brand/tlc-white.png','/assets/brand/tlc-white.webp')
  s=re.sub(r'/bblo/member-center/#(?:member-check-in|member-win|visitor-check-in)', '/bblo/member-center/',s)
  s=re.sub(r'/bblo/testimonials/#(?:share-story|profile-update)', '/bblo/member-center/',s)
  s=s.replace('Members: share your BBLO experience','Open the Member Hub')
@@ -39,6 +40,9 @@ for file in ROOT.rglob('index.html'):
  if '/assets/polish.css' not in s:
   s=s.replace('</head>',f'<link rel="stylesheet" href="{BASE}/assets/polish.css?v={VERSION}"></head>')
  route='/'+str(file.parent.relative_to(ROOT)).strip('/')+'/'
+ # Each preview canonical identifies its actual equivalent content. Production
+ # launch must switch these to production URLs together with indexing rules.
+ s=re.sub(r'<link rel="canonical" href="[^\"]+">',f'<link rel="canonical" href="https://doitwithtlc.com{BASE}{route}">',s)
  # Decorative clue in the hero, while all headings remain real text.
  s=re.sub(r'<img class="hero-clue"[^>]*>','',s)
  name='calendar' if ('events/' in route or 'where-is-carmen' in route) else 'business-card' if ('members/' in route or 'about/' in route or 'board/' in route) else 'open-door'
