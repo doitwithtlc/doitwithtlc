@@ -30,7 +30,7 @@ for file in ROOT.rglob('index.html'):
  if file == ROOT/'index.html': continue
  s=file.read_text()
  # Rebuild only the main navigation; keep BBLO's separate section menu.
- nav=TLC_MENU+'<a href="'+BASE+'/where-is-carmen/">Where is Carmen?</a>'+DROPDOWN+'<a href="'+BASE+'/contact/">Contact</a><a class="button" href="'+VIRTUAL+'">Schedule a 1:1</a>'
+ nav=TLC_MENU+'<details class="nav-dropdown carmen-dropdown"><summary>Where is Carmen? <span aria-hidden="true">⌄</span></summary><div class="dropdown-links"><a href="'+BASE+'/where-is-carmen/">Weekly Guide Overview</a><a href="'+BASE+'/where-is-carmen/#weekly-guide">Instagram Feed</a></div></details>'+DROPDOWN+'<a href="'+BASE+'/contact/">Contact</a><a class="button" href="'+VIRTUAL+'">Schedule a 1:1</a>'
  s=re.sub(r'(<nav[^>]*aria-label="Main navigation"[^>]*>).*?(</nav>)',lambda m:m[1]+nav+m[2],s,flags=re.S)
  s=s.replace('href="/website-preview/" aria-label="The Liaison Companies LLC — Home"','href="/website-preview/home/" aria-label="The Liaison Companies LLC — Home"')
  s=s.replace('>Testimonials<','>Visitor Experience<')
