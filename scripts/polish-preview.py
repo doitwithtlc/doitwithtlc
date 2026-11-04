@@ -51,6 +51,16 @@ for file in ROOT.rglob('index.html'):
  if 'data-nav-fallback' not in s:
   s=s.replace('</head>','<noscript data-nav-fallback><style>@media(max-width:760px){header nav{display:flex!important}.nav-toggle{display:none!important}}</style></noscript></head>')
  route='/'+str(file.parent.relative_to(ROOT)).strip('/')+'/'
+ # BBLO media remains visible, with neutral context until Carmen supplies captions.
+ if route.startswith(('/bblo/gallery/','/bblo/community-impact/')):
+  s=re.sub(r'<figcaption>.*?</figcaption>','',s,flags=re.S)
+  s=re.sub(r'(<article>)(?:<h3>.*?</h3>)?<p[^>]*>.*?</p>(<video\b.*?</video>)(</article>)',r'\1\2\3',s,flags=re.S)
+  s=re.sub(r'(<p class="lead">).*?(</p>)',r'\1Moments from BBLO meetings, business visibility and community involvement.\2',s,count=1,flags=re.S)
+  s=re.sub(r'(<div class="card-copy">.*?</h[23]>)(<p>.*?</p>)',r'\1<p>Meetings, visibility and connecting with our community.</p>',s,flags=re.S)
+  # Keep media alternatives useful without claiming an unconfirmed activity.
+  s=re.sub(r'(<video\b[^>]*aria-label=")[^\"]*(")',r'\1BBLO community video\2',s)
+  s=s.replace('BBLO’s sponsored community-build archive brings together the people, the build site and the shared work.','Moments of BBLO connecting with and giving back to the community.')
+  s=s.replace('The photographs document participants together at a Habitat build site and hands-on work in progress. They are shared as a record of BBLO’s community participation.','BBLO members showing up, building relationships and connecting with the community.')
  # Each preview canonical identifies its actual equivalent content. Production
  # launch must switch these to production URLs together with indexing rules.
  s=re.sub(r'<link rel="canonical" href="[^\"]+">',f'<link rel="canonical" href="https://doitwithtlc.com{BASE}{route}">',s)
