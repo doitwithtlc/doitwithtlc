@@ -129,6 +129,16 @@ for file in ROOT.rglob('index.html'):
   s=re.sub(r'<script>\(\(\)=>\{if\(window\.__bhldScript\).*?</script>', '<script>(()=>{const w=document.querySelector("behold-widget");const load=()=>{if(window.__bhldScript)return;window.__bhldScript=true;const s=document.createElement("script");s.type="module";s.src="https://w.behold.so/widget.js";document.head.append(s);};if("IntersectionObserver" in window){const o=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){load();o.disconnect();}},{rootMargin:"300px"});o.observe(w);}else load();})();</script>',s,flags=re.S)
  # Test tools may access the preview, but search indexing stays disabled.
  assert 'noindex' in s, str(file)
+
+ # Keep homepage social previews branded when regenerating the site.
+ if file == ROOT/'home/index.html':
+  share_url = 'https://doitwithtlc.com/website-preview/assets/brand/tlc-share-20261104.jpg'
+  share_alt = 'The Liaison Companies logo, Carmen silhouette, and You Can’t Be Everywhere, But Your Brand Can tagline'
+  s=re.sub(r'<meta (?:property|name)="(?:og:image(?::[^"]+)?|twitter:image(?::[^"]+)?)"[^>]*>', '', s)
+  s=re.sub(r'<link rel="image_src"[^>]*>', '', s)
+  share_meta = f'<meta property="og:image" content="{share_url}"><meta property="og:image:secure_url" content="{share_url}"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="{share_alt}"><meta name="twitter:image" content="{share_url}"><meta name="twitter:image:alt" content="{share_alt}"><link rel="image_src" href="{share_url}">'
+  s=s.replace('</head>',share_meta+'</head>')
+
  file.write_text(s);count+=1
 
 print(f'Polished {count} review pages. Preview indexing restrictions preserved.')
