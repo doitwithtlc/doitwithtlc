@@ -7,12 +7,19 @@ import html, json, re
 
 ROOT = Path(__file__).resolve().parents[1] / 'website-preview'
 BASE = '/website-preview'
-VERSION = '20261103-polish2'
+VERSION = '20261103-services'
 ASSETS = BASE + '/assets/brand/'
 MEDIA = json.loads((ROOT.parent/'data/gallery-media.json').read_text())
 DIMENSIONS = {BASE+'/assets/'+photo['src']:(photo['width'],photo['height']) for album in MEDIA.values() for photo in album['photos'] if photo.get('width') and photo.get('height')}
 SECTIONS = [('','About BBLO'),('join/','How to Join'),('members/','Meet Our Members'),('board/','Meet Our Board'),('community-impact/','Our Community Impact'),('gallery/','Photos & Videos'),('testimonials/','Visitor Experience'),('present/','Interested in Presenting?'),('partners/','BBLO Partners'),('support/','Brand Opportunities'),('member-center/','Member Login')]
-DROPDOWN = '<details class="nav-dropdown"><summary>BBLO <span aria-hidden="true">⌄</span></summary><div class="dropdown-links">' + ''.join(f'<a href="{BASE}/bblo/{route}">{label}</a>' for route,label in SECTIONS) + '</div></details>'
+DROPDOWN = '<details class="nav-dropdown bblo-dropdown"><summary>BBLO <span aria-hidden="true">⌄</span></summary><div class="dropdown-links">' + ''.join(f'<a href="{BASE}/bblo/{route}">{label}</a>' for route,label in SECTIONS) + '</div></details>'
+
+TLC_MENU = '<details class="nav-dropdown tlc-dropdown"><summary>The Liaison Companies <span aria-hidden="true">⌄</span></summary><div class="dropdown-links"><a href="'+BASE+'/home/">Home / Our Services</a><a href="'+BASE+'/services/brand-representation/">Brand Representation</a><a href="'+BASE+'/services/event-management/">Event Management</a><a href="'+BASE+'/bblo/">BBLO</a><a href="'+BASE+'/services/bilingual-outreach/">Bilingual Outreach</a><a href="'+BASE+'/services/branding-content/">Branding &amp; Content</a><a href="'+BASE+'/about/">Meet Carmen</a></div></details>'
+VIRTUAL = 'https://calendar.app.google/WQ41dAo7znAJeruT8'
+IN_PERSON = 'https://calendar.app.google/B2fesYe5HteXBfE77'
+def connect_section(label, subject, address='carmen@doitwithtlc.com'):
+ from urllib.parse import quote
+ return '<section class="service-connect" id="connect"><div class="wrap"><p class="eyebrow">Your next step</p><h2>Let’s talk about '+label+'.</h2><p>Request information by email or choose a virtual or in-person 1:1 with Carmen.</p><div class="actions"><a class="button" href="mailto:'+address+'?subject='+quote(subject)+'">Email for information</a><a class="button secondary" href="'+VIRTUAL+'">Book a virtual 1:1</a><a class="button secondary" href="'+IN_PERSON+'">Book an in-person 1:1</a></div></div></section>'
 
 def icon(name, cls='clue-icon'):
  return f'<img class="{cls}" src="{ASSETS}clue-{name}.webp" alt="" width="128" height="128" loading="lazy" decoding="async">'
@@ -23,7 +30,10 @@ count=0
 for file in ROOT.rglob('index.html'):
  if file == ROOT/'index.html': continue
  s=file.read_text()
- s=re.sub(r'<details class="nav-dropdown">.*?</details>',lambda _:DROPDOWN,s,flags=re.S)
+ # Rebuild only the main navigation; keep BBLO's separate section menu.
+ nav=TLC_MENU+'<a href="'+BASE+'/where-is-carmen/">Where is Carmen?</a>'+DROPDOWN+'<a href="'+BASE+'/contact/">Contact</a><a class="button" href="'+VIRTUAL+'">Schedule a 1:1</a>'
+ s=re.sub(r'(<nav[^>]*aria-label="Main navigation"[^>]*>).*?(</nav>)',lambda m:m[1]+nav+m[2],s,flags=re.S)
+ s=s.replace('href="/website-preview/" aria-label="The Liaison Companies LLC — Home"','href="/website-preview/home/" aria-label="The Liaison Companies LLC — Home"')
  s=s.replace('>Testimonials<','>Visitor Experience<')
  s=s.replace('/assets/brand/tlc-white.png','/assets/brand/tlc-white.webp')
  def image_dimensions(m):
@@ -51,6 +61,18 @@ for file in ROOT.rglob('index.html'):
  if 'data-nav-fallback' not in s:
   s=s.replace('</head>','<noscript data-nav-fallback><style>@media(max-width:760px){header nav{display:flex!important}.nav-toggle{display:none!important}}</style></noscript></head>')
  route='/'+str(file.parent.relative_to(ROOT)).strip('/')+'/'
+ s=re.sub(r'<section class="service-connect".*?</section>','',s,flags=re.S)
+ service_routes={'/services/brand-representation/':('your brand representation','Brand Representation Information'),'/services/event-management/':('your event','Event Management Information'),'/services/bilingual-outreach/':('bilingual outreach','Bilingual Outreach Information'),'/services/branding-content/':('your content needs','Branding and Content Information'),'/bblo/':('BBLO','BBLO Information')}
+ if route in service_routes:
+  label,subject=service_routes[route]
+  connection=connect_section(label,subject,'bblocala@gmail.com' if route=='/bblo/' else 'carmen@doitwithtlc.com')
+  s=s.replace('<section class="carmen-trail"',connection+'<section class="carmen-trail"',1)
+  # Service hero leads straight to the visitor's two contact choices.
+  if route.startswith('/services/'):
+   hero_part=re.search(r'<section class="hero[^\"]*">.*?</section>',s,re.S)
+   if hero_part:
+    part=re.sub(r'<div class="actions">.*?</div>','<div class="actions"><a class="button" href="#connect">Request information or book a 1:1</a></div>',hero_part.group(),count=1,flags=re.S)
+    s=s[:hero_part.start()]+part+s[hero_part.end():]
  # BBLO media remains visible, with neutral context until Carmen supplies captions.
  if route.startswith(('/bblo/gallery/','/bblo/community-impact/')):
   s=re.sub(r'<figcaption>.*?</figcaption>','',s,flags=re.S)
