@@ -1,1 +1,10 @@
 .curated-gallery{grid-template-columns:repeat(3,minmax(0,1fr));align-items:start}.curated-gallery img{width:100%;height:320px;aspect-ratio:auto;object-fit:contain;background:#eae3d3}.curated-gallery a:focus-visible{outline:3px solid var(--gold);outline-offset:4px}.gallery-video-grid{align-items:start}.gallery-video{display:block;width:100%;max-width:480px;max-height:620px;background:#07162a}.gallery-album-grid h2{font-size:30px}.gallery-album-grid .album-card>.photo{padding:18px 18px 0;margin:0}.gallery-album-grid .album-card>.photo img{height:230px}.gallery-album-grid figcaption{display:none}@media(max-width:850px){.curated-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.curated-gallery,.gallery-video-grid,.gallery-album-grid{grid-template-columns:1fr}.curated-gallery img{height:auto;max-height:600px}.gallery-video{max-height:580px}}
+
+/* Frameless gallery photographs and album covers. */
+.gallery-album-grid .album-card{background:transparent;border:0;box-shadow:none}
+.gallery-album-grid .album-card>.photo{padding:0;margin:0;border:0;background:transparent;box-shadow:none}
+.gallery-album-grid .album-card>.photo a{display:block}
+.gallery-album-grid .album-card>.photo img{display:block;width:100%;height:auto;max-height:none;aspect-ratio:auto;object-fit:contain;background:transparent;border:0;box-shadow:none}
+.gallery-album-grid .album-card .card-copy{padding:22px 0 28px}
+.curated-gallery .photo,.curated-gallery figure{padding:0;border:0;background:transparent;box-shadow:none}
+.curated-gallery img{display:block;height:auto;max-height:none;background:transparent;border:0;box-shadow:none}
