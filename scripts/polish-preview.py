@@ -7,8 +7,10 @@ import html, json, re
 
 ROOT = Path(__file__).resolve().parents[1] / 'website-preview'
 BASE = '/website-preview'
-VERSION = '20261103-polish'
+VERSION = '20261103-polish2'
 ASSETS = BASE + '/assets/brand/'
+MEDIA = json.loads((ROOT.parent/'data/gallery-media.json').read_text())
+DIMENSIONS = {BASE+'/assets/'+photo['src']:(photo['width'],photo['height']) for album in MEDIA.values() for photo in album['photos'] if photo.get('width') and photo.get('height')}
 SECTIONS = [('','About BBLO'),('join/','How to Join'),('members/','Meet Our Members'),('board/','Meet Our Board'),('community-impact/','Our Community Impact'),('gallery/','Photos & Videos'),('testimonials/','Visitor Experience'),('present/','Interested in Presenting?'),('partners/','BBLO Partners'),('support/','Brand Opportunities'),('member-center/','Member Login')]
 DROPDOWN = '<details class="nav-dropdown"><summary>BBLO <span aria-hidden="true">⌄</span></summary><div class="dropdown-links">' + ''.join(f'<a href="{BASE}/bblo/{route}">{label}</a>' for route,label in SECTIONS) + '</div></details>'
 
@@ -24,6 +26,12 @@ for file in ROOT.rglob('index.html'):
  s=re.sub(r'<details class="nav-dropdown">.*?</details>',lambda _:DROPDOWN,s,flags=re.S)
  s=s.replace('>Testimonials<','>Visitor Experience<')
  s=s.replace('/assets/brand/tlc-white.png','/assets/brand/tlc-white.webp')
+ def image_dimensions(m):
+  tag=m.group();src=re.search(r'src="([^\"]+)"',tag)
+  if src and src[1] in DIMENSIONS and not re.search(r'\bwidth=',tag):
+   w,h=DIMENSIONS[src[1]];tag=tag[:-1]+f' width="{w}" height="{h}">'
+  return tag
+ s=re.sub(r'<img\b[^>]+>',image_dimensions,s)
  s=re.sub(r'/bblo/member-center/#(?:member-check-in|member-win|visitor-check-in)', '/bblo/member-center/',s)
  s=re.sub(r'/bblo/testimonials/#(?:share-story|profile-update)', '/bblo/member-center/',s)
  s=s.replace('Members: share your BBLO experience','Open the Member Hub')
@@ -39,6 +47,9 @@ for file in ROOT.rglob('index.html'):
  s=re.sub(r'(/assets/bblo/bblo\.js)(?:\?v=[^"\s]+)?',r'\1?v='+VERSION,s)
  if '/assets/polish.css' not in s:
   s=s.replace('</head>',f'<link rel="stylesheet" href="{BASE}/assets/polish.css?v={VERSION}"></head>')
+ s=re.sub(r'(/assets/polish\.css)(?:\?v=[^"\s]+)?',r'\1?v='+VERSION,s)
+ if 'data-nav-fallback' not in s:
+  s=s.replace('</head>','<noscript data-nav-fallback><style>@media(max-width:760px){header nav{display:flex!important}.nav-toggle{display:none!important}}</style></noscript></head>')
  route='/'+str(file.parent.relative_to(ROOT)).strip('/')+'/'
  # Each preview canonical identifies its actual equivalent content. Production
  # launch must switch these to production URLs together with indexing rules.

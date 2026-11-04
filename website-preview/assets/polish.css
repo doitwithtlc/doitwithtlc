@@ -4,3 +4,6 @@
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
 .form-consent{min-height:44px;align-items:center}.form-consent input{flex:0 0 22px;width:22px;height:22px;margin:0}
+
+/* Keep the mobile menu closed before scripts load, avoiding layout shift. */
+@media(max-width:760px){header nav{display:none}header nav.mobile-open{display:flex}}
