@@ -26,6 +26,7 @@ for file in ROOT.rglob('index.html'):
  # One destination for current partner benefits and brand inquiries.
  s=s.replace(BASE+'/bblo/support/',BASE+'/bblo/partners/#feature-your-brand')
  s=s.replace('Community build archive','Community build').replace('Local housing nonprofit and the organization behind the Vet Build archive.','A local nonprofit focused on safe, affordable housing and community participation.')
+ s=s.replace('>Visitor Experience<','>Member &amp; Visitor Experiences<')
  s=s.replace('>Photos & Videos<','>BBLO in Action<').replace('>BBLO Partners<','>Partners &amp; Brand Opportunities<')
  s=re.sub(r'<a[^>]*href="'+re.escape(BASE)+r'/bblo/partners/#feature-your-brand"[^>]*>Brand Opportunities</a>','',s)
  # Member login is an entry in the BBLO dropdown, not a repeated page promotion.
