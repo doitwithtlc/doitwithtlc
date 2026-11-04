@@ -11,7 +11,7 @@ VERSION = '20261103-bblo-refined2'
 ASSETS = BASE + '/assets/brand/'
 MEDIA = json.loads((ROOT.parent/'data/gallery-media.json').read_text())
 DIMENSIONS = {BASE+'/assets/'+photo['src']:(photo['width'],photo['height']) for album in MEDIA.values() for photo in album['photos'] if photo.get('width') and photo.get('height')}
-SECTIONS = [('','About BBLO'),('join/','How to Join'),('members/','Meet Our Members'),('board/','Meet Our Board'),('community-impact/','Our Community Impact'),('gallery/','BBLO in Action'),('testimonials/','Member &amp; Visitor Experiences'),('present/','Interested in Presenting?'),('partners/','Partners & Brand Opportunities'),('chapters/','Bring BBLO to Your Community'),('member-center/','Member Login')]
+SECTIONS = [('','About BBLO'),('benefits/','Membership Benefits &amp; Pricing'),('join/','How to Join'),('members/','Meet Our Members'),('board/','Meet Our Board'),('community-impact/','Our Community Impact'),('gallery/','BBLO in Action'),('testimonials/','Member &amp; Visitor Experiences'),('present/','Interested in Presenting?'),('partners/','Partners & Brand Opportunities'),('chapters/','Bring BBLO to Your Community'),('member-center/','Member Login')]
 DROPDOWN = '<details class="nav-dropdown bblo-dropdown"><summary>BBLO <span aria-hidden="true">⌄</span></summary><div class="dropdown-links">' + ''.join(f'<a href="{BASE}/bblo/{route}">{label}</a>' for route,label in SECTIONS) + '</div></details>'
 
 TLC_MENU = '<details class="nav-dropdown tlc-dropdown"><summary>The Liaison Companies <span aria-hidden="true">⌄</span></summary><div class="dropdown-links"><a href="'+BASE+'/home/">Home / Our Services</a><a href="'+BASE+'/services/brand-representation/">Brand Representation</a><a href="'+BASE+'/services/event-management/">Event Management</a><a href="'+BASE+'/bblo/">BBLO</a><a href="'+BASE+'/services/bilingual-outreach/">Bilingual Outreach</a><a href="'+BASE+'/services/branding-content/">Branding &amp; Content</a><a href="'+BASE+'/local-business-spotlights/">Local Business Spotlights &amp; Nominations</a><a href="'+BASE+'/about/">Meet Carmen</a></div></details>'
@@ -136,4 +136,4 @@ print(f'Polished {count} review pages. Preview indexing restrictions preserved.'
 # Keep Carmen’s final content structure after all generators run.
 import runpy
 runpy.run_path(str(ROOT.parent/"scripts/refine-bblo.py"))
-runpy.run_path(str(ROOT.parent/"scripts/build-community-intake.py"))
+runpy.run_path(str(ROOT.parent/"scripts/build-lead-intakes.py"))
