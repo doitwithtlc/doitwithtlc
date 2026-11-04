@@ -116,7 +116,11 @@ for file in ROOT.rglob('index.html'):
   s=s.replace('<div id="inquiry-review"','<noscript><p>Email <a href="mailto:carmen@doitwithtlc.com">carmen@doitwithtlc.com</a> or call <a href="tel:3522079770">352-207-9770</a> to discuss your inquiry.</p></noscript><div id="inquiry-review"') if '<noscript>' not in s else s
   s=re.sub(r'(id="inquiry-review" class="form-summary")(?: tabindex="-1")*',r'\1 tabindex="-1"',s)
  if route=='/where-is-carmen/':
-  s=s.replace('<p>The next verified website edition is being prepared.</p>','<p>Find the latest business-opportunities posts on TLC’s Instagram. Confirm the date, location and registration with the organizer before attending.</p><a class="button" href="https://www.instagram.com/doitwithtlc/" target="_blank" rel="noopener">See TLC’s latest posts ↗</a>')
+  guide='<div class="weekly-edition" id="weekly-edition"><p class="eyebrow">@doitwithtlc on Instagram</p><h2>Follow the clues.<br>See what’s happening.</h2><p>Browse TLC’s latest Instagram posts right here, including weekly business opportunities, local connections and community activity. Check each post’s date and confirm event details with the organizer before attending.</p><behold-widget feed-id="YC6Ea8B8OruDyWFDJjwq" style="display:block;min-width:0"></behold-widget><script>(()=>{if(window.__bhldScript)return;window.__bhldScript=true;const s=document.createElement("script");s.type="module";s.src="https://w.behold.so/widget.js";document.head.append(s);})();</script><noscript><p>Enable JavaScript to view TLC’s Instagram posts on this page.</p></noscript></div>'
+  s=re.sub(r'<!-- GUIDE:START -->.*?<!-- GUIDE:END -->',lambda _:'<!-- GUIDE:START -->'+guide+'<!-- GUIDE:END -->',s,flags=re.S)
+  s=s.replace('This week&rsquo;s business clues','The latest business clues')
+ if route=='/bblo/':
+  s=re.sub(r'<section[^>]*id="bblo-instagram".*?</section>','',s,flags=re.S)
  if route=='/bblo/present/':
   s=s.replace('Review my answers','Review &amp; email proposal').replace('Review only — nothing is sent or saved.','Review your answers, then open an email draft to BBLO. You send the final message from your email app.')
   s=re.sub(r'<div class="review-note".*?</div>','<p class="note">Share your proposed topic below, review your answers and email them to BBLO for consideration.</p>',s,flags=re.S)
