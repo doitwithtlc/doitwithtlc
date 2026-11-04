@@ -15,11 +15,10 @@ SECTIONS = [('','About BBLO'),('join/','How to Join'),('members/','Meet Our Memb
 DROPDOWN = '<details class="nav-dropdown bblo-dropdown"><summary>BBLO <span aria-hidden="true">⌄</span></summary><div class="dropdown-links">' + ''.join(f'<a href="{BASE}/bblo/{route}">{label}</a>' for route,label in SECTIONS) + '</div></details>'
 
 TLC_MENU = '<details class="nav-dropdown tlc-dropdown"><summary>The Liaison Companies <span aria-hidden="true">⌄</span></summary><div class="dropdown-links"><a href="'+BASE+'/home/">Home / Our Services</a><a href="'+BASE+'/services/brand-representation/">Brand Representation</a><a href="'+BASE+'/services/event-management/">Event Management</a><a href="'+BASE+'/bblo/">BBLO</a><a href="'+BASE+'/services/bilingual-outreach/">Bilingual Outreach</a><a href="'+BASE+'/services/branding-content/">Branding &amp; Content</a><a href="'+BASE+'/about/">Meet Carmen</a></div></details>'
-VIRTUAL = 'https://calendar.app.google/WQ41dAo7znAJeruT8'
-IN_PERSON = 'https://calendar.app.google/B2fesYe5HteXBfE77'
+VIRTUAL = 'https://calendar.app.google/rpNKmw4UhZW2e2Xz7'
 def connect_section(label, subject, address='carmen@doitwithtlc.com'):
  from urllib.parse import quote
- return '<section class="service-connect" id="connect"><div class="wrap"><p class="eyebrow">Your next step</p><h2>Let’s talk about '+label+'.</h2><p>Request information by email or choose a virtual or in-person 1:1 with Carmen.</p><div class="actions"><a class="button" href="mailto:'+address+'?subject='+quote(subject)+'">Email for information</a><a class="button secondary" href="'+VIRTUAL+'">Book a virtual 1:1</a><a class="button secondary" href="'+IN_PERSON+'">Book an in-person 1:1</a></div></div></section>'
+ return '<section class="service-connect" id="connect"><div class="wrap"><p class="eyebrow">Your next step</p><h2>Let’s talk about '+label+'.</h2><p>Request information by email or schedule a 1:1 with Carmen.</p><div class="actions"><a class="button" href="mailto:'+address+'?subject='+quote(subject)+'">Email for information</a><a class="button secondary" href="'+VIRTUAL+'">Schedule a 1:1</a></div></div></section>'
 
 def icon(name, cls='clue-icon'):
  return f'<img class="{cls}" src="{ASSETS}clue-{name}.webp" alt="" width="128" height="128" loading="lazy" decoding="async">'
