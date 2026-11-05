@@ -1,0 +1,6 @@
+# BBLO event announcements
+The public calendar and announcement cards read `data/bblo-events.json`. Only entries with `published: true` are shown. Categories: `bblo`, `community`, `field-trip`. Both calendar and list use the same entries; the Field Trip Friday page starts with that category selected.
+
+To add an announcement, edit https://github.com/doitwithtlc/doitwithtlc/edit/main/data/bblo-events.json and add an event object with a unique id, title, category, start, end, location, description, url, cta, and published. Use verified details only. Dates require the local UTC offset (-05:00 winter; -04:00 daylight time). This is a public event list: never include attendee information or private notes. Committing publishes through the existing Pages deployment. Mirror the approved list to website-preview/data/bblo-events.json for review consistency. The preview is not the production source.
+
+The existing Gain Ground funnel remains the owner of tickets, participation forms, CRM capture, and automation; website cards link directly to https://gaingroundocala.com/. No duplicated registration workflow is created. Calendar entries do not automatically import from CRM or Carmen's private calendar.
