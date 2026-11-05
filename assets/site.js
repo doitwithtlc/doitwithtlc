@@ -85,3 +85,6 @@ document.addEventListener('DOMContentLoaded',()=>{
  if(link.pathname===location.pathname)link.setAttribute('aria-current','page');
  document.querySelectorAll('.bblo-subnav a[href="'+prefix+'/bblo/events/"]').forEach(a=>a.textContent='Community Event Calendar');
 });
+
+// Cafecito discovery across existing pages.
+document.addEventListener('DOMContentLoaded',()=>{const box=document.querySelector('.carmen-dropdown .dropdown-links');if(box&&!box.querySelector('a[href="/cafecito-with-carmen/"]')){const a=document.createElement('a');a.href='/cafecito-with-carmen/';a.textContent='Cafecito with Carmen';box.append(a);}});

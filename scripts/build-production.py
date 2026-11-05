@@ -37,6 +37,7 @@ def build(source, output):
             text = text.replace('content="index,follow,max-image-preview:large"', 'content="noindex,follow"')
         # Native navigation must expose the new pages even with JavaScript disabled.
         for menu, href, label in [
+            ('carmen-dropdown', '/cafecito-with-carmen/', 'Cafecito with Carmen'),
             ('tlc-dropdown', '/local-business-spotlights/', 'Local Business Spotlights &amp; Nominations'),
             ('bblo-dropdown', '/bblo/benefits/', 'Membership Benefits &amp; Pricing'),
             ('bblo-dropdown', '/bblo/chapters/', 'Bring BBLO to Your Community'),
@@ -53,6 +54,17 @@ def build(source, output):
         destination.write_text(text)
         if not member_profile:
             routes.append(route)
+    # Preserve the independently maintained Cafecito editorial routes on promotion.
+    import shutil
+    blog = ROOT / 'cafecito-with-carmen'
+    if blog.exists():
+        for article in blog.rglob('index.html'):
+            relative = article.relative_to(ROOT)
+            destination = output / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            if article.resolve() != destination.resolve():
+                shutil.copy2(article, destination)
+            routes.append('/' + relative.parent.as_posix() + '/')
     alias = output / 'home/index.html'
     alias.parent.mkdir(parents=True, exist_ok=True)
     alias.write_text('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex,follow"><link rel="canonical" href="https://doitwithtlc.com/"><meta http-equiv="refresh" content="0;url=/"><title>The Liaison Companies</title></head><body><a href="/">Visit The Liaison Companies</a></body></html>')
