@@ -69,8 +69,19 @@ document.addEventListener('DOMContentLoaded',()=>{const box=document.querySelect
  if(a.closest('nav'))a.remove();else{a.href=prefix+'/bblo/gallery/';if(/community impact/i.test(a.textContent))a.textContent='BBLO in Action';}
  });
  document.querySelectorAll('.bblo-dropdown .dropdown-links,.bblo-subnav').forEach(box=>{
- for(const [path,label] of [['/bblo/events/','BBLO & Community Events'],['/bblo/field-trip-friday/','Field Trip Friday']]){
+ for(const [path,label] of [['/bblo/field-trip-friday/','Field Trip Friday']]){
  if(!box.querySelector('a[href="'+prefix+path+'"]')){const a=document.createElement('a');a.href=prefix+path;a.textContent=label;box.append(a);}
  }
  });
  });
+// Expose the community calendar directly in the main desktop and mobile menu.
+document.addEventListener('DOMContentLoaded',()=>{
+ const prefix=location.pathname.startsWith('/website-preview/')?'/website-preview':'';
+ const nav=document.getElementById('site-nav');if(!nav)return;
+ document.querySelectorAll('.bblo-dropdown a[href="'+prefix+'/bblo/events/"]').forEach(a=>a.remove());
+ let link=nav.querySelector(':scope > a[data-community-calendar]');
+ if(!link){link=document.createElement('a');link.dataset.communityCalendar='';nav.prepend(link);}
+ link.href=prefix+'/bblo/events/';link.textContent='Community Event Calendar';
+ if(link.pathname===location.pathname)link.setAttribute('aria-current','page');
+ document.querySelectorAll('.bblo-subnav a[href="'+prefix+'/bblo/events/"]').forEach(a=>a.textContent='Community Event Calendar');
+});
