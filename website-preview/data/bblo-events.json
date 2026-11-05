@@ -1,0 +1,17 @@
+{
+  "timezone": "America/New_York",
+  "events": [
+    {
+      "id": "gain-ground-ocala-women-2027",
+      "title": "GAIN GROUND OCALA Women 2027",
+      "category": "community",
+      "start": "2027-02-25T10:00:00-05:00",
+      "end": "2027-02-25T16:00:00-05:00",
+      "location": "College of Central Florida · Klein Center · Ocala, Florida",
+      "description": "Trades • Services • Business Growth. A business-growth event for women entering, leading, and growing businesses in trades and service industries, developed and produced by The Liaison Companies LLC.",
+      "url": "https://gaingroundocala.com/",
+      "cta": "Tickets & Participation",
+      "published": true
+    }
+  ]
+}
