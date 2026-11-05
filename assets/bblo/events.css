@@ -1,1 +1,16 @@
 .event-tools{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin:1.5rem 0}.event-tools select{padding:.65rem;font:inherit;background:#fff;color:#0B1F3A;border:1px solid #0B1F3A}.event-month{display:flex;align-items:center;justify-content:space-between;gap:1rem}.event-month h2{font-size:1.7rem}.event-month button{padding:.6rem 1rem;font:inherit;background:#0B1F3A;color:white;border:0;cursor:pointer}.event-calendar{width:100%;table-layout:fixed;border-collapse:collapse;background:white}.event-calendar th,.event-calendar td{border:1px solid #ddd8cd;padding:.5rem;vertical-align:top}.event-calendar td{height:100px}.event-calendar td>a{display:block;font-size:.8rem;margin-top:.4rem;line-height:1.35}.event-calendar .today{outline:2px solid #C9A227;outline-offset:-2px}.event-list{display:grid;gap:1.5rem;margin-top:2rem}.event-card{border-top:2px solid #C9A227;padding:1.5rem 0;scroll-margin-top:2rem}.event-card h2{font-size:2rem}.event-meta{font-weight:600}.event-calendar-wrap{overflow:auto}.event-calendar{min-width:560px}@media(max-width:600px){.event-calendar td{height:75px}.event-calendar th,.event-calendar td{padding:.3rem}.event-card h2{font-size:1.6rem}}
+/* Horizontal upcoming-event carousel; visitors control movement. */
+.event-carousel{margin:2rem 0;min-width:0}
+.event-carousel-heading{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;margin-bottom:1.25rem}
+.event-carousel-heading h2{font-size:2rem;margin:.2rem 0}
+.event-carousel-heading p{margin:.35rem 0}
+.event-carousel-controls{display:flex;gap:.6rem;flex-shrink:0}
+.event-carousel-controls button{width:48px;height:48px;border:1px solid #0B1F3A;background:#0B1F3A;color:#fff;font-size:1.5rem;border-radius:50%;cursor:pointer}
+.event-carousel-controls button:disabled{opacity:.3;cursor:default}
+.event-list{display:flex;gap:24px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding:4px;padding:4px 4px 18px;margin-top:0;scrollbar-color:#C9A227 #e7e0d2;scrollbar-width:thin}
+.event-list .event-card{flex:0 0 min(390px,calc(100% - 32px));min-width:0;scroll-snap-align:start;border:1px solid #ded7c8;border-top:4px solid #C9A227;border-radius:12px;background:#fff;padding:1.5rem;box-shadow:0 4px 18px #0b1f3a08;overflow-wrap:anywhere}
+.event-list .event-card h2{font-size:1.65rem;line-height:1.18;margin:.65rem 0}
+.event-list .event-card .button{display:block;text-align:center;margin:1.25rem 0 .85rem}
+.event-list .event-card .text-link{display:inline-block}
+.event-list:focus-visible,.event-card:focus-visible,.event-carousel-controls button:focus-visible{outline:3px solid #C9A227;outline-offset:3px}
+@media(max-width:600px){.event-carousel-heading{gap:.75rem}.event-carousel-heading h2{font-size:1.7rem}.event-carousel-controls button{width:40px;height:40px}.event-list .event-card{flex-basis:calc(100% - 28px);padding:1.15rem}}
