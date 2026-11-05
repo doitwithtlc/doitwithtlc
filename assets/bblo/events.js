@@ -9,6 +9,23 @@ document.addEventListener('DOMContentLoaded',async()=>{
  const names={bblo:'BBLO Event',community:'Community Event','field-trip':'Field Trip Friday'};
  const safeUrl=value=>{try{let u=new URL(value,location.origin);return ['https:','http:'].includes(u.protocol)?u.href:'#';}catch{return '#';}};
  const el=(tag,text,className)=>{const n=document.createElement(tag);if(text)n.textContent=text;if(className)n.className=className;return n;};
+ // A swipeable, keyboard-accessible row of upcoming event details.
+ const shell=el('div',null,'event-carousel');
+ shell.setAttribute('role','region');shell.setAttribute('aria-roledescription','carousel');shell.setAttribute('aria-label','Upcoming events');
+ const heading=el('div',null,'event-carousel-heading'),headingText=el('div');
+ headingText.append(el('p','Explore what’s coming up','eyebrow'),el('h2','Upcoming events'),el('p','Swipe across or use the arrows to browse.','note'));
+ const controls=el('div',null,'event-carousel-controls');
+ const previous=el('button','←'),next=el('button','→');
+ for(const [button,name] of [[previous,'Previous events'],[next,'Next events']]){button.type='button';button.setAttribute('aria-label',name);button.setAttribute('aria-controls','event-list');}
+ controls.append(previous,next);heading.append(headingText,controls);
+ list.before(shell);shell.append(heading,list);
+ list.tabIndex=0;list.setAttribute('aria-label','Upcoming event cards');
+ const updateCarousel=()=>{const max=list.scrollWidth-list.clientWidth;previous.disabled=list.scrollLeft<=2;next.disabled=max<=2||list.scrollLeft>=max-2;};
+ const move=direction=>{const card=list.querySelector('.event-card');const step=card?card.getBoundingClientRect().width+24:list.clientWidth;list.scrollBy({left:direction*step,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});};
+ previous.addEventListener('click',()=>move(-1));next.addEventListener('click',()=>move(1));
+ list.addEventListener('scroll',updateCarousel,{passive:true});window.addEventListener('resize',updateCarousel);
+ list.addEventListener('keydown',event=>{if(event.target!==list)return;if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();move(event.key==='ArrowRight'?1:-1);}});
+ calendar.addEventListener('click',event=>{const link=event.target.closest('a[href^="#event-"]');if(!link)return;const card=document.getElementById(link.hash.slice(1));if(card){event.preventDefault();card.scrollIntoView({block:'nearest',inline:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});card.focus({preventScroll:true});}});
  let events=[],month=new Date();month=new Date(month.getFullYear(),month.getMonth(),1);
  if(root.dataset.bbloEvents==='field-trip')category.value='field-trip';
  function render(){
@@ -20,7 +37,8 @@ document.addEventListener('DOMContentLoaded',async()=>{
  for(let offset=0;offset<first+days;offset+=7){const row=el('tr');for(let col=0;col<7;col++){const cell=el('td'),day=offset+col-first+1;if(day>0&&day<=days){const key=month.getFullYear()+'-'+String(month.getMonth()+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');cell.append(el('span',String(day)));if(key===today)cell.className='today';selected.filter(e=>dateKey(e.start)===key).forEach(e=>{const a=el('a',e.title);a.href='#event-'+e.id;cell.append(a);});}row.append(cell);}body.append(row);}table.append(body);calendar.replaceChildren(table);
  list.replaceChildren();const now=new Date();const upcoming=selected.filter(e=>new Date(e.end||e.start)>=now);
  status.textContent=upcoming.length?upcoming.length+' upcoming '+(upcoming.length===1?'event':'events'):'No upcoming '+(category.value==='field-trip'?'Field Trip Friday dates':'events')+' announced yet.';
- upcoming.forEach(e=>{const card=el('article',null,'event-card');card.id='event-'+e.id;card.append(el('p',names[e.category]||'BBLO Event','eyebrow'),el('h2',e.title),el('p',formatter.format(new Date(e.start))+' · '+time.format(new Date(e.start))+(e.end?'–'+time.format(new Date(e.end)):'')+' ET','event-meta'),el('p',e.location),el('p',e.description));if(e.url){const a=el('a',e.cta||'Event details','button');a.href=safeUrl(e.url);card.append(a);}const add=el('a','Add to my calendar','text-link');const compact=v=>new Date(v).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}Z/,'Z');add.href='https://calendar.google.com/calendar/render?'+new URLSearchParams({action:'TEMPLATE',text:e.title,dates:compact(e.start)+'/'+compact(e.end||e.start),details:e.description+' '+(e.url||''),location:e.location});card.append(document.createTextNode(' '),add);list.append(card);});
+ upcoming.forEach(e=>{const card=el('article',null,'event-card');card.id='event-'+e.id;card.tabIndex=-1;card.append(el('p',names[e.category]||'BBLO Event','eyebrow'),el('h2',e.title),el('p',formatter.format(new Date(e.start))+' · '+time.format(new Date(e.start))+(e.end?'–'+time.format(new Date(e.end)):'')+' ET','event-meta'),el('p',e.location),el('p',e.description));if(e.url){const a=el('a',e.cta||'Event details','button');a.href=safeUrl(e.url);card.append(a);}const add=el('a','Add to my calendar','text-link');const compact=v=>new Date(v).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}Z/,'Z');add.href='https://calendar.google.com/calendar/render?'+new URLSearchParams({action:'TEMPLATE',text:e.title,dates:compact(e.start)+'/'+compact(e.end||e.start),details:e.description+' '+(e.url||''),location:e.location});card.append(document.createTextNode(' '),add);list.append(card);});
+ list.scrollLeft=0;shell.hidden=!upcoming.length;requestAnimationFrame(updateCarousel);
  }
  document.getElementById('event-prev').addEventListener('click',()=>{month.setMonth(month.getMonth()-1);render();});
  document.getElementById('event-next').addEventListener('click',()=>{month.setMonth(month.getMonth()+1);render();});
