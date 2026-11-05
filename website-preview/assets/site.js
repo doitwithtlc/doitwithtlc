@@ -58,3 +58,6 @@ document.addEventListener('DOMContentLoaded',()=>{
   const box=document.querySelector(menu);if(box&&!box.querySelector('a[href="'+prefix+path+'"]')){const link=document.createElement('a');link.href=prefix+path;link.textContent=label;box.append(link);}
  }
 });
+
+// Direct BBLO visitor registration from every shared navigation menu.
+document.addEventListener('DOMContentLoaded',()=>{const box=document.querySelector('.bblo-dropdown .dropdown-links');if(box&&!box.querySelector('a[href="https://api.leadconnectorhq.com/widget/form/EWkYWRPYI3SPRLjEPzYo"]')){const link=document.createElement('a');link.href='https://api.leadconnectorhq.com/widget/form/EWkYWRPYI3SPRLjEPzYo';link.textContent='Ready to Visit?';box.prepend(link);}});
