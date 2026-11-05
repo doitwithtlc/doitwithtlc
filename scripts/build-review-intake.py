@@ -55,26 +55,6 @@ def build(root, prefix):
         s = re.sub(r'(/assets/site\.js)(?:\?v=[^"\s]+)?', r'\1?v='+VERSION, s)
         p.write_text(s)
 
-    js = root/'assets/site.js'
-    if js.exists() and '// Dedicated reviews navigation.' not in js.read_text():
-        js.write_text(js.read_text()+'''\n// Dedicated reviews navigation.
-document.addEventListener('DOMContentLoaded',()=>{
- const prefix=location.pathname.startsWith('/website-preview/')?'/website-preview':'';
- const destination=prefix+'/share-your-experience/';
- document.querySelectorAll('a[href="'+prefix+'/inquire/?service=feedback"]').forEach(a=>a.href=destination);
- const bblo=document.querySelector('.bblo-dropdown .dropdown-links');
- if(bblo&&!bblo.querySelector('a[href="'+destination+'"]')){const a=document.createElement('a');a.href=destination;a.textContent='Share Your BBLO Experience';bblo.append(a);}
- document.querySelectorAll('header nav > a[href="'+prefix+'/contact/"]').forEach(a=>{
-  const menu=document.createElement('details');menu.className='nav-dropdown contact-dropdown';
-  const summary=document.createElement('summary');summary.textContent='Contact Us ⌄';
-  const links=document.createElement('div');links.className='dropdown-links';
-  const contact=a.cloneNode(true);contact.textContent='Let’s connect';
-  const review=document.createElement('a');review.href=destination;review.textContent='Share a little love · Reviews & Testimonials';
-  links.append(contact,review);menu.append(summary,links);a.replaceWith(menu);
- });
-});
-''')
-
 if __name__ == '__main__':
     build(REPO/'website-preview', '/website-preview')
     # Production is generated from preview by build-production.py. Updating a
