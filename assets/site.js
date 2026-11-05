@@ -88,3 +88,25 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 // Cafecito discovery across existing pages.
 document.addEventListener('DOMContentLoaded',()=>{const box=document.querySelector('.carmen-dropdown .dropdown-links');if(box&&!box.querySelector('a[href="/cafecito-with-carmen/"]')){const a=document.createElement('a');a.href='/cafecito-with-carmen/';a.textContent='Cafecito with Carmen';box.append(a);}});
+
+// Keep the three BBLO actions above a collapsed, alphabetical About BBLO menu.
+document.addEventListener('DOMContentLoaded',()=>{
+ const box=document.querySelector('.bblo-dropdown > .dropdown-links');if(!box)return;
+ const prefix=location.pathname.startsWith('/website-preview/')?'/website-preview':'';
+ const links=[...box.querySelectorAll('a')];
+ const ready=links.find(a=>/ready to visit/i.test(a.textContent));
+ const member=links.find(a=>/member login/i.test(a.textContent));
+ const checkin=links.find(a=>/friday check.?in/i.test(a.textContent));
+ const about=links.find(a=>a.pathname===prefix+'/bblo/'&&!a.hash);
+ const actions=[ready,member,checkin].filter(Boolean);
+ const rest=links.filter(a=>!actions.includes(a)&&a!==about);
+ if(about){about.textContent='About BBLO Overview';rest.push(about);}
+ rest.sort((a,b)=>a.textContent.trim().localeCompare(b.textContent.trim(),'en',{sensitivity:'base'}));
+ const details=document.createElement('details');details.className='bblo-about-menu';
+ const summary=document.createElement('summary');summary.textContent='About BBLO';
+ const items=document.createElement('div');items.className='bblo-about-links';items.append(...rest);
+ details.append(summary,items);box.replaceChildren(...actions,details);
+ const style=document.createElement('style');
+ style.textContent='header .bblo-about-menu{padding:0;border:0}header .bblo-about-menu>summary{padding:10px 12px;font-size:14px;font-weight:600;cursor:pointer}header .bblo-about-menu>summary:hover{background:#e8dfcb}header .bblo-about-links{padding-left:12px;border-left:2px solid var(--gold);margin:0 10px 8px}header .bblo-about-menu:not([open])>.bblo-about-links{display:none}';
+ document.head.append(style);
+});
