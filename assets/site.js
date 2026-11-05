@@ -61,3 +61,16 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 // Direct BBLO visitor registration from every shared navigation menu.
 document.addEventListener('DOMContentLoaded',()=>{const box=document.querySelector('.bblo-dropdown .dropdown-links');if(box&&!box.querySelector('a[href="https://api.leadconnectorhq.com/widget/form/EWkYWRPYI3SPRLjEPzYo"]')){const link=document.createElement('a');link.href='https://api.leadconnectorhq.com/widget/form/EWkYWRPYI3SPRLjEPzYo';link.textContent='Ready to Visit?';box.prepend(link);}});
+
+ // BBLO announcements and one consolidated photo archive.
+ document.addEventListener('DOMContentLoaded',()=>{
+ const prefix=location.pathname.startsWith('/website-preview/')?'/website-preview':'';
+ document.querySelectorAll('a[href="'+prefix+'/bblo/community-impact/"]').forEach(a=>{
+ if(a.closest('nav'))a.remove();else{a.href=prefix+'/bblo/gallery/';if(/community impact/i.test(a.textContent))a.textContent='BBLO in Action';}
+ });
+ document.querySelectorAll('.bblo-dropdown .dropdown-links,.bblo-subnav').forEach(box=>{
+ for(const [path,label] of [['/bblo/events/','BBLO & Community Events'],['/bblo/field-trip-friday/','Field Trip Friday']]){
+ if(!box.querySelector('a[href="'+prefix+path+'"]')){const a=document.createElement('a');a.href=prefix+path;a.textContent=label;box.append(a);}
+ }
+ });
+ });
