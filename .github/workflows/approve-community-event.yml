@@ -1,0 +1,88 @@
+name: Approve community event
+on:
+  issue_comment:
+    types: [created]
+permissions:
+  contents: write
+  issues: write
+  pages: write
+  id-token: write
+concurrency:
+  group: community-event-publication
+  cancel-in-progress: false
+jobs:
+  approve:
+    if: >-
+      github.event.comment.user.login == 'doitwithtlc' &&
+      startsWith(github.event.issue.title, '[Event Scout] ') &&
+      (github.event.comment.body == '/approve' || github.event.comment.body == '/reject')
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Validate and publish approved event
+        id: review
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const {owner, repo} = context.repo;
+            const issue_number = context.issue.number;
+            const note = body => github.rest.issues.createComment({owner,repo,issue_number,body});
+            const {data:issue} = await github.rest.issues.get({owner,repo,issue_number});
+            if(issue.state !== 'open') {core.setOutput('publish','false'); return;}
+            if(context.payload.comment.body === '/reject') {
+              await note('Rejected by Carmen. This draft was not added to the calendar.');
+              await github.rest.issues.update({owner,repo,issue_number,state:'closed',state_reason:'not_planned'});
+              core.setOutput('publish','false'); return;
+            }
+            try {
+              const match = issue.body.match(/<!-- event-scout-json -->\s*```json\s*([\s\S]*?)\s*```/);
+              if(!match) throw new Error('Missing structured event draft.');
+              const draft = JSON.parse(match[1]);
+              const value = (key, required=false) => {
+                const v = draft[key];
+                if(required && (typeof v !== 'string' || !v.trim())) throw new Error('Missing '+key);
+                if(v != null && (typeof v !== 'string' || v.length>8000)) throw new Error('Invalid '+key);
+                return v || '';
+              };
+              const url = key => { const v=value(key); if(!v)return ''; const u=new URL(v); if(u.protocol!=='https:' && u.protocol!=='http:')throw new Error('Invalid '+key);return u.href; };
+              const title=value('title',true), start=value('start',true), end=value('end',true);
+              const dated = v => /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?(Z|[+-]\d{2}:\d{2})$/.test(v) && Number.isFinite(Date.parse(v));
+              if(!dated(start)||!dated(end)||Date.parse(end)<=Date.parse(start)) throw new Error('Confirmed start/end times with timezone offsets are required; end must follow start.');
+              const source=url('source_url');if(!source)throw new Error('Original source link is required.');
+              if(draft.verification_status!=='verified')throw new Error('Resolve missing or conflicting information and set verification_status to verified before approval.');
+              const category=value('category',true);if(!['community','bblo','field-trip','business','workshop','training','vendor','fundraiser','culture','family'].includes(category))throw new Error('Invalid category.');
+              const event={id:'scout-'+issue_number,title,category,start,end,location:value('location',true),address:value('address'),description:value('description',true),url:url('url')||source,cta:'Event details',source_url:source,organizer:value('organizer'),cost:value('cost'),opportunities:value('opportunities'),flyer_url:url('flyer_url'),virtual:draft.virtual===true,published:true,approved_by:context.actor,approved_at:new Date().toISOString(),review_issue:issue.html_url};
+              const path='data/bblo-events.json';
+              const {data:file}=await github.rest.repos.getContent({owner,repo,path,ref:'main'});
+              const data=JSON.parse(Buffer.from(file.content,'base64').toString('utf8'));
+              if(!Array.isArray(data.events))throw new Error('Invalid calendar data.');
+              const duplicate=data.events.find(e=>e.id!==event.id && e.title.trim().toLowerCase()===title.trim().toLowerCase() && Date.parse(e.start)===Date.parse(start));
+              if(duplicate)throw new Error('An event with this title and start time is already published.');
+              data.events=data.events.filter(e=>e.id!==event.id);data.events.push(event);data.events.sort((a,b)=>Date.parse(a.start)-Date.parse(b.start));
+              await github.rest.repos.createOrUpdateFileContents({owner,repo,path,branch:'main',sha:file.sha,message:'Publish approved community event #'+issue_number,content:Buffer.from(JSON.stringify(data,null,2)+'\n').toString('base64')});
+              core.setOutput('publish','true');
+              await note('Approved by Carmen. Calendar data saved; website deployment is starting. Check this workflow run for the publication result.');
+            }catch(error){await note('Event was not published: '+error.message);core.setFailed(error.message);}
+      - uses: actions/checkout@v4
+        if: steps.review.outputs.publish == 'true'
+        with:
+          ref: main
+      - uses: actions/configure-pages@v5
+        if: steps.review.outputs.publish == 'true'
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.review.outputs.publish == 'true'
+        with:
+          path: .
+      - uses: actions/deploy-pages@v4
+        if: steps.review.outputs.publish == 'true'
+        id: deployment
+      - name: Confirm publication
+        if: steps.review.outputs.publish == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const {owner,repo}=context.repo;const issue_number=context.issue.number;
+            await github.rest.issues.createComment({owner,repo,issue_number,body:'Published to the [Community Calendar](https://doitwithtlc.com/bblo/events/).'});
+            await github.rest.issues.update({owner,repo,issue_number,state:'closed',state_reason:'completed'});
