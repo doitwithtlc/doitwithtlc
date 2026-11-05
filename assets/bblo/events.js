@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
  const formatter=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'long',day:'numeric',year:'numeric'});
  const time=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit'});
  const dateKey=d=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(d));
- const names={bblo:'BBLO Event',community:'Community Event','field-trip':'Field Trip Friday'};
+ const names={business:'Business Event',workshop:'Workshop',training:'Training',vendor:'Vendor Event',fundraiser:'Fundraiser',culture:'Cultural Event',family:'Family Event',bblo:'BBLO Event',community:'Community Event','field-trip':'Field Trip Friday'};
  const safeUrl=value=>{try{let u=new URL(value,location.origin);return ['https:','http:'].includes(u.protocol)?u.href:'#';}catch{return '#';}};
  const el=(tag,text,className)=>{const n=document.createElement(tag);if(text)n.textContent=text;if(className)n.className=className;return n;};
  // A swipeable, keyboard-accessible row of upcoming event details.
