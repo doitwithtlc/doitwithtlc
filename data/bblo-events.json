@@ -12,6 +12,18 @@
       "url": "https://gaingroundocala.com/",
       "cta": "Tickets & Participation",
       "published": true
+    },
+    {
+      "id": "bblo-holiday-headshots-2026",
+      "title": "BBLO Holiday Headshots with MJ Photography",
+      "category": "bblo",
+      "start": "2026-12-04T08:00:00-05:00",
+      "end": "2026-12-04T10:00:00-05:00",
+      "location": "Media Minds, 2535 NE 36th Ave, Ocala, FL 34470",
+      "description": "New year. New headshot. Melissa Pedersen of MJ Photography will provide onsite professional headshots for BBLO members and visitors during our Friday meeting. BBLO discounted cost: $75.",
+      "url": "https://doitwithtlc.com/bblo/members/mj-photography/",
+      "cta": "Meet MJ Photography",
+      "published": true
     }
   ]
 }
