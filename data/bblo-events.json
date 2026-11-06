@@ -208,6 +208,19 @@
       "review_issue": "https://github.com/doitwithtlc/doitwithtlc/issues/14"
     },
     {
+      "id": "bblo-interfaith-field-trip-20261113",
+      "title": "BBLO Field Trip Friday: Interfaith Tour",
+      "category": "field-trip",
+      "start": "2026-11-13T09:00:00-05:00",
+      "location": "Interfaith Emergency Services",
+      "address": "435 NW 2nd Street, Ocala, FL 34475",
+      "description": "Join BBLO for a tour of Interfaith Emergency Services. Meet onsite at 9 a.m. End time has not been announced.",
+      "organizer": "BBLO",
+      "url": "https://www.iesmarion.org/",
+      "cta": "About Interfaith",
+      "published": true
+    },
+    {
       "id": "bblo-member-presentations-20261120",
       "title": "BBLO Member Presentations: Esperanza Sanchez & Mayte Paz",
       "category": "bblo",
