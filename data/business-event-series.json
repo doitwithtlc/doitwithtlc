@@ -1,0 +1,119 @@
+{
+  "timezone": "America/New_York",
+  "checked_on": "2026-11-06",
+  "purpose": "Reusable recurring schedules and exceptions for calendar maintenance and weekly business carousel planning. Occurrences in bblo-events.json remain the published calendar source. Recheck current organizer announcements and holiday changes before producing each carousel; these rules do not auto-publish future events.",
+  "series": [
+    {
+      "id": "cope-ocala",
+      "name": "C.O.P.E. Ocala",
+      "rule": "First Wednesday monthly",
+      "start_time": "10:00",
+      "end_time": "11:30",
+      "location": "Absolute Law Group, 4414 SW College Rd, Suite 942, Ocala — second floor",
+      "basis": "Organizer's November 4 announcement; owner confirms recurring monthly schedule"
+    },
+    {
+      "id": "cope-villages",
+      "name": "C.O.P.E. The Villages",
+      "rule": "Third Wednesday monthly",
+      "start_time": "10:00",
+      "end_time": "11:30",
+      "location": "UF Health Auxiliary Foundation, 1501 N US Highway 441, Lady Lake — second-floor conference room",
+      "basis": "Owner's November calendar and organizer's October announcement"
+    },
+    {
+      "id": "mc4",
+      "name": "Marion County Continuity of Care Council",
+      "rule": "Second Thursday monthly",
+      "start_time": "08:00",
+      "meeting_start": "08:20",
+      "end_time": null,
+      "location": "One Health Center, 1714 SW 17th St, Ocala",
+      "source_url": "https://mc4ocala.com/"
+    },
+    {
+      "id": "lc4",
+      "name": "LC4 Villages",
+      "rule": "First Thursday monthly",
+      "start_time": "10:00",
+      "end_time": "11:00",
+      "location": null,
+      "status": "needs_information",
+      "missing": [
+        "Meeting venue/address"
+      ],
+      "november_date": "2026-11-05"
+    },
+    {
+      "id": "conexion-hispana",
+      "name": "Conexión Hispana",
+      "rule": "Second Tuesday monthly",
+      "start_time": null,
+      "end_time": null,
+      "location": null,
+      "status": "needs_information",
+      "missing": [
+        "November start/end times",
+        "November traveling meeting venue/address"
+      ],
+      "november_date": "2026-11-10",
+      "source_url": "https://ocalacep.com/programs/networking"
+    },
+    {
+      "id": "1-million-cups-ocala",
+      "name": "1 Million Cups Ocala",
+      "rule": "Wednesday weekly",
+      "start_time": "09:00",
+      "end_time": "10:30",
+      "location": "Power Plant Business Incubator, 405 SE Osceola Ave, Ocala — second-floor training room",
+      "exceptions": [
+        {
+          "date": "2026-11-18",
+          "location": "Midtown Station, 235 NE Watula Ave, Ocala",
+          "source_url": "https://members.ocalacep.com/event-calendar/Details/traveling-1-million-cups-ocala-1564291?sourceTypeId=Website"
+        },
+        {
+          "date": "2026-11-25",
+          "note": "Listed locally and on owner's recurring schedule; recheck Thanksgiving week before producing carousel."
+        }
+      ]
+    },
+    {
+      "id": "ocala-business-leaders",
+      "name": "Ocala Business Leaders",
+      "rule": "Wednesday weekly",
+      "start_time": "06:30",
+      "meeting_start": "07:00",
+      "end_time": "08:00",
+      "location": "Christopher Hall, 1510 SE Third Ave, Ocala",
+      "source_url": "https://ocalabusinessleaders.com/events/"
+    },
+    {
+      "id": "bni-strategic-allies",
+      "name": "BNI Strategic Allies",
+      "rule": "Thursday weekly",
+      "arrival_time": "07:15",
+      "start_time": "07:30",
+      "end_time": "09:00",
+      "location": "College Road Baptist Church, 5010 SW College Rd, Ocala",
+      "source_url": "https://saocala.com/home",
+      "exceptions": [
+        {
+          "date": "2026-11-26",
+          "status": "hold",
+          "reason": "Thanksgiving; do not publish meeting without chapter confirmation."
+        }
+      ]
+    }
+  ],
+  "bblo_exceptions": [
+    {
+      "date": "2026-11-13",
+      "note": "Interfaith field trip 9–10 a.m.; replaces regular meeting."
+    },
+    {
+      "date": "2026-11-27",
+      "note": "No meeting — Black Friday, per BBLO Presentations sheet."
+    }
+  ]
+}
