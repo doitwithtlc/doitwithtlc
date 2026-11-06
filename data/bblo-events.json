@@ -208,6 +208,20 @@
       "review_issue": "https://github.com/doitwithtlc/doitwithtlc/issues/14"
     },
     {
+      "id": "bblo-member-presentations-20261120",
+      "title": "BBLO Member Presentations: Esperanza Sanchez & Mayte Paz",
+      "category": "bblo",
+      "event_type": "member-presentation",
+      "start": "2026-11-20T08:00:00-05:00",
+      "end": "2026-11-20T10:00:00-05:00",
+      "location": "Media Minds",
+      "address": "2535 NE 36th Ave, Ocala, FL 34470",
+      "description": "BBLO member presentations featuring Esperanza Sanchez (Esperanza Sanchez, Realtor & Mortgage) and Mayte Paz (Calesa Township), during our Friday meeting.",
+      "url": "https://doitwithtlc.com/bblo/",
+      "cta": "Plan your visit",
+      "published": true
+    },
+    {
       "id": "bblo-holiday-headshots-2026",
       "title": "BBLO Holiday Headshots with MJ Photography",
       "category": "bblo",

@@ -14,3 +14,25 @@
 .event-list .event-card .text-link{display:inline-block}
 .event-list:focus-visible,.event-card:focus-visible,.event-carousel-controls button:focus-visible{outline:3px solid #C9A227;outline-offset:3px}
 @media(max-width:600px){.event-carousel-heading{gap:.75rem}.event-carousel-heading h2{font-size:1.7rem}.event-carousel-controls button{width:40px;height:40px}.event-list .event-card{flex-basis:calc(100% - 28px);padding:1.15rem}}
+
+/* Category labels remain visible so meaning does not depend on color. */
+.event-legend{display:flex;flex-wrap:wrap;gap:.65rem;margin:1rem 0}
+.event-key{display:inline-block;border-radius:6px;padding:.5rem .75rem;font-size:.85rem;font-weight:700}
+.event-key.event-kind-bblo,.event-calendar td>a.event-kind-bblo{background:#0B1F3A;color:#fff;border-left:4px solid #C9A227}
+.event-key.event-kind-field-trip,.event-calendar td>a.event-kind-field-trip{background:#C9A227;color:#0B1F3A;border-left:4px solid #0B1F3A}
+.event-key.event-kind-other,.event-calendar td>a.event-kind-other{background:#F5F1E8;color:#0B1F3A;border-left:4px solid #a8a397}
+.event-calendar td>a.event-entry{padding:.45rem;border-radius:4px;text-decoration:none;font-weight:700;overflow-wrap:anywhere}
+.event-calendar td>a.event-entry:hover{text-decoration:underline}
+.event-calendar td>a.event-entry:focus-visible{outline:3px solid #0B1F3A;outline-offset:2px}
+.event-list .event-card.event-kind-bblo{border-top:6px solid #0B1F3A;border-left:4px solid #C9A227;background:#f8f9fc}
+.event-list .event-card.event-kind-field-trip{border-top:6px solid #C9A227;border-left:4px solid #0B1F3A;background:#fff9e8}
+.event-card.event-kind-bblo h2,.event-card.event-kind-field-trip h2{font-family:'DM Sans',sans-serif;font-weight:700;color:#0B1F3A}
+.event-card.event-kind-bblo .eyebrow,.event-card.event-kind-field-trip .eyebrow{display:inline-block;padding:.4rem .65rem;border-radius:4px;font-weight:700;letter-spacing:.03em}
+.event-card.event-kind-bblo .eyebrow{background:#0B1F3A;color:#fff}
+.event-card.event-kind-field-trip .eyebrow{background:#C9A227;color:#0B1F3A}
+
+.event-silhouette-badge{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:#F5F1E8;border:2px solid #C9A227;flex-shrink:0;vertical-align:middle;margin:0 .45rem .25rem 0}
+.event-silhouette-badge img{display:block;width:28px;height:28px;object-fit:contain}
+.event-calendar .event-silhouette-badge{width:28px;height:28px;border-width:1px}
+.event-calendar .event-silhouette-badge img{width:22px;height:22px}
+.event-list .event-card.event-tlc-highlight{box-shadow:0 0 0 1px #C9A227,0 4px 18px #0b1f3a08}
