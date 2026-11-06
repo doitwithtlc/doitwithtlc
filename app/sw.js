@@ -1,5 +1,5 @@
 'use strict';
-const CACHE='tlc-app-shell-v1';
+const CACHE='tlc-app-shell-v2';
 const SHELL=['/app/','/app/app.css','/app/app.js','/app/manifest.webmanifest','/app/icons/icon-192.png','/app/icons/icon-512.png','/app/icons/apple-touch-icon.png','/assets/brand/tlc-white.webp','/assets/brand/carmen-silhouette.webp','/assets/brand/clue-calendar.webp','/assets/brand/clue-business-card.webp'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL)));});
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('tlc-app-shell-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
