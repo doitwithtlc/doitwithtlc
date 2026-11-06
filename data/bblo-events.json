@@ -2,16 +2,26 @@
   "timezone": "America/New_York",
   "events": [
     {
-      "id": "gain-ground-ocala-women-2027",
-      "title": "GAIN GROUND OCALA Women 2027",
-      "category": "community",
-      "start": "2027-02-25T10:00:00-05:00",
-      "end": "2027-02-25T16:00:00-05:00",
-      "location": "College of Central Florida · Klein Center · Ocala, Florida",
-      "description": "Trades • Services • Business Growth. A business-growth event for women entering, leading, and growing businesses in trades and service industries, developed and produced by The Liaison Companies LLC.",
-      "url": "https://gaingroundocala.com/",
-      "cta": "Tickets & Participation",
-      "published": true
+      "id": "scout-10",
+      "title": "VetWorks",
+      "category": "business",
+      "start": "2026-11-11T12:00:00-05:00",
+      "end": "2026-11-11T13:00:00-05:00",
+      "location": "Power Plant Business Incubator",
+      "address": "405 SE Osceola Ave, Ocala, FL 34471",
+      "description": "VetWorks business networking meeting. Location confirmed by Carmen: Power Plant Business Incubator.",
+      "url": "https://members.ocalacep.com/event-calendar/Details/vetworks-1907841?sourceTypeId=Website",
+      "cta": "Event details",
+      "source_url": "https://members.ocalacep.com/event-calendar/Details/vetworks-1907841?sourceTypeId=Website",
+      "organizer": "VetWorks",
+      "cost": "",
+      "opportunities": "",
+      "flyer_url": "",
+      "virtual": false,
+      "published": true,
+      "approved_by": "doitwithtlc",
+      "approved_at": "2026-11-06T21:47:05.328Z",
+      "review_issue": "https://github.com/doitwithtlc/doitwithtlc/issues/10"
     },
     {
       "id": "bblo-holiday-headshots-2026",
@@ -26,6 +36,18 @@
       "published": true,
       "image": "/assets/bblo/events/bblo-shots-and-shots-20261204.webp",
       "imageAlt": "Shots & Shots: BBLO holiday headshots and café shots with Melissa Pedersen of MJ Photography, December 4, 2026, 8–10 AM, $75 discounted headshot rate."
+    },
+    {
+      "id": "gain-ground-ocala-women-2027",
+      "title": "GAIN GROUND OCALA Women 2027",
+      "category": "community",
+      "start": "2027-02-25T10:00:00-05:00",
+      "end": "2027-02-25T16:00:00-05:00",
+      "location": "College of Central Florida · Klein Center · Ocala, Florida",
+      "description": "Trades • Services • Business Growth. A business-growth event for women entering, leading, and growing businesses in trades and service industries, developed and produced by The Liaison Companies LLC.",
+      "url": "https://gaingroundocala.com/",
+      "cta": "Tickets & Participation",
+      "published": true
     }
   ]
 }
