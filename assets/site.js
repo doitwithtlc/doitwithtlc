@@ -96,8 +96,8 @@ document.addEventListener('DOMContentLoaded',()=>{
  const links=[...box.querySelectorAll('a')];
  const ready=links.find(a=>/ready to visit/i.test(a.textContent));
  const member=links.find(a=>/member login/i.test(a.textContent));
- let checkin=links.find(a=>/friday check.?in/i.test(a.textContent));
- if(!checkin){checkin=document.createElement('a');checkin.href='/bblo/check-in/';checkin.textContent='BBLO Friday Check-in';}
+ let checkin=links.find(a=>a.pathname===prefix+'/bblo/check-in/'||/friday check.?in/i.test(a.textContent));
+ if(!checkin)checkin=document.createElement('a');checkin.href=prefix+'/bblo/check-in/';checkin.textContent='Wins for This Week';
  const about=links.find(a=>a.pathname===prefix+'/bblo/'&&!a.hash);
  const actions=[ready,member,checkin].filter(Boolean);
  const rest=links.filter(a=>!actions.includes(a)&&a!==about);
