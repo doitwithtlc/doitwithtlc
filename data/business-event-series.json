@@ -50,14 +50,14 @@
       "rule": "Second Tuesday monthly",
       "start_time": null,
       "end_time": null,
-      "location": null,
+      "location": "Power Plant Business Incubator, 405 SE Osceola Ave, Ocala, FL 34471",
       "status": "needs_information",
       "missing": [
-        "November start/end times",
-        "November traveling meeting venue/address"
+        "November start/end times"
       ],
       "november_date": "2026-11-10",
-      "source_url": "https://ocalacep.com/programs/networking"
+      "source_url": "https://ocalacep.com/programs/networking",
+      "verification_notes": "Carmen confirmed November 10 venue in chat on November 6, 2026. Confirm meeting times before publishing."
     },
     {
       "id": "1-million-cups-ocala",
