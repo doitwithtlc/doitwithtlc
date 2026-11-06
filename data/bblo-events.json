@@ -214,11 +214,12 @@
       "start": "2026-11-13T09:00:00-05:00",
       "location": "Interfaith Emergency Services",
       "address": "435 NW 2nd Street, Ocala, FL 34475",
-      "description": "Join BBLO for a tour of Interfaith Emergency Services. Meet onsite at 9 a.m. End time has not been announced.",
+      "description": "Join BBLO for a tour of Interfaith Emergency Services. Meet onsite from 9–10 a.m.",
       "organizer": "BBLO",
       "url": "https://www.iesmarion.org/",
       "cta": "About Interfaith",
-      "published": true
+      "published": true,
+      "end": "2026-11-13T10:00:00-05:00"
     },
     {
       "id": "bblo-member-presentations-20261120",
