@@ -42,7 +42,9 @@
       "missing": [
         "Meeting venue/address"
       ],
-      "november_date": "2026-11-05"
+      "november_date": "2026-11-05",
+      "research_notes": "Calendar occurrences support first Thursday 10–11am. Possible matching organization: Lake & Sumter County Continuity of Care Council (LS4C); public archived posts show rotating host locations. Identity and November venue are not confirmed; do not substitute organization's listed address for the meeting venue.",
+      "candidate_source_url": "https://www.findglocal.com/US/Oxford/105583678302049/Lake-%26-Sumter-County-Continuity-of-Care-Council---LS4C"
     },
     {
       "id": "conexion-hispana",
@@ -102,6 +104,33 @@
           "date": "2026-11-26",
           "status": "hold",
           "reason": "Thanksgiving; do not publish meeting without chapter confirmation."
+        }
+      ]
+    },
+    {
+      "id": "cep-power-hour",
+      "name": "CEP Power Hour",
+      "requested_as": "Power Networkers",
+      "rule": "Fourth Thursday monthly",
+      "start_time": "09:30",
+      "end_time": null,
+      "location": "SpringHill Suites Ocala",
+      "source_url": "https://ocalacep.com/programs/networking",
+      "status": "needs_information",
+      "missing": [
+        "November holiday-adjusted meeting date",
+        "End time",
+        "Confirmation that this is the Power Networkers group Carmen means"
+      ],
+      "public_contact": {
+        "name": "Kim Muse",
+        "email": "Admit.Bridgewateral@tlcmgmt.com"
+      },
+      "exceptions": [
+        {
+          "date": "2026-11-26",
+          "status": "hold",
+          "reason": "Normal recurrence falls on Thanksgiving; do not publish without confirmation."
         }
       ]
     }
