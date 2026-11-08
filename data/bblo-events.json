@@ -145,6 +145,28 @@
       "review_issue": "https://github.com/doitwithtlc/doitwithtlc/issues/7"
     },
     {
+      "id": "scout-15",
+      "title": "Veterans in Business Symposium",
+      "category": "business",
+      "start": "2026-11-10T17:30:00-05:00",
+      "end": "2026-11-10T19:30:00-05:00",
+      "location": "Mary Sue Rich Community Center at Reed Place",
+      "address": "1821 NW 21st Ave, Ocala, FL 34475",
+      "description": "City of Ocala networking event for veteran entrepreneurs, with business resources and government procurement opportunities. The City's calendar confirms November 10 at 5:30 p.m. and the venue. Only In Ocala reports a 7:30 p.m. end time and registration through smallbiz@ocalafl.gov or 352-629-8523; confirm final details with the organizer.",
+      "url": "https://www.ocalafl.gov/Home/Components/Calendar/Event/5660/3478",
+      "cta": "Event details",
+      "source_url": "https://www.ocalafl.gov/Home/Components/Calendar/Event/5660/3478",
+      "organizer": "City of Ocala",
+      "cost": "",
+      "opportunities": "Connect with veteran entrepreneurs, business resources and government procurement opportunities.",
+      "flyer_url": "",
+      "virtual": false,
+      "published": true,
+      "approved_by": "doitwithtlc",
+      "approved_at": "2026-11-08T13:26:22.466Z",
+      "review_issue": "https://github.com/doitwithtlc/doitwithtlc/issues/15"
+    },
+    {
       "title": "Ocala Business Leaders Weekly Networking Breakfast",
       "category": "business",
       "start": "2026-11-11T06:30:00-05:00",
