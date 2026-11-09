@@ -9,6 +9,7 @@ from html import escape
 from urllib.parse import quote, urlsplit
 import json
 import re
+import hashlib
 
 ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = 'https://doitwithtlc.com'
@@ -28,6 +29,7 @@ def action(url, label, external=False, cls='button'):
 def profile_url(m): return '/bblo/members/' + m['slug'] + '/'
 
 def build(root=ROOT):
+    version=VERSION+'-'+hashlib.sha256((ROOT/'assets/bblo/members-public.js').read_bytes()+(ROOT/'assets/bblo/members-public.css').read_bytes()).hexdigest()[:10]
     members = json.loads((root / 'data/bblo-members.json').read_text())
     public = json.loads((root / 'data/bblo-public-profiles.json').read_text())
     ads = json.loads((root / 'data/bblo-advertising.json').read_text())['placements']
@@ -55,7 +57,7 @@ def build(root=ROOT):
         text = re.sub(r'<script[^>]+src="/assets/bblo/bblo.js[^>]*></script>', '', text)
         crumbs = {'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'TLC','item':ORIGIN+'/'},{'@type':'ListItem','position':2,'name':'BBLO member businesses','item':ORIGIN+'/bblo/members/'},{'@type':'ListItem','position':3,'name':title.split(' | ')[0],'item':ORIGIN+route}]}
         structured = [crumbs] + ([schema] if schema else [])
-        head = '<link rel="icon" type="image/jpeg" href="/logo.jpg"><link rel="stylesheet" href="/assets/bblo/members-public.css?v='+VERSION+'"><script src="/assets/bblo/members-public.js?v='+VERSION+'" defer></script>'
+        head = '<link rel="icon" type="image/jpeg" href="/logo.jpg"><link rel="stylesheet" href="/assets/bblo/members-public.css?v='+version+'"><script src="/assets/bblo/members-public.js?v='+version+'" defer></script>'
         head += ''.join('<script type="application/ld+json">'+json.dumps(s,ensure_ascii=False,separators=(',',':')).replace('<','\\u003c')+'</script>' for s in structured)
         text = text.replace('</head>',head+'</head>')
         dest = root / route.strip('/') / 'index.html'
@@ -156,7 +158,7 @@ def build(root=ROOT):
     text=re.sub(r'<link[^>]+href="/assets/bblo/members-public.css[^>]+>', '', text)
     text=re.sub(r'<script[^>]+src="/assets/bblo/members-public.js[^>]*></script>', '', text)
     if home_cards:
-        text=text.replace('</head>','<link rel="stylesheet" href="/assets/bblo/members-public.css?v='+VERSION+'"><script src="/assets/bblo/members-public.js?v='+VERSION+'" defer></script></head>')
+        text=text.replace('</head>','<link rel="stylesheet" href="/assets/bblo/members-public.css?v='+version+'"><script src="/assets/bblo/members-public.js?v='+version+'" defer></script></head>')
     home.write_text(text)
     return len(people)
 
