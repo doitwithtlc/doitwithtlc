@@ -34,6 +34,7 @@ def build(source, output):
             text = text.replace('<h3>Connect directly.</h3>', '<h3>Explore their business.</h3>')
             text = re.sub(r'<p class="note">Business contact information supplied.*?</p>',
                           '<p class="note">Visit the available business website or social pages to learn more.</p>', text)
+            # The approved public-profile builder below supplies only public facts.
             text = text.replace('content="index,follow,max-image-preview:large"', 'content="noindex,follow"')
         # Native navigation must expose the new pages even with JavaScript disabled.
         for menu, href, label in [
@@ -72,6 +73,19 @@ def build(source, output):
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     sitemap += ''.join('<url><loc>' + escape('https://doitwithtlc.com' + route) + '</loc></url>\n' for route in sorted(routes))
     (output / 'sitemap.xml').write_text(sitemap + '</urlset>\n')
+    # Preserve the public member-profile design and its indexing policy on promotion.
+    # The independent builder reads approved production data, not private contacts.
+    public_builder=ROOT / 'scripts/build-public-members.py'
+    if public_builder.exists():
+        import runpy
+        shutil.copytree(ROOT / 'data', output / 'data', dirs_exist_ok=True) if ROOT.resolve()!=output.resolve() else None
+        for route in ('bblo/members', 'bblo/benefits', 'bblo/partners'):
+            source_page=ROOT / route / 'index.html'; target_page=output / route / 'index.html'
+            if source_page.resolve()!=target_page.resolve():
+                target_page.parent.mkdir(parents=True,exist_ok=True)
+                shutil.copy2(source_page,target_page)
+        runpy.run_path(str(public_builder))['build'](output)
+        runpy.run_path(str(ROOT / 'scripts/check-seo.py'))['write_sitemap'](output)
     return routes
 
 if __name__ == '__main__':
