@@ -12,7 +12,9 @@ The indexing report (last updated November 5) shows 32 indexed pages and 10 excl
 | Discovered, currently not indexed | 8 | Nonprofit spotlights, Rancho Reposo, three dated BBLO galleries, BBLO Support, Client Stories, and the Unstoppable gallery. Google had not crawled these examples. |
 | Crawled, currently not indexed | 1 | `/bblo/events/`, last crawled November 7. Google did not supply a specific content-quality diagnosis. |
 
-The homepage, Brand Representation, Event Management, Bilingual Outreach and Branding & Content individually show “URL is on Google / Page is indexed.” Brand Representation also shows crawl allowed, indexing allowed, successful smartphone Googlebot fetch, and matching Google-selected canonical. Index inclusion is not a ranking guarantee.
+The homepage and all four service pages individually show “URL is on Google / Page is indexed.” Brand Representation also shows crawl allowed, indexing allowed, successful smartphone Googlebot fetch, and matching Google-selected canonical. Index inclusion is not a ranking guarantee.
+
+A subsequent individual inspection also shows the calendar is indexed, with a successful smartphone Googlebot fetch and a matching selected canonical. Use that current URL result over the older summary exclusion. It reports a temporary sitemap-processing error in its historical discovery details; the freshly submitted sitemap separately processed successfully with 42 URLs. Do not attribute this index inclusion to today's changes without evidence.
 
 Google reports no manual actions and no security issues.
 
@@ -26,6 +28,7 @@ Google reports no manual actions and no security issues.
 - Added `scripts/check-seo.py` to validate production discovery and internal paths. Use `--write-sitemap` when refreshing the sitemap after page changes.
 - Added readable, collapsible event agendas to the calendar and Field Trip Friday pages, generated from the same approved public ledger. This exposes event names, dates, locations and organizer links in HTML without requiring JavaScript. It preserves the interactive calendar and includes explicit wording that past dates are also shown. This addresses a crawlability opportunity; it does not establish why Google previously declined indexing.
 - Added `scripts/build-event-agenda.py` and integrated agenda refresh into the existing event-approval publication workflow. Direct calendar-data edits should also run this script before publication.
+- Declared the existing, unchanged `/logo.jpg` as the homepage favicon. Google's historical 404 examples were repeated requests for `/favicon.ico`; no broken content URLs appeared among those examples. The old default ICO URL is not redirected by GitHub Pages.
 
 Intentional member-profile, preview, review-page and home-alias exclusions remain. Utility pages are outside the sitemap. The noindex report may continue showing the intentional alias; its exclusion does not require making it indexable.
 
@@ -79,6 +82,11 @@ https://pagespeed.web.dev/analysis/https-doitwithtlc-com/894ys1afdy?utm_source=s
 | Cumulative Layout Shift | 0.008 | 0.001 |
 
 These are automated homepage lab results, not a full-site accessibility certification, service-page speed score or ranking assessment. Search Console lacks enough real-user Chrome UX data for mobile and desktop Core Web Vitals. PageSpeed still identifies optional opportunities around image delivery, render-blocking requests and cache lifetimes.
+
+An additional Event Management mobile lab test also scored 100 in all four categories, with LCP 1.5 seconds, TBT 0 ms and CLS 0.029:
+https://pagespeed.web.dev/analysis/https-doitwithtlc-com-services-event-management/4q3ooxywt7?hl=en&form_factor=mobile
+
+Search Console reports a valid robots.txt and no host problems in the previous 90 days. Crawl statistics (updated November 6) show 276 requests and an average response time of 101 ms. This is Google's crawl response metric, not a visitor page-load time.
 
 All 65 production HTML routes responded HTTP 200 in the live audit. No X-Robots-Tag response headers were found. Local checks passed for sitemap/indexability/canonical consistency, public landing-page main headings, descriptions, alt attributes and internal page/asset paths. JSON-LD parsed successfully; the duplicate description was corrected. Calendar generator checks cover escaping, unpublished-entry exclusion and repeatable output. External CRM form delivery was not tested.
 
