@@ -31,6 +31,7 @@ def build(root=ROOT):
     members = json.loads((root / 'data/bblo-members.json').read_text())
     public = json.loads((root / 'data/bblo-public-profiles.json').read_text())
     ads = json.loads((root / 'data/bblo-advertising.json').read_text())['placements']
+    board={m['member_slug']:m['role'] for m in json.loads((root/'data/bblo-board.json').read_text())['members']}
     for m in members:
         if m['slug'] not in public: raise ValueError('Missing public profile: ' + m['slug'])
     people = sorted([{**m, **public[m['slug']]} for m in members], key=lambda m: m['company'].casefold())
@@ -98,6 +99,8 @@ def build(root=ROOT):
         title=m['company']+' | '+(' · '.join(m['services'][:2]))+' | BBLO'
         desc=m['company']+': '+', '.join(m['services'])+'. '+('Serving '+', '.join(m['areas'])+'. ' if m['areas'] else '')+'Meet '+m['name']+' through BBLO and explore business links.'
         hero=section('<a class="text-link" href="/bblo/members/">← All member businesses</a><p class="eyebrow">BBLO member business · '+esc(m['group'])+'</p><h1>'+esc(m['company'])+'</h1><p class="lead">'+esc(' · '.join(m['services'][:3]))+'</p><p class="member-representative">Your BBLO connection: <strong>'+esc(m['name'])+'</strong></p>','hero')
+        if m['slug'] in board:
+            hero=hero.replace('</div></section>','<p>BBLO leadership: '+esc(board[m['slug']])+' · <a href="/bblo/board/">Meet the board →</a></p></div></section>')
         body=hero+section('<div class="member-public-layout"><div><h2>Get to know '+esc(m['company'])+'</h2><p class="member-intro">'+esc(m['summary'])+'</p><h2>Services &amp; specialties</h2><ul class="service-tags">'+''.join('<li>'+esc(s)+'</li>' for s in m['services'])+'</ul>'+('<h2>Service area</h2><p>'+esc(' · '.join(m['areas']))+'</p>' if m['areas'] else '')+('<h2>Languages</h2><p>'+esc(' · '.join(m['languages']))+'</p>' if m.get('languages') else '')+'<p class="note">Contact the business to confirm current services, availability and service area.</p></div><aside class="member-connect"><p class="eyebrow">Make the connection</p>'+photo+'<h2>Connect with '+esc(m['name'])+'</h2><div class="member-contact-actions">'+''.join(contact)+connect+'</div><p class="note">Introduction requests open your email app. Review and send the message to TLC.</p></aside></div>')
         if m.get('activities'):
             body+=section('<p class="eyebrow">In the BBLO community</p><h2>Member activity</h2>'+''.join('<article class="card"><h3><a href="'+esc(a['url'])+'">'+esc(a['title'])+'</a></h3><p>'+esc(a['description'])+'</p></article>' for a in m['activities']))
