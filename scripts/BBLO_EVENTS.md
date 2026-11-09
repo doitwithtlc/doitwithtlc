@@ -1,4 +1,6 @@
 # BBLO event announcements
+After changing approved calendar data, run `python3 scripts/build-event-agenda.py` and `python3 scripts/check-seo.py` before publishing. The event-approval workflow runs these automatically. The generated, collapsible agendas on the calendar and Field Trip Friday pages expose the same published event names, dates, locations and organizer links in HTML without requiring JavaScript. They include past dates with explicit archive wording; unpublished entries are excluded.
+
 The public calendar and announcement cards read `data/bblo-events.json`. Only entries with `published: true` are shown. Categories: `bblo`, `community`, `field-trip`. Both calendar and list use the same entries; the Field Trip Friday page starts with that category selected.
 
 To add an announcement, edit https://github.com/doitwithtlc/doitwithtlc/edit/main/data/bblo-events.json and add an event object with a unique id, title, category, start, end, location, description, url, cta, and published. Use verified details only. Dates require the local UTC offset (-05:00 winter; -04:00 daylight time). This is a public event list: never include attendee information or private notes. Committing publishes through the existing Pages deployment. Mirror the approved list to website-preview/data/bblo-events.json for review consistency. The preview is not the production source.

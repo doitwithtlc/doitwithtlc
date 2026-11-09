@@ -71,6 +71,18 @@ jobs:
           ref: main
       - uses: actions/configure-pages@v5
         if: steps.review.outputs.publish == 'true'
+      - name: Refresh crawlable event agendas
+        if: steps.review.outputs.publish == 'true'
+        run: |
+          python3 scripts/build-event-agenda.py
+          python3 scripts/check-seo.py
+          git add bblo/events/index.html bblo/field-trip-friday/index.html
+          if ! git diff --cached --quiet; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'Refresh published event agenda for search discovery'
+            git push origin HEAD:main
+          fi
       - uses: actions/upload-pages-artifact@v3
         if: steps.review.outputs.publish == 'true'
         with:
