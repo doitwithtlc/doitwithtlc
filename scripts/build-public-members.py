@@ -144,8 +144,9 @@ def build(root=ROOT):
     text=benefit.read_text()
     start='<!-- included-member-profile:start -->';end='<!-- included-member-profile:end -->'
     included=start+section('<p class="eyebrow">Included with paid membership</p><h2>A public profile.<br>A place for your business to be found.</h2><p>Your BBLO membership includes a dedicated public business page, a standard directory listing, services and specialties, approved business links, and the member photos or logo you provide. Public profile updates are reviewed by BBLO.</p><p>Profiles are made eligible for search indexing; inclusion and ranking are determined by the search engine. Extra advertising placements are optional and arranged separately.</p><div class="actions">'+action('/bblo/members/','Explore the directory')+action('/bblo/profile-update/','Update your profile',cls='button secondary')+action('/bblo/advertise/','Optional advertising',cls='text-link')+'</div>')+end
-    if start in text:text=re.sub(re.escape(start)+r'.*?'+re.escape(end),lambda _:included,text,flags=re.S)
-    else:text=text.replace('</main>',included+'</main>')
+    if 'data-membership-overview="complete"' not in text:
+        if start in text:text=re.sub(re.escape(start)+r'.*?'+re.escape(end),lambda _:included,text,flags=re.S)
+        else:text=text.replace('</main>',included+'</main>')
     benefit.write_text(text)
     # Add an entry from the existing partner page without rebuilding its navigation.
     partners=root/'bblo/partners/index.html';text=partners.read_text()
