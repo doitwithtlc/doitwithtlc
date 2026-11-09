@@ -2,7 +2,7 @@
 
 ## Included membership benefit
 
-Every listed member business has a public profile and an alphabetical directory listing. The profile includes a business description, specialties, known service areas, the named representative, existing approved media, business links and a route to request an introduction. Members can submit corrections, original logos and approved photos through `/bblo/profile-update/`.
+Every listed member business has a public profile and a directory listing. TLC, BBLO, Media Minds and MJ Photography appear first in that exact order; remaining businesses follow alphabetically. BBLO's program card links to its existing About page and is not counted as an additional paid member. The profile includes a business description, specialties, known service areas, the named representative, existing approved media, business links and a route to request an introduction. Members can submit corrections, original logos and approved photos through `/bblo/profile-update/`.
 
 The update form prepares an email for the member to review and send. It does not automatically send, update the website, create a CRM record or upload images. BBLO reviews the email and attachments before publication. Do not describe this as a self-service editing portal or automatic CRM integration.
 
@@ -14,7 +14,7 @@ No advertiser is active. No advertising price has been published or charged. Web
 
 | Product | Placement | Scope boundary |
 | --- | --- | --- |
-| Featured Directory | Separate Sponsored cards above alphabetical listings | Up to three simultaneous cards. A category-specific booking must match the member's category. Standard search results remain relevant and alphabetical. |
+| Featured Directory | Separate Sponsored cards after the four priority entries, before remaining alphabetical listings | Up to three simultaneous cards. A category-specific booking must match the member's category. Search results remain relevant. |
 | Homepage Feature | Sponsored section directly below the TLC homepage hero | One simultaneous card. Placement does not replace the hero or change standard member listings. |
 | Sponsored Business Story | Separate, labeled editorial-style advertising article | A proposed service, not an automated article generator. Requires an approved brief, original media, agreed creation fee, publishing term and destination links. |
 

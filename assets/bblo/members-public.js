@@ -15,7 +15,7 @@
     directory.forEach(card=>{card.hidden=!matches(card);if(!card.hidden)count++;});
     paid.forEach(card=>{card.hidden=!adActive(card)||!matches(card);});
     document.querySelectorAll('.sponsored-members').forEach(section=>{section.hidden=![...section.querySelectorAll('.paid-member')].some(card=>!card.hidden);});
-    if(search){document.getElementById('member-count').textContent=`${count} ${count===1?'business':'businesses'}`;document.getElementById('member-empty').hidden=count!==0;}
+    if(search){document.getElementById('member-count').textContent=`${count} ${count===1?'listing':'listings'}`;document.getElementById('member-empty').hidden=count!==0;}
   }
   search?.addEventListener('input',filter);category?.addEventListener('change',filter);filter();
   const form=document.getElementById('member-profile-update');

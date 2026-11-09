@@ -56,7 +56,7 @@ with tempfile.TemporaryDirectory() as temp:
     config([{'location':'directory','member_slug':'mj-photography','status':'approved','label':'Sponsored','start':'2020-01-01T00:00:00-05:00','end':'2099-01-01T00:00:00-05:00'}])
     build(root);text=(root/'bblo/members/index.html').read_text()
     assert 'class="card paid-member"' in text and '>Sponsored<' in text
-    assert text.index('class="card paid-member"')<text.index('Member business directory')
+    assert text.index('class="card paid-member"')>text.index('Member business directory')
     config([{'location':'homepage','member_slug':'mj-photography','status':'approved','label':'Sponsored','start':'2020-01-01T00:00:00-05:00','end':'2099-01-01T00:00:00-05:00'}])
     build(root);home=(root/'index.html').read_text()
     assert 'class="card paid-member"' in home and '/assets/bblo/members-public.js?' in home
