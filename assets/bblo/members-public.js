@@ -9,8 +9,8 @@
     return Number.isFinite(start)&&Number.isFinite(end)&&start<=now&&now<end;
   };
   function filter(){
-    const q=normalize(search?.value.trim()||''),group=category?.value||'';
-    const matches=card=>(!group||card.dataset.group===group)&&normalize(card.dataset.member).includes(q);
+    const terms=normalize(search?.value.trim()||'').split(/\s+/).filter(Boolean),group=category?.value||'';
+    const matches=card=>(!group||card.dataset.group===group)&&terms.every(term=>normalize(card.dataset.member).includes(term));
     let count=0;
     directory.forEach(card=>{card.hidden=!matches(card);if(!card.hidden)count++;});
     paid.forEach(card=>{card.hidden=!adActive(card)||!matches(card);});
