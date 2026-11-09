@@ -10,6 +10,7 @@ from urllib.parse import quote, urlsplit
 import json
 import re
 import hashlib
+from bblo_advertising_rates import cards as advertising_cards, note as advertising_note, terms as advertising_terms, assets as advertising_assets
 
 ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = 'https://doitwithtlc.com'
@@ -59,6 +60,7 @@ def build(root=ROOT):
         structured = [crumbs] + ([schema] if schema else [])
         head = '<link rel="icon" type="image/jpeg" href="/logo.jpg"><link rel="stylesheet" href="/assets/bblo/members-public.css?v='+version+'"><script src="/assets/bblo/members-public.js?v='+version+'" defer></script>'
         head += ''.join('<script type="application/ld+json">'+json.dumps(s,ensure_ascii=False,separators=(',',':')).replace('<','\\u003c')+'</script>' for s in structured)
+        if route == '/bblo/advertise/': head += advertising_assets()
         text = text.replace('</head>',head+'</head>')
         dest = root / route.strip('/') / 'index.html'
         dest.parent.mkdir(parents=True,exist_ok=True)
@@ -78,7 +80,10 @@ def build(root=ROOT):
             if ad.get('group') and ad['group']!=m['group']:raise ValueError('Advertising group must match the member category')
             cards.append('<article class="card paid-member" data-ad-start="'+esc(ad['start'])+'" data-ad-end="'+esc(ad['end'])+'" data-member="'+esc(m['company']+' '+m['name']+' '+' '.join(m['services']))+'" data-group="'+esc(m['group'])+'"><p class="member-label">Sponsored</p><h3>'+esc(m['company'])+'</h3><p>'+esc(m['category'])+'</p>'+action(profile_url(m),'Explore '+m['company'])+'</article>')
         if not cards:return ''
-        if len(cards)>(3 if location=='directory' else 1):raise ValueError('Advertising capacity exceeded for '+location)
+        if location == 'directory':
+            offset = (now.year * 12 + now.month - 1) % len(cards)
+            cards = cards[offset:] + cards[:offset]
+        if len(cards)>(6 if location=='directory' else 1):raise ValueError('Advertising capacity exceeded for '+location)
         note='All members remain available in the directory.' if location=='directory' else '<a href="/bblo/members/">Explore all BBLO member businesses.</a>'
         return section('<p class="eyebrow">Paid advertising</p><h2>Featured member businesses</h2><div class="grid three">'+''.join(cards)+'</div><p class="note">Sponsored placement is advertising. '+note+'</p>','sponsored-members')
 
@@ -135,8 +140,7 @@ def build(root=ROOT):
     page('/bblo/profile-update/','Update Your BBLO Business Profile | TLC','Send approved public business information, services and links for your included BBLO member profile.',update)
 
     advertising=section('<p class="eyebrow">Optional advertising · TLC &amp; BBLO</p><h1>Give your business<br><em>an extra place to be seen.</em></h1><p class="lead">Your standard BBLO business profile is included with paid membership. Advertising adds a separate, clearly labeled placement for an agreed period.</p>','hero')
-    offers=[('Featured directory placement','A Sponsored business card after TLC and the community partners, ahead of the remaining alphabetical listings, linked to your public profile. Category relevance and display dates are agreed before booking.'),('Homepage business feature','A dedicated Sponsored placement on the TLC homepage, connecting visitors with your member profile or agreed business destination.'),('Sponsored business story','A separate, labeled business feature built from your approved information and original images, with links to your profile and business website.')]
-    advertising+=section('<h2>Explore additional visibility</h2><div class="grid three">'+''.join('<article class="card"><p class="member-label">Optional advertising</p><h3>'+a+'</h3><p>'+b+'</p></article>' for a,b in offers)+'</div><h2>Know exactly what you are booking.</h2><p>We confirm the placement, dates, rotation, creative, destination link, price and responsibilities in writing. Availability is confirmed individually. Advertising does not change the standard listing order or promise a Google position, visitor count, inquiries or sales.</p><p>Paid placements are labeled Sponsored and commercial outbound links are identified appropriately for search engines.</p><div class="actions">'+action(email_link('BBLO advertising inquiry','My business:\nPlacement of interest:\nPreferred dates:\nDestination website:\nBest way to reach me:\n'),'Ask about placement availability')+action('/bblo/members/','Explore member businesses',cls='button secondary')+'</div><p class="note">This button opens an email draft for you to review and send. Placement and payment are confirmed separately.</p>')
+    advertising+=section('<h2>Optional visibility upgrades</h2>'+advertising_cards()+advertising_note()+advertising_terms()+action('/bblo/benefits/','See included membership benefits',cls='button secondary'))
     page('/bblo/advertise/','BBLO Advertising & Featured Business Placements | TLC','Explore optional featured directory placements, homepage business features and sponsored stories alongside your included BBLO membership profile.',advertising)
 
     # Keep the promise explicit where members compare membership options.
