@@ -14,3 +14,7 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+## Editorial rule
+
+When explaining that Spanish fluency is not required for BBLO, use English only. Do not translate that assurance into Spanish in website copy, generated pages, templates, or promotional materials.
