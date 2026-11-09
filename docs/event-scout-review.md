@@ -26,6 +26,7 @@ Include a readable summary, verification notes, the source and checked date, and
   "virtual": false,
   "description": "",
   "organizer": "",
+  "organizer_url": "",
   "cost": "",
   "url": "",
   "source_url": "",

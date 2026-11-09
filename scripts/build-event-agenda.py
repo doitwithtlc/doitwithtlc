@@ -7,6 +7,8 @@ from pathlib import Path
 from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
+from event_pages import build as build_event_pages, event_route
+
 ROOT = Path(__file__).resolve().parents[1]
 START = '<!-- published-event-agenda:start -->'
 END = '<!-- published-event-agenda:end -->'
@@ -22,8 +24,8 @@ def render(events, category=None):
         if end:
             label += '–' + end.strftime('%-I:%M %p %Z' if end.date() == start.date() else '%B %-d, %Y · %-I:%M %p %Z')
         title = escape(event['title'])
-        url = event.get('url') or event.get('source_url') or ''
-        if urlsplit(url).scheme in ('http', 'https'):
+        url = event_route(event)
+        if url:
             title = '<a href="' + escape(url, quote=True) + '">' + title + '</a>'
         place = ' · '.join(str(event.get(key) or '') for key in ('location', 'address') if event.get(key))
         rows.append((start, '<li><h3>' + title + '</h3><p><time datetime="'
@@ -36,10 +38,11 @@ def render(events, category=None):
     return (START + '<section aria-labelledby="published-agenda-title"><div class="wrap">'
             '<details><summary id="published-agenda-title">Published event dates at a glance</summary>'
             '<p>Browse the published dates below, including past events. Use the calendar above for filters and upcoming events. '
-            'Open an event link for the organizer’s latest details.</p>' + content
+            'Each event has its own detail page with organizer information. <a href="/community-events/archive/">Browse past events</a>.</p>' + content
             + '</details></div></section>' + END)
 
 def build(root=ROOT):
+    build_event_pages(root)
     events = json.loads((root / 'data/bblo-events.json').read_text())['events']
     for route, category in [('bblo/events/index.html', None), ('bblo/field-trip-friday/index.html', 'field-trip')]:
         page = root / route
@@ -60,4 +63,6 @@ def build(root=ROOT):
 
 if __name__ == '__main__':
     build()
-    print('Published event agendas refreshed from approved calendar data.')
+    import runpy
+    runpy.run_path(str(ROOT / 'scripts/check-seo.py'))['write_sitemap'](ROOT)
+    print('Event pages, archives, agendas and sitemap refreshed from the shared calendar data.')

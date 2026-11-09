@@ -1,0 +1,55 @@
+name: Refresh calendar event pages
+on:
+  push:
+    branches: [main]
+    paths:
+      - data/bblo-events.json
+      - scripts/event_pages.py
+      - scripts/build-event-agenda.py
+      - scripts/check-event-pages.py
+      - scripts/check-seo.py
+      - assets/bblo/event-pages.*
+      - .github/workflows/refresh-event-pages.yml
+  schedule:
+    - cron: '15 6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: community-event-publication
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build and validate the shared calendar pages
+        run: |
+          python scripts/build-event-agenda.py
+          python scripts/check-event-pages.py
+          python scripts/check-seo.py
+      - name: Save refreshed pages
+        run: |
+          git add community-events sitemap.xml bblo/events/index.html bblo/field-trip-friday/index.html
+          if ! git diff --cached --quiet; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'Refresh event pages from the community calendar'
+            git push origin HEAD:main
+          fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - uses: actions/deploy-pages@v4
+        id: deployment

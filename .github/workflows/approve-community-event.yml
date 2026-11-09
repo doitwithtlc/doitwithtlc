@@ -53,7 +53,7 @@ jobs:
               const source=url('source_url');if(!source)throw new Error('Original source link is required.');
               if(draft.verification_status!=='verified')throw new Error('Resolve missing or conflicting information and set verification_status to verified before approval.');
               const category=value('category',true);if(!['community','bblo','field-trip','business','workshop','training','vendor','fundraiser','culture','family'].includes(category))throw new Error('Invalid category.');
-              const event={id:'scout-'+issue_number,title,category,start,end,location:value('location',true),address:value('address'),description:value('description',true),url:url('url')||source,cta:'Event details',source_url:source,organizer:value('organizer'),cost:value('cost'),opportunities:value('opportunities'),flyer_url:url('flyer_url'),virtual:draft.virtual===true,published:true,approved_by:context.actor,approved_at:new Date().toISOString(),review_issue:issue.html_url};
+              const event={id:'scout-'+issue_number,title,category,start,end,location:value('location',true),address:value('address'),description:value('description',true),url:url('url')||source,cta:'Event details',source_url:source,organizer:value('organizer'),organizer_url:url('organizer_url'),cost:value('cost'),opportunities:value('opportunities'),flyer_url:url('flyer_url'),virtual:draft.virtual===true,published:true,approved_by:context.actor,approved_at:new Date().toISOString(),review_issue:issue.html_url};
               const path='data/bblo-events.json';
               const {data:file}=await github.rest.repos.getContent({owner,repo,path,ref:'main'});
               const data=JSON.parse(Buffer.from(file.content,'base64').toString('utf8'));
@@ -76,7 +76,7 @@ jobs:
         run: |
           python3 scripts/build-event-agenda.py
           python3 scripts/check-seo.py
-          git add bblo/events/index.html bblo/field-trip-friday/index.html
+          git add community-events sitemap.xml bblo/events/index.html bblo/field-trip-friday/index.html
           if ! git diff --cached --quiet; then
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
