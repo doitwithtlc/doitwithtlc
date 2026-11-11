@@ -21,6 +21,8 @@ def render(events, category=None):
         start = datetime.fromisoformat(event['start']).astimezone(ZoneInfo('America/New_York'))
         end = datetime.fromisoformat(event['end']).astimezone(ZoneInfo('America/New_York')) if event.get('end') else None
         label = start.strftime('%B %-d, %Y · %-I:%M %p %Z')
+        if event.get('date_only'):
+            label = start.strftime('%B %-d, %Y') + ' · Deadline date; closing hour not announced'
         if end:
             label += '–' + end.strftime('%-I:%M %p %Z' if end.date() == start.date() else '%B %-d, %Y · %-I:%M %p %Z')
         title = escape(event['title'])

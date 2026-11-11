@@ -55,6 +55,8 @@ def button(href, label, secondary=False):
 
 def date_label(event):
     start = parse(event['start'])
+    if event.get('date_only'):
+        return start.strftime('%A, %B %-d, %Y') + ' · Deadline date; closing hour not announced'
     label = start.strftime('%A, %B %-d, %Y · %-I:%M %p')
     if event.get('end'):
         end = parse(event['end'])
@@ -122,7 +124,7 @@ def build(root=ROOT, now=None):
             body += '<p><strong>Cost:</strong> '+escape(event['cost'])+'</p>'
         if event.get('opportunities'):
             body += '<p><strong>Opportunities:</strong> '+escape(event['opportunities'])+'</p>'
-        if not event.get('end'):
+        if not event.get('end') and not event.get('date_only'):
             body += '<p class="note">An end time has not been announced. Confirm with the organizer.</p>'
         if event.get('address_pending'):
             body += '<p class="note">The exact street address needs confirmation. Contact the organizer before traveling.</p>'
