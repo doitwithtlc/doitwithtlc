@@ -7,7 +7,7 @@
  const status=(e,now)=>['cancelled','canceled'].includes(e.status)?'Event cancelled':e.status==='postponed'?'Event postponed':!active(e,now)?'Event has ended':new Date(e.start)<=now?(e.end?'Happening now':'Scheduled today'):'Upcoming event';
  const el=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;return n;};
  const date=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'long',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'});
- const card=e=>{const article=el('article');article.className='event-related-card';const h=el('h3'),a=el('a',e.title);a.href=route(e);h.append(a);article.append(h,el('p',date.format(new Date(e.start))),el('p',e.location));return article;};
+ const card=e=>{const article=el('article');article.className='event-related-card';const h=el('h3'),a=el('a',e.title);a.href=route(e);h.append(a);article.append(h,el('p',e.date_only?localDay(e.start)+' · Deadline date; closing hour not announced':date.format(new Date(e.start))),el('p',e.location));return article;};
  let events=[];
  function refresh(){
   const now=new Date(),detail=document.querySelector('[data-event-id]'),current=detail&&events.find(e=>e.id===detail.dataset.eventId);
