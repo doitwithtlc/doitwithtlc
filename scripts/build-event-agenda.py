@@ -25,6 +25,8 @@ def render(events, category=None):
             label = start.strftime('%B %-d, %Y') + ' · Deadline date; closing hour not announced'
         if end:
             label += '–' + end.strftime('%-I:%M %p %Z' if end.date() == start.date() else '%B %-d, %Y · %-I:%M %p %Z')
+        if event.get('end_time_pending'):
+            label += ' · End time: TBD'
         title = escape(event['title'])
         url = event_route(event)
         if url:

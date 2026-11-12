@@ -61,6 +61,8 @@ def date_label(event):
     if event.get('end'):
         end = parse(event['end'])
         label += '–' + end.strftime('%-I:%M %p' if start.date() == end.date() else '%B %-d, %Y · %-I:%M %p')
+    if event.get('end_time_pending'):
+        label += ' · End time: TBD'
     return label + ' ' + start.strftime('%Z')
 
 
