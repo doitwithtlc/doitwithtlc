@@ -1,4 +1,9 @@
 # Event Scout review
+
+## Standing owner exclusions
+
+Effective November 14, 2026: never promote Deafine Media, Deafine Venue, Deafine Studios, or their events, locations, services, vendor directories, sponsorships or related promotional opportunities. Exclude them from Event Scout findings and drafts, the TLC/BBLO Community Calendar, weekly business carousels, Stories and recommendations. Apply this exclusion when they are an organizer, host, venue or promoted service, even if the event has a different title or appears through a third-party listing. Do not reopen or resubmit rejected issue #40. Do not infer affiliations with unrelated businesses. This exclusion remains in force unless Carmen explicitly changes it.
+
 Review drafts at https://github.com/doitwithtlc/doitwithtlc/issues?q=is%3Aissue+is%3Aopen+%22%5BEvent+Scout%5D%22
 
 Only the doitwithtlc owner account can approve or reject.
