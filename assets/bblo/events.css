@@ -36,3 +36,14 @@
 .event-calendar .event-silhouette-badge{width:28px;height:28px;border-width:1px}
 .event-calendar .event-silhouette-badge img{width:22px;height:22px}
 .event-list .event-card.event-tlc-highlight{box-shadow:0 0 0 1px #C9A227,0 4px 18px #0b1f3a08}
+
+/* Event-specific sharing follows the calendar's navy and gold palette. */
+.event-share{margin:1rem 0;color:#0B1F3A;text-align:left;max-width:100%;min-width:0}
+.event-share summary{display:list-item;cursor:pointer;font:inherit;font-weight:700;padding:.7rem 1rem;border:1px solid #0B1F3A;border-radius:6px;background:#F5F1E8;min-height:44px;box-sizing:border-box}
+.event-share-options{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}
+.event-share-options a,.event-share-options button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.5rem .8rem;border:1px solid #0B1F3A;border-radius:5px;background:#fff;color:#0B1F3A;font:inherit;font-size:.95rem;text-decoration:none;cursor:pointer;box-sizing:border-box}
+.event-share-options [hidden]{display:none!important}
+.event-share-options a:hover,.event-share-options button:hover{background:#F5F1E8}
+.event-share :focus-visible{outline:3px solid #C9A227;outline-offset:3px}
+.event-share-url{font-size:.85rem;overflow-wrap:anywhere;margin:.75rem 0}
+.event-share-status{font-size:.9rem;margin:.5rem 0}

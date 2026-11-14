@@ -70,6 +70,25 @@ def card(event):
     return '<article class="event-related-card"><p class="eyebrow">'+escape(KINDS.get(event.get('category'),'Community Event'))+'</p><h3><a href="'+event_route(event)+'">'+escape(event['title'])+'</a></h3><p>'+escape(date_label(event))+'</p><p>'+escape(event.get('location',''))+'</p></article>'
 
 
+
+def share_controls(event):
+    url = ORIGIN + event_route(event)
+    text = '\n'.join(filter(None, [event['title'], date_label(event), event.get('location'), event.get('address')]))
+    body = text + '\n' + url
+    links = [('Text', 'sms:?'+urlencode({'body':body})),
+             ('Email', 'mailto:?'+urlencode({'subject':event['title'],'body':body})),
+             ('WhatsApp', 'https://wa.me/?'+urlencode({'text':body})),
+             ('Facebook', 'https://www.facebook.com/sharer/sharer.php?'+urlencode({'u':url})),
+             ('LinkedIn', 'https://www.linkedin.com/sharing/share-offsite/?'+urlencode({'url':url})),
+             ('X', 'https://twitter.com/intent/tweet?'+urlencode({'text':text,'url':url}))]
+    html = '<details class="event-share" data-event-share data-share-title="'+escape(event['title'],quote=True)+'" data-share-text="'+escape(text,quote=True)+'" data-share-url="'+escape(url,quote=True)+'"><summary>Share event</summary><div class="event-share-options">'
+    html += '<button type="button" data-share-native hidden>Share with an app</button>'
+    for label, href in links:
+        html += '<a href="'+escape(href,quote=True)+'"'+(' data-share-sms' if label=='Text' else '')+(' target="_blank" rel="noopener noreferrer"' if href.startswith('https:') else '')+'>'+label+'</a>'
+    html += '<button type="button" data-share-copy hidden>Copy link</button></div><p class="event-share-url"><a href="'+url+'">'+escape(url)+'</a></p><p class="event-share-status" role="status"></p></details>'
+    return html
+
+
 def page_shell(template, title, description, route, content, schemas, image=''):
     # Reuse the live site's navigation and footer, not a second design system.
     head = template.split('</head>',1)[0] + '</head>'
@@ -141,7 +160,7 @@ def build(root=ROOT, now=None):
             compact = lambda d: parse(d).astimezone(ZoneInfo('UTC')).strftime('%Y%m%dT%H%M%SZ')
             calendar = 'https://calendar.google.com/calendar/render?'+urlencode({'action':'TEMPLATE','text':event['title'],'dates':compact(event['start'])+'/'+compact(event['end']),'details':event.get('description','')+' '+ORIGIN+route,'location':location})
             body += '<span data-upcoming-action'+(' hidden' if label not in ('Upcoming event','Happening now','Scheduled today') else '')+'>'+button(calendar,'Add to my calendar',True)+'</span>'
-        body += '</div><p class="note">Listed by The Liaison Companies LLC. Hosting and registration remain with the named organizer unless TLC or BBLO is identified as the host. Confirm the organizer’s latest details before attending.</p></div>'
+        body += '</div>'+share_controls(event)+'<p class="note">Listed by The Liaison Companies LLC. Hosting and registration remain with the named organizer unless TLC or BBLO is identified as the host. Confirm the organizer’s latest details before attending.</p></div>'
         if image:
             body += '<figure class="event-detail-flyer"><a href="'+escape(image,quote=True)+'"><img src="'+escape(image,quote=True)+'" alt="'+escape(event.get('imageAlt') or event['title']+' flyer',quote=True)+'" decoding="async"></a><figcaption>Open the full event flyer.</figcaption></figure>'
         else:
