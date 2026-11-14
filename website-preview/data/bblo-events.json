@@ -1952,6 +1952,26 @@
       "published": false,
       "cta": "Event details",
       "carousel_ready": false
+    },
+    {
+      "id": "tcg-card-vault-grand-opening-20261121",
+      "title": "TCG Card Vault Grand Opening",
+      "category": "business",
+      "start": "2026-11-21T12:00:00-05:00",
+      "end": "",
+      "location": "TCG Card Vault",
+      "address": "2142 E Silver Springs Blvd, Suite 5, Ocala, FL 34470",
+      "description": "Celebrate the grand opening of TCG Card Vault, a family-friendly shop for trading cards, collectibles, toys and more. Free giveaways for the first 25 kids and free face painting. An end time is not listed on the flyer.",
+      "organizer": "TCG Card Vault",
+      "cost": "",
+      "url": "",
+      "source_url": "",
+      "source_type": "owner_supplied_flyer",
+      "verification_status": "verified",
+      "verified_on": "2026-11-14",
+      "verification_notes": "Date, noon start, address and activities verified against the owner-supplied grand opening flyer. No end time or admission price is stated.",
+      "published": true,
+      "carousel_ready": true
     }
   ]
 }
