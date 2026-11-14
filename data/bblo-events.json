@@ -2295,13 +2295,15 @@
       "organizer": "TCG Card Vault",
       "cost": "",
       "url": "",
-      "source_url": "",
+      "source_url": "https://doitwithtlc.com/assets/bblo/events/tcg-card-vault-grand-opening-20261121.jpg",
       "source_type": "owner_supplied_flyer",
       "verification_status": "verified",
       "verified_on": "2026-11-14",
       "verification_notes": "Date, noon start, address and activities verified against the owner-supplied grand opening flyer. No end time or admission price is stated.",
       "published": true,
-      "carousel_ready": true
+      "carousel_ready": true,
+      "image": "/assets/bblo/events/tcg-card-vault-grand-opening-20261121.jpg",
+      "imageAlt": "TCG Card Vault grand opening flyer: Saturday, November 21, 2026 at noon, 2142 E Silver Springs Blvd, Suite 5, Ocala; free giveaways for the first 25 kids and free face painting."
     }
   ]
 }
