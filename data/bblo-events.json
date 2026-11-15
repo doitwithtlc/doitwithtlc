@@ -2304,6 +2304,28 @@
       "carousel_ready": true,
       "image": "/assets/bblo/events/tcg-card-vault-grand-opening-20261121.jpg",
       "imageAlt": "TCG Card Vault grand opening flyer: Saturday, November 21, 2026 at noon, 2142 E Silver Springs Blvd, Suite 5, Ocala; free giveaways for the first 25 kids and free face painting."
+    },
+    {
+      "id": "omcar-member-holiday-appreciation-20261203",
+      "title": "OMCAR Member Holiday Appreciation Event",
+      "category": "business",
+      "start": "2026-12-03T18:00:00-05:00",
+      "end": "2026-12-03T20:00:00-05:00",
+      "location": "Midtown Station",
+      "address": "235 NE Watula Ave, Ocala, FL 34470",
+      "description": "Member holiday appreciation and professional networking hosted by the Ocala/Marion County Association of REALTORS®. Enjoy food and networking. Bring an unwrapped toy to receive two free drink tickets. See the organizer's event page for registration and participation details.",
+      "organizer": "Ocala/Marion County Association of REALTORS® (OMCAR)",
+      "cost": "",
+      "url": "https://members.omcar.com/event-calendar/Details/member-holiday-appreciation-event-1967275?sourceTypeId=Website",
+      "source_url": "https://members.omcar.com/event-calendar/Details/member-holiday-appreciation-event-1967275?sourceTypeId=Website",
+      "cta": "Organizer details and registration",
+      "image": "/assets/bblo/events/omcar-member-holiday-appreciation-20261203.jpg",
+      "imageAlt": "OMCAR Member Holiday Appreciation Event flyer: December 3, 6–8 PM at Midtown Station, 235 NE Watula Ave, Ocala. Bring an unwrapped toy to receive two free drink tickets; food and networking.",
+      "source_type": "owner_supplied_flyer",
+      "verification_status": "verified",
+      "verified_on": "2026-11-15",
+      "published": true,
+      "carousel_ready": true
     }
   ]
 }
