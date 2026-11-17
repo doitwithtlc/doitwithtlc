@@ -32,10 +32,10 @@ function downloadCalendar(e){const url=URL.createObjectURL(new Blob([calendarCon
 
 // TLC share helpers: generated page links are discovered, never assumed from an ID.
 const sharePages=new Map();
-const publicCalendar='https://doitwithtlc.com/bblo/events/';
+const publicCalendar='https://doitwithtlc.com/events/';
 async function loadSharePages(){
   try{
-    const response=await fetch('/bblo/events/',{cache:'no-store'});
+    const response=await fetch('/events/',{cache:'no-store'});
     if(!response.ok)return;
     const doc=new DOMParser().parseFromString(await response.text(),'text/html');
     for(const a of doc.querySelectorAll('a[href^="/community-events/"]')){

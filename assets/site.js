@@ -78,12 +78,12 @@ document.addEventListener('DOMContentLoaded',()=>{const box=document.querySelect
 document.addEventListener('DOMContentLoaded',()=>{
  const prefix=location.pathname.startsWith('/website-preview/')?'/website-preview':'';
  const nav=document.getElementById('site-nav');if(!nav)return;
- document.querySelectorAll('.bblo-dropdown a[href="'+prefix+'/bblo/events/"]').forEach(a=>a.remove());
+ document.querySelectorAll('.bblo-dropdown a').forEach(a=>{if([prefix+'/events/',prefix+'/bblo/events/'].includes(a.pathname))a.remove();});
  let link=nav.querySelector(':scope > a[data-community-calendar]');
  if(!link){link=document.createElement('a');link.dataset.communityCalendar='';nav.prepend(link);}
- link.href=prefix+'/bblo/events/';link.textContent='Community Event Calendar';
+ link.href=prefix+'/events/';link.textContent='Community Event Calendar';
  if(link.pathname===location.pathname)link.setAttribute('aria-current','page');
- document.querySelectorAll('.bblo-subnav a[href="'+prefix+'/bblo/events/"]').forEach(a=>a.textContent='Community Event Calendar');
+ document.querySelectorAll('.bblo-subnav a[href="'+prefix+'/events/"]').forEach(a=>a.textContent='Community Event Calendar');
 });
 
 // Cafecito discovery across existing pages.
@@ -110,4 +110,13 @@ document.addEventListener('DOMContentLoaded',()=>{
  const style=document.createElement('style');
  style.textContent='header .bblo-about-menu{padding:0;border:0}header .bblo-about-menu>summary{padding:10px 12px;font-size:14px;font-weight:600;cursor:pointer}header .bblo-about-menu>summary:hover{background:#e8dfcb}header .bblo-about-links{padding-left:12px;border-left:2px solid var(--gold);margin:0 10px 8px}header .bblo-about-menu:not([open])>.bblo-about-links{display:none}';
  document.head.append(style);
+});
+
+// Send legacy calendar links to TLC's main calendar, preserving filters and anchors.
+document.addEventListener('DOMContentLoaded',()=>{
+ document.querySelectorAll('a[href]').forEach(a=>{
+  if(a.origin===location.origin && a.pathname==='/bblo/events/'){
+   a.pathname='/events/';
+  }
+ });
 });

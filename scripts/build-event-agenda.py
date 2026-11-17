@@ -48,7 +48,7 @@ def render(events, category=None):
 def build(root=ROOT):
     build_event_pages(root)
     events = json.loads((root / 'data/bblo-events.json').read_text())['events']
-    for route, category in [('bblo/events/index.html', None), ('bblo/field-trip-friday/index.html', 'field-trip')]:
+    for route, category in [('events/index.html', None), ('bblo/field-trip-friday/index.html', 'field-trip')]:
         page = root / route
         text = page.read_text()
         agenda = render(events, category)

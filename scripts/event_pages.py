@@ -110,7 +110,7 @@ def page_shell(template, title, description, route, content, schemas, image=''):
 
 def build(root=ROOT, now=None):
     now = now or datetime.now(TZ)
-    template = (root/'bblo/events/index.html').read_text()
+    template = (root/'events/index.html').read_text()
     raw = json.loads((root/'data/bblo-events.json').read_text())['events']
     events = [e for e in raw if e.get('published') is True]
     ids = [e['id'] for e in events]
@@ -137,7 +137,7 @@ def build(root=ROOT, now=None):
             image = ORIGIN+image
         image = external(image)
         location = ' · '.join(event.get(k,'') for k in ('location','address') if event.get(k))
-        body = '<main id="main" class="event-detail" data-event-id="'+event['id']+'"><section class="hero event-detail-hero"><div class="wrap"><nav class="event-breadcrumb" aria-label="Breadcrumb"><a href="/bblo/events/">Community Calendar</a><span aria-hidden="true"> / </span><span>Event details</span></nav><p class="eyebrow">'+escape(KINDS.get(event.get('category'),'Community Event'))+'</p><h1>'+escape(event['title'])+'</h1><p class="event-state" data-event-state role="status">'+label+'</p><p class="lead"><time datetime="'+escape(event['start'])+'">'+escape(date_label(event))+'</time></p><p>'+escape(location)+'</p></div></section>'
+        body = '<main id="main" class="event-detail" data-event-id="'+event['id']+'"><section class="hero event-detail-hero"><div class="wrap"><nav class="event-breadcrumb" aria-label="Breadcrumb"><a href="/events/">Community Calendar</a><span aria-hidden="true"> / </span><span>Event details</span></nav><p class="eyebrow">'+escape(KINDS.get(event.get('category'),'Community Event'))+'</p><h1>'+escape(event['title'])+'</h1><p class="event-state" data-event-state role="status">'+label+'</p><p class="lead"><time datetime="'+escape(event['start'])+'">'+escape(date_label(event))+'</time></p><p>'+escape(location)+'</p></div></section>'
         body += '<section><div class="wrap event-detail-grid"><div><h2>About this event</h2><p class="event-description">'+escape(event.get('description',''))+'</p>'
         if organizer:
             body += '<p><strong>Hosted by:</strong> '+escape(organizer)+'</p>'
@@ -164,10 +164,10 @@ def build(root=ROOT, now=None):
         if image:
             body += '<figure class="event-detail-flyer"><a href="'+escape(image,quote=True)+'"><img src="'+escape(image,quote=True)+'" alt="'+escape(event.get('imageAlt') or event['title']+' flyer',quote=True)+'" decoding="async"></a><figcaption>Open the full event flyer.</figcaption></figure>'
         else:
-            body += '<aside class="event-detail-aside"><p class="eyebrow">Find your next connection</p><h2>More happening<br>around Ocala.</h2><p>Explore business events, community gatherings and BBLO activities in one calendar.</p>'+button('/bblo/events/','Explore the calendar')+'</aside>'
+            body += '<aside class="event-detail-aside"><p class="eyebrow">Find your next connection</p><h2>More happening<br>around Ocala.</h2><p>Explore business events, community gatherings and BBLO activities in one calendar.</p>'+button('/events/','Explore the calendar')+'</aside>'
         body += '</div></section>'
         related = sorted([e for e in upcoming if e['id'] != event['id']],key=lambda e:(e.get('category') != event.get('category'),parse(e['start'])))[:3]
-        body += '<section class="event-related"><div class="wrap"><p class="eyebrow">Keep exploring</p><h2>Find your next event.</h2><div class="event-related-grid" data-related-events>'+''.join(card(e) for e in related)+'</div><div class="actions">'+button('/bblo/events/','All upcoming events')+button('/community-events/archive/','Past events',True)+'</div></div></section>'
+        body += '<section class="event-related"><div class="wrap"><p class="eyebrow">Keep exploring</p><h2>Find your next event.</h2><div class="event-related-grid" data-related-events>'+''.join(card(e) for e in related)+'</div><div class="actions">'+button('/events/','All upcoming events')+button('/community-events/archive/','Past events',True)+'</div></div></section>'
         body += '<section><div class="wrap event-detail-connections"><div><p class="eyebrow">Business visibility in Ocala</p><h2>Get to know the businesses<br>behind the connections.</h2><p>Explore BBLO members, plan a Friday visit or see how TLC represents businesses in the community.</p></div><div class="actions">'+button('/bblo/members/','Meet local businesses',True)+button('/bblo/visit/','Visit BBLO',True)+button('/services/brand-representation/','Explore TLC representation',True)+'</div></div></section></main>'
         schemas = [{'@context':'https://schema.org','@type':'WebPage','name':title,'url':ORIGIN+route,'description':description,'publisher':{'@type':'Organization','name':'The Liaison Companies LLC','url':ORIGIN+'/'}}]
         # Event markup is limited to future/current physical listings with a confirmed address.
@@ -184,7 +184,7 @@ def build(root=ROOT, now=None):
         path.write_text(page_shell(template,title,description,route,body,schemas,image))
         generated.append(str(path.relative_to(root)))
     past = [e for e in reversed(events) if state(e,now) not in ('Upcoming event','Happening now','Scheduled today')]
-    content = '<main id="main" class="event-detail"><section class="hero"><div class="wrap"><p class="eyebrow">Community Calendar archive</p><h1>Past events.<br>More connections ahead.</h1><p class="lead">Browse previous calendar listings and find what is coming up next.</p>'+button('/bblo/events/','See upcoming events')+'</div></section><section><div class="wrap"><h2>Previous listings</h2><div class="event-related-grid" data-event-archive>'+''.join(card(e) for e in past)+'</div></div></section></main>'
+    content = '<main id="main" class="event-detail"><section class="hero"><div class="wrap"><p class="eyebrow">Community Calendar archive</p><h1>Past events.<br>More connections ahead.</h1><p class="lead">Browse previous calendar listings and find what is coming up next.</p>'+button('/events/','See upcoming events')+'</div></section><section><div class="wrap"><h2>Previous listings</h2><div class="event-related-grid" data-event-archive>'+''.join(card(e) for e in past)+'</div></div></section></main>'
     path=root/'community-events/archive/index.html';path.parent.mkdir(parents=True,exist_ok=True)
     path.write_text(page_shell(template,'Past Ocala Community & Business Events | TLC','Browse previous Ocala business and community event listings, then discover upcoming events on the TLC community calendar.','/community-events/archive/',content,[]))
     generated.append(str(path.relative_to(root)))
@@ -194,7 +194,7 @@ def build(root=ROOT, now=None):
     for path in folder.glob('*/index.html'):
         relative=str(path.relative_to(root))
         if relative not in current and MARKER in path.read_text():
-            notice='<main id="main"><section class="hero"><div class="wrap"><h1>This listing is no longer available.</h1>'+button('/bblo/events/','Find upcoming events')+'</div></section></main>'
+            notice='<main id="main"><section class="hero"><div class="wrap"><h1>This listing is no longer available.</h1>'+button('/events/','Find upcoming events')+'</div></section></main>'
             html=page_shell(template,'Listing unavailable | TLC','This event listing is no longer published. Find upcoming community events on the TLC calendar.','/'+str(path.parent.relative_to(root))+'/',notice,[])
             html=html.replace('content="index,follow,max-image-preview:large"','content="noindex,follow"')
             path.write_text(html)

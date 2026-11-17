@@ -19,8 +19,8 @@ assert state(unknown,datetime(2026,11,11,0,0,tzinfo=TZ))=='Event has ended'
 assert cutoff(dict(unknown,start='2027-03-14T01:00:00-05:00')).utcoffset().total_seconds()==-14400
 with tempfile.TemporaryDirectory() as folder:
  root=Path(folder)
- (root/'bblo/events').mkdir(parents=True)
- (root/'bblo/events/index.html').write_text((ROOT/'bblo/events/index.html').read_text())
+ (root/'events').mkdir(parents=True)
+ (root/'events/index.html').write_text((ROOT/'events/index.html').read_text())
  (root/'data').mkdir()
  events=[e,dict(e,id='unpublished-draft',published=False,start='',end='')]
  ledger=root/'data/bblo-events.json'

@@ -40,7 +40,7 @@ jobs:
           python scripts/check-seo.py
       - name: Save refreshed pages
         run: |
-          git add community-events sitemap.xml bblo/events/index.html bblo/field-trip-friday/index.html
+          git add community-events sitemap.xml events/index.html bblo/field-trip-friday/index.html
           if ! git diff --cached --quiet; then
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
