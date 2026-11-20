@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 // Cafecito discovery across existing pages.
 document.addEventListener('DOMContentLoaded',()=>{const box=document.querySelector('.carmen-dropdown .dropdown-links');if(box&&!box.querySelector('a[href="/cafecito-with-carmen/"]')){const a=document.createElement('a');a.href='/cafecito-with-carmen/';a.textContent='Cafecito with Carmen';box.append(a);}});
 
-// Keep the three BBLO actions above a collapsed, alphabetical About BBLO menu.
+// Keep the direct BBLO actions above a collapsed, alphabetical About BBLO menu.
 document.addEventListener('DOMContentLoaded',()=>{
  const box=document.querySelector('.bblo-dropdown > .dropdown-links');if(!box)return;
  const prefix=location.pathname.startsWith('/website-preview/')?'/website-preview':'';
@@ -99,7 +99,9 @@ document.addEventListener('DOMContentLoaded',()=>{
  let checkin=links.find(a=>a.pathname===prefix+'/bblo/check-in/'||/friday check.?in/i.test(a.textContent));
  if(!checkin)checkin=document.createElement('a');checkin.href=prefix+'/bblo/check-in/';checkin.textContent='Wins for This Week';
  const about=links.find(a=>a.pathname===prefix+'/bblo/'&&!a.hash);
- const actions=[ready,member,checkin].filter(Boolean);
+ let apply=links.find(a=>a.pathname===prefix+'/bblo/join/'&&a.hash==='#application');
+ if(!apply)apply=document.createElement('a');apply.href=prefix+'/bblo/join/#application';apply.textContent='Apply for BBLO';
+ const actions=[apply,ready,member,checkin].filter(Boolean);
  const rest=links.filter(a=>!actions.includes(a)&&a!==about);
  if(about){about.textContent='About BBLO Overview';rest.push(about);}
  rest.sort((a,b)=>a.textContent.trim().localeCompare(b.textContent.trim(),'en',{sensitivity:'base'}));
