@@ -6,7 +6,7 @@ Every listed member business has a public profile and a directory listing. TLC, 
 
 The update form prepares an email for the member to review and send. It does not automatically send, update the website, create a CRM record or upload images. BBLO reviews the email and attachments before publication. Do not describe this as a self-service editing portal or automatic CRM integration.
 
-Public profile data comes from `data/bblo-members.json` for existing public identity/media/social links, with reviewed enrichment in `data/bblo-public-profiles.json`. Private phone/email fields from the membership data are never copied automatically. Public contacts must be explicitly sourced in the enrichment file. Missing service areas and photos are omitted. Legacy Insurance's old Ocala Insurance Group URL is withheld pending correction.
+Public profile data comes from `data/bblo-members.json` for existing public identity/media/social links, with reviewed enrichment in `data/bblo-public-profiles.json`. Private phone/email fields from the membership data are never copied automatically. Public contacts must be explicitly sourced in the enrichment file. Missing service areas and photos are omitted.
 
 ## Advertising inventory and fulfilment
 

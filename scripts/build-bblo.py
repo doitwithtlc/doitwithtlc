@@ -44,8 +44,7 @@ def contacts(m):
  blocks=[]
  for n,number in enumerate(re.findall(r'\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}',m['phone'])):
   digits=re.sub(r'\D','',number);label='Phone'
-  if m['slug']=='legacy-insurance':label=['Cell','Office'][min(n,1)]
-  elif m['slug']=='rc-home-pros':label=['Office','Español'][min(n,1)]
+  if m['slug']=='rc-home-pros':label=['Office','Español'][min(n,1)]
   elif m['slug']=='martinez-roofing':label=['Office','Cell'][min(n,1)]
   blocks.append(f'<div><dt>{label}</dt><dd><a href="tel:+1{digits}">{esc(number)}</a></dd></div>')
  if m['email']:blocks.append(f'<div><dt>Email</dt><dd><a href="mailto:{esc(m["email"])}">{esc(m["email"])}</a></dd></div>')

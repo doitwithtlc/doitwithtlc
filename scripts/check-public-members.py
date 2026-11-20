@@ -35,8 +35,8 @@ for member in members:
         obj=json.loads(schema)
         assert 'aggregateRating' not in obj
 
-legacy=(ROOT/'bblo/members/legacy-insurance/index.html').read_text()
-assert 'ocalainsurancegroup.com' not in legacy.lower()
+assert not (ROOT/'bblo/members/legacy-insurance/index.html').exists()
+assert not (ROOT/'website-preview/bblo/members/legacy-insurance/index.html').exists()
 update=(ROOT/'bblo/profile-update/index.html').read_text()
 assert 'content="noindex,follow"' in update
 assert 'publish_permission' in update
@@ -66,4 +66,4 @@ with tempfile.TemporaryDirectory() as temp:
     try:build(root)
     except ValueError:pass
     else:raise AssertionError('Undisclosed/unapproved ad accepted')
-print('17 public profiles: indexing, structured data, contact boundaries, disclosures and repeat-build checks passed. Paid placement and expiry checks passed.')
+print(f'{len(members)} public profiles: indexing, structured data, contact boundaries, disclosures and repeat-build checks passed. Paid placement and expiry checks passed.')
