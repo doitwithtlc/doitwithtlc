@@ -53,14 +53,20 @@ def button(href, label, secondary=False):
     return '<a class="button'+(' secondary' if secondary else '')+'" href="'+escape(href, quote=True)+'">'+escape(label)+'</a>'
 
 
+def display_date(value, pattern):
+    # Numeric components avoid platform-specific %-d and %-I directives.
+    pattern = pattern.replace('%-d', str(value.day)).replace('%-I', str(value.hour % 12 or 12))
+    return value.strftime(pattern)
+
+
 def date_label(event):
     start = parse(event['start'])
     if event.get('date_only'):
-        return start.strftime('%A, %B %-d, %Y') + ' · Deadline date; closing hour not announced'
-    label = start.strftime('%A, %B %-d, %Y · %-I:%M %p')
+        return display_date(start, '%A, %B %-d, %Y') + ' · Deadline date; closing hour not announced'
+    label = display_date(start, '%A, %B %-d, %Y · %-I:%M %p')
     if event.get('end'):
         end = parse(event['end'])
-        label += '–' + end.strftime('%-I:%M %p' if start.date() == end.date() else '%B %-d, %Y · %-I:%M %p')
+        label += '–' + display_date(end, '%-I:%M %p' if start.date() == end.date() else '%B %-d, %Y · %-I:%M %p')
     if event.get('end_time_pending'):
         label += ' · End time: TBD'
     return label + ' ' + start.strftime('%Z')

@@ -21,3 +21,6 @@
 @media(prefers-reduced-motion:reduce){.photo-track{animation:none;will-change:auto}.photo-track-group[aria-hidden="true"]{display:none}.strip-window{overflow-y:auto}.strip-pause{display:none}.connection-card{transition:none}}
 
 .route-cards .connection-card:last-child{grid-column:1/-1}
+
+/* Keep the business offer and next action ahead of decorative artwork on phones. */
+@media(max-width:760px){.service-home-hero>.wrap{padding-block:24px;gap:16px}.service-home-hero .home-carmen,.service-home-hero .hero-clue{display:none}.service-home-hero h1{font-size:36px}.service-home-hero .lead{font-size:18px;line-height:1.5}.service-home-hero .signature{font-size:18px}.service-home-hero .actions{display:flex;flex-direction:column;align-items:stretch}.service-home-hero .actions .text-link{padding:12px 0}.service-home-hero .button{white-space:normal;text-align:center}}
