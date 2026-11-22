@@ -94,14 +94,17 @@ document.addEventListener('DOMContentLoaded',()=>{
  const box=document.querySelector('.bblo-dropdown > .dropdown-links');if(!box)return;
  const prefix=location.pathname.startsWith('/website-preview/')?'/website-preview':'';
  const links=[...box.querySelectorAll('a')];
- const ready=links.find(a=>/ready to visit/i.test(a.textContent));
+ let ready=links.find(a=>/ready to visit/i.test(a.textContent));
+ if(!ready)ready=document.createElement('a');ready.href=prefix+'/bblo/visit/';ready.textContent='Visit BBLO';
+ let benefits=links.find(a=>a.pathname===prefix+'/bblo/benefits/');
+ if(!benefits)benefits=document.createElement('a');benefits.href=prefix+'/bblo/benefits/';benefits.textContent='Benefits & Pricing';
  const member=links.find(a=>/member login/i.test(a.textContent));
  let checkin=links.find(a=>a.pathname===prefix+'/bblo/check-in/'||/friday check.?in/i.test(a.textContent));
  if(!checkin)checkin=document.createElement('a');checkin.href=prefix+'/bblo/check-in/';checkin.textContent='Wins for This Week';
  const about=links.find(a=>a.pathname===prefix+'/bblo/'&&!a.hash);
  let apply=links.find(a=>a.pathname===prefix+'/bblo/join/'&&a.hash==='#application');
  if(!apply)apply=document.createElement('a');apply.href=prefix+'/bblo/join/#application';apply.textContent='Apply for BBLO';
- const actions=[apply,ready,member,checkin].filter(Boolean);
+ const actions=[ready,benefits,apply,member,checkin].filter(Boolean);
  const rest=links.filter(a=>!actions.includes(a)&&a!==about);
  if(about){about.textContent='About BBLO Overview';rest.push(about);}
  rest.sort((a,b)=>a.textContent.trim().localeCompare(b.textContent.trim(),'en',{sensitivity:'base'}));
