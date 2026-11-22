@@ -122,3 +122,16 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
  });
 });
+
+// Preserve the selected service/package in the visible inquiry and direct email.
+document.addEventListener('DOMContentLoaded',()=>{
+ const context=document.getElementById('inquiry-context'),email=document.getElementById('direct-inquiry-email');if(!context||!email)return;
+ const params=new URLSearchParams(location.search);
+ const services={representation:'Brand representation',events:'Event management','bilingual-outreach':'Bilingual outreach','branding-content':'Branding and content'};
+ const service=services[params.get('service')];const packages={starter:'Starter',growth:'Growth',platinum:'Platinum'};
+ const tier=params.get('service')==='representation'?packages[params.get('package')]:null;
+ if(!service)return;const choice=service+(tier?' — '+tier:'');
+ context.hidden=false;context.textContent='Your interest: '+choice+'. Your selection is included in the form and in your email subject; you can change it before sending.';
+ document.querySelectorAll('iframe.crm-intake-frame, a[href*="su2Ld2HaaTaziXtotiMp"]').forEach(element=>{const attribute=element.tagName==='IFRAME'?'src':'href';const url=new URL(element.getAttribute(attribute),location.href);url.searchParams.set('tlc_inquiry_service',choice);element.setAttribute(attribute,url.href);});
+ email.href='mailto:carmen@doitwithtlc.com?subject='+encodeURIComponent('TLC inquiry — '+choice);
+});
