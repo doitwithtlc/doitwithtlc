@@ -1,3 +1,6 @@
+// Load the public-site measurement configuration once; form success is measured separately.
+if(!document.querySelector('script[data-tlc-analytics]')){const measurement=document.createElement('script');measurement.src='/assets/analytics.js?v=20261121-ga4';measurement.dataset.tlcAnalytics='';measurement.defer=true;document.head.append(measurement);}
+
 function initializeInquiry() {
  const form=document.getElementById('tlc-inquiry'); if(!form)return;
  const service=form.elements.service,box=document.getElementById('inquiry-review');
