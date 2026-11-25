@@ -17,3 +17,5 @@ Validate with `python scripts/check-event-pages.py` and `python scripts/check-se
 ## Optional Google event metadata
 
 Use verified official host URLs and event-specific artwork, not a generic TLC logo. Explicit public free admission labels emit a zero-price USD Offer; membership-only or unclear pricing stays unspecified. Add `verified_offer` only upon confirming an all-in attendee price, currency USD, and actual ticket/registration URL. Add `performers` as a list of verified named people or performing groups only when applicable, with `type` (`Person` or `PerformingGroup`) and `name`. The page displays these facts alongside the structured data. Do not invent availability, ticket links, fees, performers or images. Optional warnings may remain on events with no such details; Google determines recrawling and rich-result placement.
+
+Upcoming/current detail pages list missing optional event information and direct visitors to confirm it with the event coordinator or host. This visible note is not a substitute for verified structured data.

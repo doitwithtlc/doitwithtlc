@@ -43,6 +43,8 @@ with tempfile.TemporaryDirectory() as folder:
  assert 'Example &lt;event&gt;' in text and '<h1>Example <event>' not in text
  assert '"@type":"Event"' in text
  assert '"offers"' not in text and '"performer"' not in text
+ assert 'Please confirm any missing information directly with the event coordinator or host' in text
+ assert 'ticket price or registration details' in text and 'official event flyer' in text
  events[0]=dict(e,cost='Free',organizer_url='https://example.com/', image='https://example.com/image.png',performers=[{'type':'Person','name':'Actual artist'}])
  ledger.write_text(json.dumps({'events':events}))
  build(root,now)
@@ -60,6 +62,7 @@ with tempfile.TemporaryDirectory() as folder:
  text=file.read_text()
  assert 'Event has ended' in text and 'data-upcoming-action hidden' in text
  assert '"@type":"Event"' not in text
+ assert 'Details to confirm:' not in text
  assert '/community-events/fixture-event/' in (root/'community-events/archive/index.html').read_text()
  # Unpublishing removes content from the archive and sitemap eligibility.
  events[0]['published']=False

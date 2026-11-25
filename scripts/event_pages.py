@@ -194,6 +194,15 @@ def build(root=ROOT, now=None):
             body += '<p><strong>Verified admission:</strong> '+escape('$'+format(offer['price'], '.2f')+' USD')+' · '+button(offer['url'],'Ticket information',True)+'</p>'
         if performers:
             body += '<p><strong>Performers:</strong> '+escape(', '.join(p['name'] for p in performers))+'</p>'
+        if label in ('Upcoming event','Happening now','Scheduled today'):
+            unconfirmed = []
+            if not organizer or not host: unconfirmed.append('organizer contact or website')
+            if not offer: unconfirmed.append('ticket price or registration details')
+            elif 'url' not in offer: unconfirmed.append('registration details, if required')
+            if not image: unconfirmed.append('official event flyer')
+            if not performers: unconfirmed.append('program or performer details, if applicable')
+            if unconfirmed:
+                body += '<p class="note"><strong>Details to confirm:</strong> '+escape('; '.join(unconfirmed))+'. Please confirm any missing information directly with the event coordinator or host before attending.</p>'
         if event.get('opportunities'):
             body += '<p><strong>Opportunities:</strong> '+escape(event['opportunities'])+'</p>'
         if not event.get('end') and not event.get('date_only'):
