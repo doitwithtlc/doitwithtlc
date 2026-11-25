@@ -194,15 +194,8 @@ def build(root=ROOT, now=None):
             body += '<p><strong>Verified admission:</strong> '+escape('$'+format(offer['price'], '.2f')+' USD')+' · '+button(offer['url'],'Ticket information',True)+'</p>'
         if performers:
             body += '<p><strong>Performers:</strong> '+escape(', '.join(p['name'] for p in performers))+'</p>'
-        if label in ('Upcoming event','Happening now','Scheduled today'):
-            unconfirmed = []
-            if not organizer or not host: unconfirmed.append('organizer contact or website')
-            if not offer: unconfirmed.append('ticket price or registration details')
-            elif 'url' not in offer: unconfirmed.append('registration details, if required')
-            if not image: unconfirmed.append('official event flyer')
-            if not performers: unconfirmed.append('program or performer details, if applicable')
-            if unconfirmed:
-                body += '<p class="note"><strong>Details to confirm:</strong> '+escape('; '.join(unconfirmed))+'. Please confirm any missing information directly with the event coordinator or host before attending.</p>'
+        if label in ('Upcoming event','Happening now','Scheduled today') and (not organizer or not host or not offer or 'url' not in offer or not image or not performers):
+            body += '<p class="note">For any missing information, please contact the event host directly.</p>'
         if event.get('opportunities'):
             body += '<p><strong>Opportunities:</strong> '+escape(event['opportunities'])+'</p>'
         if not event.get('end') and not event.get('date_only'):
@@ -220,7 +213,7 @@ def build(root=ROOT, now=None):
             compact = lambda d: parse(d).astimezone(ZoneInfo('UTC')).strftime('%Y%m%dT%H%M%SZ')
             calendar = 'https://calendar.google.com/calendar/render?'+urlencode({'action':'TEMPLATE','text':event['title'],'dates':compact(event['start'])+'/'+compact(event['end']),'details':event.get('description','')+' '+ORIGIN+route,'location':location})
             body += '<span data-upcoming-action'+(' hidden' if label not in ('Upcoming event','Happening now','Scheduled today') else '')+'>'+button(calendar,'Add to my calendar',True)+'</span>'
-        body += '</div>'+share_controls(event)+'<p class="note">Listed by The Liaison Companies LLC. Hosting and registration remain with the named organizer unless TLC or BBLO is identified as the host. Confirm the organizer’s latest details before attending.</p></div>'
+        body += '</div>'+share_controls(event)+'<p class="note">Listed by The Liaison Companies LLC. Hosting and registration remain with the named organizer unless TLC or BBLO is identified as the host.</p></div>'
         if image:
             body += '<figure class="event-detail-flyer"><a href="'+escape(image,quote=True)+'"><img src="'+escape(image,quote=True)+'" alt="'+escape(event.get('imageAlt') or event['title']+' flyer',quote=True)+'" decoding="async"></a><figcaption>Open the full event flyer.</figcaption></figure>'
         else:
