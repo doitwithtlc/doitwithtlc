@@ -13,3 +13,7 @@ Known end times control expiry. An event without a confirmed end time stays list
 This automation does not monitor social pages for cancellations, import external form submissions or invent future recurring dates. Those changes still require source verification and calendar approval. The existing event submission form/approval workflow is unchanged.
 
 Validate with `python scripts/check-event-pages.py` and `python scripts/check-seo.py`. Event structured data is included only for current/upcoming physical events with a confirmed address; missing optional fields are not fabricated. Search engines determine indexing and placement.
+
+## Optional Google event metadata
+
+Use verified official host URLs and event-specific artwork, not a generic TLC logo. Explicit public free admission labels emit a zero-price USD Offer; membership-only or unclear pricing stays unspecified. Add `verified_offer` only upon confirming an all-in attendee price, currency USD, and actual ticket/registration URL. Add `performers` as a list of verified named people or performing groups only when applicable, with `type` (`Person` or `PerformingGroup`) and `name`. The page displays these facts alongside the structured data. Do not invent availability, ticket links, fees, performers or images. Optional warnings may remain on events with no such details; Google determines recrawling and rich-result placement.

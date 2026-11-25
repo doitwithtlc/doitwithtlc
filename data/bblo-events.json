@@ -857,7 +857,10 @@
       "carousel_ready": true,
       "series_id": "ocala-business-leaders",
       "organizer": "Ocala Business Leaders",
-      "verification_status": "verified"
+      "verification_status": "verified",
+      "organizer_url": "https://ocalabusinessleaders.com/",
+      "image": "https://ocalabusinessleaders.com/wp-content/uploads/2026/02/OBL_Breakfast.png",
+      "imageAlt": "Ocala Business Leaders weekly networking breakfast organizer graphic"
     },
     {
       "id": "1mc-20261125",
@@ -896,7 +899,8 @@
       "verified_on": "2026-11-06",
       "carousel_ready": true,
       "organizer": "Ocala Metro CEP",
-      "verification_status": "verified"
+      "verification_status": "verified",
+      "organizer_url": "https://ocalacep.com/"
     },
     {
       "id": "worship-collective-market-20261128",
@@ -963,7 +967,7 @@
       "virtual": false,
       "description": "Arts in the Ocala Metro presentation. Doors open at 8:15 a.m.; presentation begins at 8:30 a.m.",
       "organizer": "Ocala Metro Chamber & Economic Partnership",
-      "organizer_url": "",
+      "organizer_url": "https://ocalacep.com/",
       "cost": "",
       "url": "https://members.ocalacep.com/event-calendar/Details/tuesday-talks-december-2026-1655877?sourceTypeId=Website",
       "source_url": "https://members.ocalacep.com/event-calendar/Details/tuesday-talks-december-2026-1655877?sourceTypeId=Website",
@@ -1016,7 +1020,7 @@
       "virtual": false,
       "description": "Weekly business networking breakfast. Breakfast begins at 6:30 a.m.; meeting runs 7–8 a.m.",
       "organizer": "Ocala Business Leaders",
-      "organizer_url": "",
+      "organizer_url": "https://ocalabusinessleaders.com/",
       "cost": "",
       "url": "https://ocalabusinessleaders.com/events/",
       "source_url": "https://ocalabusinessleaders.com/events/",
@@ -1031,7 +1035,9 @@
       "carousel_ready": true,
       "series_id": "ocala-business-leaders",
       "verification_notes": "Explicit dated organizer listing.",
-      "approved_at": "2026-11-09T14:03:08.365613+00:00"
+      "approved_at": "2026-11-09T14:03:08.365613+00:00",
+      "image": "https://ocalabusinessleaders.com/wp-content/uploads/2026/02/OBL_Breakfast.png",
+      "imageAlt": "Ocala Business Leaders weekly networking breakfast organizer graphic"
     },
     {
       "title": "CEP 101 Partner Orientation",
@@ -1043,7 +1049,7 @@
       "virtual": false,
       "description": "Complimentary orientation and refresher for CEP partners, with networking and information about partner benefits.",
       "organizer": "Ocala Metro CEP",
-      "organizer_url": "",
+      "organizer_url": "https://ocalacep.com/",
       "cost": "Free for CEP partners",
       "url": "https://members.ocalacep.com/event-calendar/Details/cep-101-partner-orientation-12-2-1963276?sourceTypeId=Website",
       "source_url": "https://members.ocalacep.com/event-calendar/Details/cep-101-partner-orientation-12-2-1963276?sourceTypeId=Website",
@@ -1097,7 +1103,7 @@
       "virtual": false,
       "description": "Practical QuickBooks workshop with Riley Vary, CPA, for entrepreneurs and small-business owners.",
       "organizer": "Ocala Metro Chamber & Economic Partnership",
-      "organizer_url": "",
+      "organizer_url": "https://ocalacep.com/",
       "cost": "",
       "url": "https://members.ocalacep.com/event-calendar/Details/entrepreneur-in-residence-eir-series-bookkeeping-using-quickbooks-more-efficiently-1562747?sourceTypeId=Website",
       "source_url": "https://members.ocalacep.com/event-calendar/Details/entrepreneur-in-residence-eir-series-bookkeeping-using-quickbooks-more-efficiently-1562747?sourceTypeId=Website",
@@ -1258,7 +1264,7 @@
       "virtual": false,
       "description": "Downtown artist displays, entertainment and family art activities.",
       "organizer": "City of Ocala Cultural Arts",
-      "organizer_url": "",
+      "organizer_url": "https://www.ocalafl.gov/government/city-departments-a-h/growth-management/cultural-arts",
       "cost": "Free",
       "url": "https://www.ocalafl.gov/government/city-departments-a-h/growth-management/cultural-arts/cultural-arts-events/first-friday-art-walk",
       "source_url": "https://www.ocalafl.gov/government/city-departments-a-h/growth-management/cultural-arts/cultural-arts-events/first-friday-art-walk",
@@ -1420,7 +1426,7 @@
       "virtual": false,
       "description": "Holiday edition of Belleview on the Rise at Belleview High School.",
       "organizer": "Ocala Metro Chamber & Economic Partnership",
-      "organizer_url": "",
+      "organizer_url": "https://ocalacep.com/",
       "cost": "",
       "url": "https://members.ocalacep.com/event-calendar/Details/belleview-on-the-rise-holiday-edition-1976763?sourceTypeId=Website",
       "source_url": "https://members.ocalacep.com/event-calendar/Details/belleview-on-the-rise-holiday-edition-1976763?sourceTypeId=Website",
@@ -1446,7 +1452,7 @@
       "virtual": false,
       "description": "Weekly business networking breakfast. Breakfast begins at 6:30 a.m.; meeting runs 7–8 a.m.",
       "organizer": "Ocala Business Leaders",
-      "organizer_url": "",
+      "organizer_url": "https://ocalabusinessleaders.com/",
       "cost": "",
       "url": "https://ocalabusinessleaders.com/events/",
       "source_url": "https://ocalabusinessleaders.com/events/",
@@ -1461,7 +1467,9 @@
       "carousel_ready": true,
       "series_id": "ocala-business-leaders",
       "verification_notes": "Explicit dated organizer listing.",
-      "approved_at": "2026-11-09T14:03:08.365613+00:00"
+      "approved_at": "2026-11-09T14:03:08.365613+00:00",
+      "image": "https://ocalabusinessleaders.com/wp-content/uploads/2026/02/OBL_Breakfast.png",
+      "imageAlt": "Ocala Business Leaders weekly networking breakfast organizer graphic"
     },
     {
       "id": "vitas-coffee-connection-20261209",
@@ -1557,7 +1565,7 @@
       "virtual": false,
       "description": "Belleview Business After Hours holiday networking event.",
       "organizer": "Ocala Metro Chamber & Economic Partnership",
-      "organizer_url": "",
+      "organizer_url": "https://ocalacep.com/",
       "cost": "",
       "url": "https://members.ocalacep.com/event-calendar/Details/belleview-business-after-hours-holiday-edition-1976766?sourceTypeId=Website",
       "source_url": "https://members.ocalacep.com/event-calendar/Details/belleview-business-after-hours-holiday-edition-1976766?sourceTypeId=Website",
@@ -1764,7 +1772,7 @@
       "virtual": false,
       "description": "Weekly business networking breakfast. Breakfast begins at 6:30 a.m.; meeting runs 7–8 a.m.",
       "organizer": "Ocala Business Leaders",
-      "organizer_url": "",
+      "organizer_url": "https://ocalabusinessleaders.com/",
       "cost": "",
       "url": "https://ocalabusinessleaders.com/events/",
       "source_url": "https://ocalabusinessleaders.com/events/",
@@ -1779,7 +1787,9 @@
       "carousel_ready": true,
       "series_id": "ocala-business-leaders",
       "verification_notes": "Explicit dated organizer listing.",
-      "approved_at": "2026-11-09T14:03:08.365613+00:00"
+      "approved_at": "2026-11-09T14:03:08.365613+00:00",
+      "image": "https://ocalabusinessleaders.com/wp-content/uploads/2026/02/OBL_Breakfast.png",
+      "imageAlt": "Ocala Business Leaders weekly networking breakfast organizer graphic"
     },
     {
       "title": "exCEPtional Mornings — December 2026",
@@ -1791,7 +1801,7 @@
       "virtual": false,
       "description": "December business breakfast. Doors open at 7:15 a.m.; presentation begins at 8 a.m. Listed event hours are 7:30–9:30 a.m. For CEP partners and their guests.",
       "organizer": "Ocala Metro CEP",
-      "organizer_url": "",
+      "organizer_url": "https://ocalacep.com/",
       "cost": "",
       "url": "https://members.ocalacep.com/event-calendar/Details/exceptional-mornings-december-2026-1557392?sourceTypeId=Website",
       "source_url": "https://members.ocalacep.com/event-calendar/Details/exceptional-mornings-december-2026-1557392?sourceTypeId=Website",
@@ -1844,7 +1854,7 @@
       "virtual": false,
       "description": "CEP business networking event hosted by Gulf Atlantic Bank. Holiday attire is encouraged.",
       "organizer": "Ocala Metro Chamber & Economic Partnership",
-      "organizer_url": "",
+      "organizer_url": "https://ocalacep.com/",
       "cost": "",
       "url": "https://members.ocalacep.com/event-calendar/Details/business-after-hours-december-2026-1670733?sourceTypeId=Website",
       "source_url": "https://members.ocalacep.com/event-calendar/Details/business-after-hours-december-2026-1670733?sourceTypeId=Website",
@@ -1869,7 +1879,7 @@
       "virtual": false,
       "description": "CEP Equine Initiative meeting. Venue and address: TBD.",
       "organizer": "Ocala Metro CEP",
-      "organizer_url": "",
+      "organizer_url": "https://ocalacep.com/",
       "cost": "",
       "url": "https://members.ocalacep.com/event-calendar/Details/equine-initiative-meeting-presented-by-pyranha-animal-health-1646236?sourceTypeId=Website",
       "source_url": "https://members.ocalacep.com/event-calendar/Details/equine-initiative-meeting-presented-by-pyranha-animal-health-1646236?sourceTypeId=Website",
@@ -1898,7 +1908,7 @@
       "virtual": false,
       "description": "Weekly business networking breakfast. Breakfast begins at 6:30 a.m.; meeting runs 7–8 a.m. This holiday-week date is explicitly listed on the organizer's calendar; recheck for holiday changes before attending.",
       "organizer": "Ocala Business Leaders",
-      "organizer_url": "",
+      "organizer_url": "https://ocalabusinessleaders.com/",
       "cost": "",
       "url": "https://ocalabusinessleaders.com/events/",
       "source_url": "https://ocalabusinessleaders.com/events/",
@@ -1913,7 +1923,9 @@
       "carousel_ready": false,
       "series_id": "ocala-business-leaders",
       "verification_notes": "Explicit dated organizer listing; recheck holiday-week status before using in weekly carousel.",
-      "approved_at": "2026-11-09T14:03:08.365613+00:00"
+      "approved_at": "2026-11-09T14:03:08.365613+00:00",
+      "image": "https://ocalabusinessleaders.com/wp-content/uploads/2026/02/OBL_Breakfast.png",
+      "imageAlt": "Ocala Business Leaders weekly networking breakfast organizer graphic"
     },
     {
       "id": "young-leaders-20261223",
@@ -1952,7 +1964,7 @@
       "virtual": false,
       "description": "Weekly business networking breakfast. Breakfast begins at 6:30 a.m.; meeting runs 7–8 a.m. This holiday-week date is explicitly listed on the organizer's calendar; recheck for holiday changes before attending.",
       "organizer": "Ocala Business Leaders",
-      "organizer_url": "",
+      "organizer_url": "https://ocalabusinessleaders.com/",
       "cost": "",
       "url": "https://ocalabusinessleaders.com/events/",
       "source_url": "https://ocalabusinessleaders.com/events/",
@@ -1967,7 +1979,9 @@
       "carousel_ready": false,
       "series_id": "ocala-business-leaders",
       "verification_notes": "Explicit dated organizer listing; recheck holiday-week status before using in weekly carousel.",
-      "approved_at": "2026-11-09T14:03:08.365613+00:00"
+      "approved_at": "2026-11-09T14:03:08.365613+00:00",
+      "image": "https://ocalabusinessleaders.com/wp-content/uploads/2026/02/OBL_Breakfast.png",
+      "imageAlt": "Ocala Business Leaders weekly networking breakfast organizer graphic"
     },
     {
       "id": "first-friday-art-walk-20270108",
@@ -1980,7 +1994,7 @@
       "virtual": false,
       "description": "Downtown artist displays, entertainment and family art activities. January's event is on the second Friday because of the holidays.",
       "organizer": "City of Ocala Cultural Arts",
-      "organizer_url": "",
+      "organizer_url": "https://www.ocalafl.gov/government/city-departments-a-h/growth-management/cultural-arts",
       "cost": "Free",
       "url": "https://www.ocalafl.gov/government/city-departments-a-h/growth-management/cultural-arts/cultural-arts-events/first-friday-art-walk",
       "source_url": "https://www.ocalafl.gov/government/city-departments-a-h/growth-management/cultural-arts/cultural-arts-events/first-friday-art-walk",
@@ -2243,7 +2257,7 @@
       "virtual": false,
       "description": "Downtown artist displays, entertainment and family art activities.",
       "organizer": "City of Ocala Cultural Arts",
-      "organizer_url": "",
+      "organizer_url": "https://www.ocalafl.gov/government/city-departments-a-h/growth-management/cultural-arts",
       "cost": "Free",
       "url": "https://www.ocalafl.gov/government/city-departments-a-h/growth-management/cultural-arts/cultural-arts-events/first-friday-art-walk",
       "source_url": "https://www.ocalafl.gov/government/city-departments-a-h/growth-management/cultural-arts/cultural-arts-events/first-friday-art-walk",

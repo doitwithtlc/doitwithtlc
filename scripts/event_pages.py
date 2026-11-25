@@ -49,6 +49,45 @@ def external(value):
     return value if urlsplit(value or '').scheme in ('http', 'https') else ''
 
 
+# Only unambiguous public admission labels are eligible for a zero-price offer.
+FREE_ADMISSION = {
+    'free', 'free and open to the public', 'free admission and parking',
+    'free; rsvp required', 'free admission; vendor fees apply',
+    'free admission; optional chalk activity $5',
+}
+
+
+def event_offer(event):
+    # A displayed, verified all-in ticket price can be supplied explicitly.
+    verified = event.get('verified_offer')
+    if isinstance(verified, dict):
+        price = verified.get('price')
+        url = external(verified.get('url'))
+        if type(price) in (int, float) and 0 <= price < float('inf') and url and verified.get('currency') == 'USD':
+            return {'@type':'Offer','price':price,'priceCurrency':'USD','url':url}
+    if (event.get('cost') or '').strip().casefold() not in FREE_ADMISSION:
+        return None
+    offer = {'@type':'Offer','price':0,'priceCurrency':'USD'}
+    # An event information page is not necessarily a ticket checkout.
+    # The existing source is a ticket URL only for explicit Eventbrite event links.
+    url = external(event.get('url'))
+    if url and urlsplit(url).hostname in ('www.eventbrite.com','eventbrite.com') and urlsplit(url).path.startswith('/e/'):
+        offer['url'] = url
+    return offer
+
+
+def event_performers(event):
+    result = []
+    for performer in event.get('performers') or []:
+        if not isinstance(performer, dict):
+            continue
+        name = performer.get('name')
+        kind = performer.get('type')
+        if isinstance(name, str) and name.strip() and kind in ('Person','PerformingGroup'):
+            result.append({'@type':kind,'name':name.strip()})
+    return result
+
+
 def button(href, label, secondary=False):
     return '<a class="button'+(' secondary' if secondary else '')+'" href="'+escape(href, quote=True)+'">'+escape(label)+'</a>'
 
@@ -149,6 +188,12 @@ def build(root=ROOT, now=None):
             body += '<p><strong>Hosted by:</strong> '+escape(organizer)+'</p>'
         if event.get('cost'):
             body += '<p><strong>Cost:</strong> '+escape(event['cost'])+'</p>'
+        offer = event_offer(event)
+        performers = event_performers(event)
+        if event.get('verified_offer') and offer and 'url' in offer:
+            body += '<p><strong>Verified admission:</strong> '+escape('$'+format(offer['price'], '.2f')+' USD')+' · '+button(offer['url'],'Ticket information',True)+'</p>'
+        if performers:
+            body += '<p><strong>Performers:</strong> '+escape(', '.join(p['name'] for p in performers))+'</p>'
         if event.get('opportunities'):
             body += '<p><strong>Opportunities:</strong> '+escape(event['opportunities'])+'</p>'
         if not event.get('end') and not event.get('date_only'):
@@ -184,6 +229,8 @@ def build(root=ROOT, now=None):
             if organizer:
                 schema['organizer']={'@type':'Organization','name':organizer}
                 if host: schema['organizer']['url']=host
+            if offer: schema['offers']=offer
+            if performers: schema['performer']=performers
             schemas.append(schema)
         path=root/route.lstrip('/')/'index.html'
         path.parent.mkdir(parents=True,exist_ok=True)

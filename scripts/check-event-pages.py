@@ -4,10 +4,18 @@ import json
 import tempfile
 from datetime import datetime
 from pathlib import Path
-from event_pages import ROOT, TZ, build, cutoff, event_route, state
+from event_pages import ROOT, TZ, build, cutoff, event_route, state, event_offer, event_performers
 
 now=datetime(2026,11,10,16,0,tzinfo=TZ)
 e={'id':'fixture-event','title':'Example <event>','published':True,'category':'business','start':'2026-11-10T16:30:00-05:00','end':'2026-11-10T18:30:00-05:00','location':'Venue','address':'123 Main St, Ocala, FL','description':'A real description & details','organizer':'Example host'}
+assert event_offer(e) is None
+assert event_offer(dict(e,cost='Free for partners')) is None
+assert event_offer(dict(e,cost='$20 + fees')) is None
+assert event_offer(dict(e,cost='Free')) == {'@type':'Offer','price':0,'priceCurrency':'USD'}
+assert event_offer(dict(e,cost='Free',url='https://www.eventbrite.com/e/example-tickets-123'))['url'].endswith('123')
+assert event_offer(dict(e,verified_offer={'price':25,'currency':'USD','url':'https://example.com/tickets'}))['price']==25
+assert event_performers(e)==[]
+assert event_performers(dict(e,performers=[{'type':'Person','name':'Actual artist'},{'type':'Organization','name':'Sponsor'}]))==[{'@type':'Person','name':'Actual artist'}]
 assert state(e,now)=='Upcoming event'
 assert state(e,datetime(2026,11,10,17,0,tzinfo=TZ))=='Happening now'
 assert state(e,datetime(2026,11,10,19,0,tzinfo=TZ))=='Event has ended'
@@ -34,6 +42,14 @@ with tempfile.TemporaryDirectory() as folder:
  text=file.read_text()
  assert 'Example &lt;event&gt;' in text and '<h1>Example <event>' not in text
  assert '"@type":"Event"' in text
+ assert '"offers"' not in text and '"performer"' not in text
+ events[0]=dict(e,cost='Free',organizer_url='https://example.com/', image='https://example.com/image.png',performers=[{'type':'Person','name':'Actual artist'}])
+ ledger.write_text(json.dumps({'events':events}))
+ build(root,now)
+ text=file.read_text()
+ assert '"offers":{"@type":"Offer","price":0,"priceCurrency":"USD"}' in text
+ assert '"performer":[{"@type":"Person","name":"Actual artist"}]' in text and 'Actual artist' in text
+ assert '"url":"https://example.com/"' in text and '"image":["https://example.com/image.png"]' in text
  # Same ID survives rescheduling; no old URL breaks.
  events[0]=dict(e,start='2026-11-12T16:30:00-05:00',end='2026-11-12T18:30:00-05:00')
  ledger.write_text(json.dumps({'events':events}))
