@@ -17,10 +17,12 @@ class Page(HTMLParser):
         super().__init__()
         self.meta, self.canonical, self.links, self.schemas = {}, [], [], []
         self.h1 = self.missing_alt = 0
+        self.redirect = False
         self.feed(text)
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
         if tag == 'meta':
+            if a.get('http-equiv', '').lower() == 'refresh': self.redirect = True
             self.meta[a.get('name', a.get('property', ''))] = a.get('content', '')
         if tag == 'link' and a.get('rel') == 'canonical':
             self.canonical.append(a.get('href'))
@@ -42,6 +44,7 @@ def inspect(root):
 def write_sitemap(root):
     pages = inspect(root)
     urls = sorted(route for route, p in pages.items() if route not in UTILITY
+            and not p.redirect
             and 'noindex' not in p.meta.get('robots', '').lower()
             and p.canonical == [ORIGIN + route])
     (root / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -56,12 +59,12 @@ def validate(root):
     errors = []
     for route in sitemap:
         p = pages.get(route)
-        if p is None or 'noindex' in p.meta.get('robots', '').lower():
-            errors.append(route + ': sitemap contains missing or noindex page')
+        if p is None or p.redirect or 'noindex' in p.meta.get('robots', '').lower():
+            errors.append(route + ': sitemap contains missing, redirecting or noindex page')
         elif p.canonical != [ORIGIN + route]:
             errors.append(route + ': sitemap canonical mismatch')
     for route, p in pages.items():
-        if 'noindex' not in p.meta.get('robots', '').lower() and route not in UTILITY:
+        if not p.redirect and 'noindex' not in p.meta.get('robots', '').lower() and route not in UTILITY:
             if route not in sitemap: errors.append(route + ': missing from sitemap')
             if p.h1 != 1: errors.append(route + ': expected one H1')
             if not p.meta.get('description'): errors.append(route + ': missing description')

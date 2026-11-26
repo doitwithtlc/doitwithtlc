@@ -173,7 +173,7 @@ def build(root=ROOT, now=None):
         route = event_route(event)
         label = state(event,now)
         title = event['title']+' | TLC Community Calendar'
-        description = (event.get('description') or event['title'])[:240]
+        description = (' · '.join(filter(None, [event['title'], date_label(event), event.get('location'), event.get('description')])))[:240]
         source = external(event.get('url')) or external(event.get('source_url'))
         host = external(event.get('organizer_url'))
         organizer = event.get('organizer') or ('BBLO' if event.get('category') in ('bblo','field-trip') else '')
