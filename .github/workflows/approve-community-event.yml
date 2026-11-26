@@ -58,6 +58,9 @@ jobs:
               const {data:file}=await github.rest.repos.getContent({owner,repo,path,ref:'main'});
               const data=JSON.parse(Buffer.from(file.content,'base64').toString('utf8'));
               if(!Array.isArray(data.events))throw new Error('Invalid calendar data.');
+              const existing=data.events.find(e=>e.review_issue===issue.html_url || e.id===event.id);
+              const slug=title.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,90).replace(/-+$/g,'');
+              event.id=existing ? existing.id : (slug || 'event')+'-'+issue_number;
               const duplicate=data.events.find(e=>e.id!==event.id && e.title.trim().toLowerCase()===title.trim().toLowerCase() && Date.parse(e.start)===Date.parse(start));
               if(duplicate)throw new Error('An event with this title and start time is already published.');
               data.events=data.events.filter(e=>e.id!==event.id);data.events.push(event);data.events.sort((a,b)=>Date.parse(a.start)-Date.parse(b.start));
